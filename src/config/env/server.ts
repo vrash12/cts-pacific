@@ -9,6 +9,10 @@ const serverEnvironmentSchema = z.object({
   PAYPAL_CLIENT_SECRET: z.string().min(1).optional(),
   PAYPAL_WEBHOOK_ID: z.string().min(1).optional(),
   PAYPAL_ENVIRONMENT: z.enum(["sandbox", "live"]).default("sandbox"),
+  PAYPAL_CARD_PAYMENTS_ENABLED: z
+    .enum(["true", "false"])
+    .default("false")
+    .transform((value) => value === "true"),
   EMAIL_API_KEY: z.string().min(1).optional(),
   EMAIL_FROM: z.string().min(3).optional(),
   QUOTE_NOTIFICATION_EMAIL: z
@@ -30,6 +34,8 @@ export function readServerEnvironment(): ServerEnvironment {
     PAYPAL_CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET || undefined,
     PAYPAL_WEBHOOK_ID: process.env.PAYPAL_WEBHOOK_ID || undefined,
     PAYPAL_ENVIRONMENT: process.env.PAYPAL_ENVIRONMENT,
+    PAYPAL_CARD_PAYMENTS_ENABLED:
+      process.env.PAYPAL_CARD_PAYMENTS_ENABLED,
     EMAIL_API_KEY: process.env.EMAIL_API_KEY || undefined,
     EMAIL_FROM: process.env.EMAIL_FROM || undefined,
     QUOTE_NOTIFICATION_EMAIL: process.env.QUOTE_NOTIFICATION_EMAIL,

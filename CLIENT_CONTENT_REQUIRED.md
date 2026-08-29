@@ -54,6 +54,7 @@ This file tracks business information and production assets that have not been s
 - Product catalog, categories, descriptions, imagery, pricing, SKUs, and inventory rules
 - Tax, shipping, delivery, return, refund, cancellation, and warranty policies
 - PayPal Business credentials and verified webhook configuration
+- Confirmation that card payments will use PayPal Advanced Card Payments, plus confirmation of merchant eligibility; otherwise the selected PCI-compliant card provider and credentials
 - Merchant statement descriptor and customer-service contact details
 
 ## Future chatbot

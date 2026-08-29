@@ -8,6 +8,13 @@
       "when": 1788005103989,
       "tag": "0000_colorful_iron_patriot",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788033716284,
+      "tag": "0001_bizarre_loners",
+      "breakpoints": true
     }
   ]
 }

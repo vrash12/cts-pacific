@@ -1,0 +1,70 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
+
+import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
+
+const services = [
+  { label: "Fiber Optics", href: "/services/fiber-optics" },
+  { label: "Data Cabling", href: "/services/data-cabling" },
+] as const;
+
+describe("ServicesNavigationMenu", () => {
+  it("closes immediately after a service option is activated", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details");
+
+    expect(details).not.toBeNull();
+    if (!details) return;
+
+    details.open = true;
+    await user.click(screen.getByRole("link", { name: "Fiber Optics" }));
+
+    expect(details.open).toBe(false);
+  });
+
+  it("also closes after All services is activated", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details");
+
+    expect(details).not.toBeNull();
+    if (!details) return;
+
+    details.open = true;
+    await user.click(screen.getByRole("link", { name: "All services" }));
+
+    expect(details.open).toBe(false);
+  });
+
+  it("closes on Escape and returns focus to the summary", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details");
+    const summary = screen.getByText("Services").closest("summary");
+
+    expect(details).not.toBeNull();
+    expect(summary).not.toBeNull();
+    if (!details || !summary) return;
+
+    details.open = true;
+    summary.focus();
+    await user.keyboard("{Escape}");
+
+    expect(details.open).toBe(false);
+    expect(summary).toHaveFocus();
+  });
+});

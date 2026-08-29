@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
+import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
@@ -37,20 +38,13 @@ export function SiteHeader() {
           {siteConfig.primaryNavigation.map((item) => {
             if ("children" in item) {
               return (
-                <details className="navigation-menu" key={item.href}>
-                  <summary>
-                    {item.label}
-                    <ChevronDown aria-hidden="true" size={15} />
-                  </summary>
-                  <div className="navigation-menu__panel">
-                    <Link href={item.href}>All services</Link>
-                    {item.children.map((child) => (
-                      <Link href={child.href} key={child.href}>
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </details>
+                <ServicesNavigationMenu
+                  href={item.href}
+                  key={item.href}
+                  label={item.label}
+                >
+                  {item.children}
+                </ServicesNavigationMenu>
               );
             }
 

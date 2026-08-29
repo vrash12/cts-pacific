@@ -11,6 +11,9 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+export * from "@/server/db/schema/administration";
+export * from "@/server/db/schema/commerce";
+
 export const quoteProjectType = pgEnum("quote_project_type", [
   "commercial",
   "government",
