@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
 
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
@@ -63,22 +63,7 @@ export function SiteHeader() {
           Request a quote
         </Link>
 
-        <details className="mobile-navigation">
-          <summary aria-label="Open navigation menu">
-            <Menu aria-hidden="true" size={24} />
-            <span>Menu</span>
-          </summary>
-          <nav className="mobile-navigation__panel" aria-label="Mobile navigation">
-            {siteConfig.primaryNavigation.map((item) => (
-              <Link href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
-            <Link className={buttonVariants({ size: "compact" })} href="/quote">
-              Request a quote
-            </Link>
-          </nav>
-        </details>
+        <MobileNavigation items={siteConfig.primaryNavigation} />
       </div>
     </header>
   );

@@ -57,6 +57,25 @@ export function AdminShell({ actor, children }: AdminShellProps) {
             ) : null}
           </div>
         </div>
+        <nav
+          aria-label="Administration"
+          className="border-t border-white/10"
+        >
+          <div className="mx-auto flex min-h-12 w-[min(calc(100%-2.5rem),88rem)] items-center gap-1 overflow-x-auto">
+            <Link
+              className="inline-flex min-h-10 shrink-0 items-center px-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+              href="/admin"
+            >
+              Dashboard
+            </Link>
+            <Link
+              className="inline-flex min-h-10 shrink-0 items-center px-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+              href="/admin/products"
+            >
+              Products
+            </Link>
+          </div>
+        </nav>
       </header>
 
       <main className="mx-auto w-[min(calc(100%-2.5rem),88rem)] py-10 sm:py-14" id="admin-main">

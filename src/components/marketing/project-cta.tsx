@@ -1,8 +1,30 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { NetworkMotif } from "@/components/marketing/network-motif";
 import { buttonVariants } from "@/components/ui/button";
+
+const intakeSteps = [
+  {
+    number: "01",
+    title: "Services",
+    detail: "Select one or multiple capabilities",
+  },
+  {
+    number: "02",
+    title: "Project",
+    detail: "Location, environment, and timeline",
+  },
+  {
+    number: "03",
+    title: "Scope",
+    detail: "Existing conditions and intended outcome",
+  },
+  {
+    number: "04",
+    title: "Contact",
+    detail: "Project contact information",
+  },
+] as const;
 
 type ProjectCtaProps = {
   eyebrow?: string;
@@ -32,7 +54,15 @@ export function ProjectCta({
             <ArrowRight aria-hidden="true" size={18} />
           </Link>
         </div>
-        <NetworkMotif inverse />
+        <ol className="service-cta__intake" aria-label="Project request information">
+          {intakeSteps.map((step) => (
+            <li key={step.number}>
+              <span>{step.number}</span>
+              <strong>{step.title}</strong>
+              <p>{step.detail}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

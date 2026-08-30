@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { NetworkMotif } from "@/components/marketing/network-motif";
 import { buttonVariants } from "@/components/ui/button";
 
 export default function NotFound() {
@@ -12,7 +11,6 @@ export default function NotFound() {
         <p>
           Return to the CTS Pacific homepage or start a project request.
         </p>
-        <NetworkMotif />
         <div className="not-found__actions">
           <Link className={buttonVariants()} href="/">Return home</Link>
           <Link className={buttonVariants({ variant: "secondary" })} href="/quote">
@@ -23,4 +21,3 @@ export default function NotFound() {
     </main>
   );
 }
-

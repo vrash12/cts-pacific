@@ -9,11 +9,16 @@ import {
   selectedCustomers,
   technicalCapabilities,
 } from "@/config/homepage";
-import { primaryNavigation, serviceLinks, siteConfig } from "@/config/site";
+import {
+  navigationServiceLinks,
+  primaryNavigation,
+  serviceLinks,
+  siteConfig,
+} from "@/config/site";
 
 describe("site configuration", () => {
-  it("contains the six approved primary service routes", () => {
-    expect(serviceLinks).toHaveLength(6);
+  it("contains the approved core and additional service routes", () => {
+    expect(serviceLinks).toHaveLength(14);
     expect(serviceLinks.map((service) => service.href)).toEqual([
       "/services/fiber-optics",
       "/services/data-cabling",
@@ -21,11 +26,33 @@ describe("site configuration", () => {
       "/services/access-control",
       "/services/micro-trenching",
       "/services/civil-underground",
+      "/services/troubleshooting",
+      "/services/maintenance",
+      "/services/pbx-systems",
+      "/services/electrical",
+      "/services/server-infrastructure",
+      "/services/telecommunication-specialist",
+      "/services/it-support",
+      "/services/facility-locating",
     ]);
+    expect(serviceLinks.filter((service) => service.group === "Core infrastructure")).toHaveLength(6);
+    expect(
+      serviceLinks.filter((service) => service.group === "Technical support & systems"),
+    ).toHaveLength(8);
   });
 
   it("keeps commerce out of primary navigation while it is disabled", () => {
     expect(primaryNavigation.map((item) => item.label)).not.toContain("Products");
+  });
+
+  it("keeps the navbar concise while the Services index owns the full catalog", () => {
+    expect(navigationServiceLinks).toHaveLength(6);
+    expect(
+      navigationServiceLinks.every(
+        (service) => service.group === "Core infrastructure",
+      ),
+    ).toBe(true);
+    expect(serviceLinks).toHaveLength(14);
   });
 
   it("links the completed company information routes from primary navigation", () => {

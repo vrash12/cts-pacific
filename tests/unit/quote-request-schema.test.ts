@@ -23,6 +23,24 @@ describe("quoteRequestSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("accepts every newly added project-specific service", () => {
+    const result = quoteRequestSchema.safeParse({
+      ...validRequest,
+      services: [
+        "troubleshooting",
+        "maintenance",
+        "pbx-systems",
+        "electrical",
+        "server-infrastructure",
+        "telecommunication-specialist",
+        "it-support",
+        "facility-locating",
+      ],
+    });
+
+    expect(result.success).toBe(true);
+  });
+
   it("rejects a request without a service or sufficient project detail", () => {
     const result = quoteRequestSchema.safeParse({
       ...validRequest,

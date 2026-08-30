@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { FieldImage } from "@/components/marketing/field-image";
-import { NetworkMotif } from "@/components/marketing/network-motif";
+import { ProjectCta } from "@/components/marketing/project-cta";
 import { buttonVariants } from "@/components/ui/button";
 import {
   getRelatedServices,
@@ -32,7 +32,13 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <div className="service-hero__content">
               <p className="eyebrow">{service.eyebrow}</p>
               <p className="service-hero__number">Service {service.number}</p>
-              <h1>{service.title}</h1>
+              <h1
+                className={
+                  service.title.length >= 30 ? "service-hero__title--compact" : undefined
+                }
+              >
+                {service.title}
+              </h1>
               <p className="service-hero__lede">{service.description}</p>
               <div className="service-hero__actions">
                 <Link className={buttonVariants({ size: "large" })} href="/quote">
@@ -70,6 +76,12 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             {service.overview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            {service.scopeNote ? (
+              <aside className="service-scope-note" aria-label="Scope confirmation note">
+                <strong>Project-specific scope</strong>
+                <p>{service.scopeNote}</p>
+              </aside>
+            ) : null}
           </div>
         </div>
       </section>
@@ -110,12 +122,6 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                 sizes="(max-width: 736px) 100vw, (max-width: 1024px) 42vw, 23vw"
                 src={service.referenceImage}
               />
-              <figcaption>
-                <span>Technical reference · Not a CTS project photograph</span>
-                <a href={service.referenceUrl} rel="noreferrer" target="_blank">
-                  {service.referenceCredit}
-                </a>
-              </figcaption>
             </figure>
           </div>
           <div className="service-applications__content">
@@ -188,25 +194,10 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
       </section>
 
-      <section className="service-cta">
-        <div className="container service-cta__grid">
-          <div>
-            <p className="eyebrow eyebrow--inverse">Discuss your project</p>
-            <h2>Need {service.navigationTitle.toLowerCase()} capability?</h2>
-          </div>
-          <div>
-            <p>
-              Share the location, project environment, target timeline, and technical
-              scope. CTS Pacific can help identify the appropriate next step.
-            </p>
-            <Link className={buttonVariants({ variant: "inverse", size: "large" })} href="/quote">
-              Request a project quote
-              <ArrowRight aria-hidden="true" size={18} />
-            </Link>
-          </div>
-          <NetworkMotif inverse />
-        </div>
-      </section>
+      <ProjectCta
+        description="Share the location, project environment, target timeline, and technical scope. CTS Pacific can help identify the appropriate next step."
+        title={`Need ${service.navigationTitle.toLowerCase()} capability?`}
+      />
     </>
   );
 }

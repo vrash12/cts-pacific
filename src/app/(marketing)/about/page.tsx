@@ -217,14 +217,18 @@ export default function AboutPage() {
 
       <section className="service-applications about-field-section">
         <div className="container service-applications__grid">
-          <div className="service-applications__visual">
+          <figure className="about-region-visual">
             <FieldImage
               alt="Technician working from an elevated bucket near telecommunications cabling."
               objectPosition="48% 42%"
               sizes="(max-width: 1024px) 100vw, 52vw"
               src="/images/services 20.jpeg"
             />
-          </div>
+            <figcaption>
+              <span>Client-supplied field photography</span>
+              Elevated infrastructure work
+            </figcaption>
+          </figure>
           <div className="service-applications__content">
             <p className="eyebrow">Regional focus</p>
             <h2>Built around Guam and Pacific project environments.</h2>

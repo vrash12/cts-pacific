@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
 
 import { FieldImage } from "@/components/marketing/field-image";
-import { NetworkMotif } from "@/components/marketing/network-motif";
 import { ProjectNavigator } from "@/components/marketing/project-navigator";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -138,8 +137,6 @@ export default function HomePage() {
               brings telecommunications and civil execution into one coordinated scope.
             </p>
           </div>
-
-          <NetworkMotif />
 
           <div className="service-grid">
             {homepageServices.map((service) => (
@@ -342,7 +339,20 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <NetworkMotif inverse />
+          <ol className="final-cta__review" aria-label="Project review sequence">
+            <li>
+              <span>01</span>
+              <p>Project requirements</p>
+            </li>
+            <li>
+              <span>02</span>
+              <p>Technical review</p>
+            </li>
+            <li>
+              <span>03</span>
+              <p>Coordinated next step</p>
+            </li>
+          </ol>
         </div>
       </section>
     </>

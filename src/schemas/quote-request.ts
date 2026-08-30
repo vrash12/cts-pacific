@@ -7,6 +7,17 @@ export const quoteServiceOptions = [
   { value: "access-control", label: "Access Control" },
   { value: "micro-trenching", label: "Micro Trenching" },
   { value: "civil-excavation", label: "Civil / Excavation" },
+  { value: "troubleshooting", label: "Troubleshooting" },
+  { value: "maintenance", label: "Maintenance" },
+  { value: "pbx-systems", label: "PBX Systems" },
+  { value: "electrical", label: "Electrical" },
+  { value: "server-infrastructure", label: "Server Infrastructure" },
+  {
+    value: "telecommunication-specialist",
+    label: "Telecommunication Specialist",
+  },
+  { value: "it-support", label: "IT Support" },
+  { value: "facility-locating", label: "Facility Locating" },
   { value: "multiple-services", label: "Multiple Services" },
   { value: "not-sure", label: "Not Sure" },
 ] as const;
@@ -45,7 +56,7 @@ export const quoteRequestSchema = z.object({
   services: z
     .array(z.enum(quoteServiceValues))
     .min(1, "Select at least one service.")
-    .max(8),
+    .max(quoteServiceOptions.length),
   projectLocation: z
     .string()
     .trim()

@@ -1,20 +1,18 @@
 import "server-only";
 
-import { count, eq } from "drizzle-orm";
+import { asc, count, desc, eq } from "drizzle-orm";
 
-import { catalogViewerRoles } from "@/server/auth/roles";
+import { assertCatalogViewerRole } from "@/server/auth/roles";
 import type { AdminActor } from "@/server/auth/require-admin";
 import { getDatabase } from "@/server/db/client";
-import { productCategories, products } from "@/server/db/schema";
+import {
+  productCategories,
+  products,
+  productVariants,
+} from "@/server/db/schema";
 
 function assertCatalogViewer(actor: AdminActor) {
-  if (
-    !catalogViewerRoles.includes(
-      actor.role as (typeof catalogViewerRoles)[number],
-    )
-  ) {
-    throw new Error("ADMIN_CATALOG_FORBIDDEN");
-  }
+  assertCatalogViewerRole(actor.role);
 }
 
 export async function getAdminCatalogOverview(actor: AdminActor) {
@@ -57,4 +55,116 @@ export async function getAdminCatalogOverview(actor: AdminActor) {
   });
 
   return { categories, totals };
+}
+
+export async function getAdminProductFormCategories(actor: AdminActor) {
+  assertCatalogViewer(actor);
+
+  return getDatabase()
+    .select({
+      id: productCategories.id,
+      name: productCategories.name,
+      slug: productCategories.slug,
+    })
+    .from(productCategories)
+    .where(eq(productCategories.isActive, true))
+    .orderBy(productCategories.displayOrder, productCategories.name);
+}
+
+export async function getAdminProducts(actor: AdminActor) {
+  assertCatalogViewer(actor);
+
+  const database = getDatabase();
+  const [productRows, variantRows] = await Promise.all([
+    database
+      .select({
+        id: products.id,
+        name: products.name,
+        slug: products.slug,
+        status: products.status,
+        categoryName: productCategories.name,
+        categorySlug: productCategories.slug,
+        updatedAt: products.updatedAt,
+      })
+      .from(products)
+      .innerJoin(
+        productCategories,
+        eq(products.categoryId, productCategories.id),
+      )
+      .orderBy(desc(products.updatedAt), products.name),
+    database
+      .select({
+        productId: productVariants.productId,
+        sku: productVariants.sku,
+        priceMinor: productVariants.priceMinor,
+        currency: productVariants.currency,
+        inventoryPolicy: productVariants.inventoryPolicy,
+        inventoryQuantity: productVariants.inventoryQuantity,
+        createdAt: productVariants.createdAt,
+      })
+      .from(productVariants)
+      .orderBy(asc(productVariants.createdAt)),
+  ]);
+
+  const primaryVariantByProduct = new Map<
+    string,
+    (typeof variantRows)[number]
+  >();
+
+  variantRows.forEach((variant) => {
+    if (!primaryVariantByProduct.has(variant.productId)) {
+      primaryVariantByProduct.set(variant.productId, variant);
+    }
+  });
+
+  return productRows.map((product) => ({
+    ...product,
+    primaryVariant: primaryVariantByProduct.get(product.id) ?? null,
+  }));
+}
+
+export async function getAdminProductForEdit(
+  actor: AdminActor,
+  productId: string,
+) {
+  assertCatalogViewer(actor);
+
+  const database = getDatabase();
+  const [product] = await database
+    .select({
+      id: products.id,
+      categoryId: products.categoryId,
+      name: products.name,
+      slug: products.slug,
+      description: products.description,
+      status: products.status,
+      updatedAt: products.updatedAt,
+    })
+    .from(products)
+    .where(eq(products.id, productId))
+    .limit(1);
+
+  if (!product) {
+    return null;
+  }
+
+  const [primaryVariant] = await database
+    .select({
+      id: productVariants.id,
+      sku: productVariants.sku,
+      name: productVariants.name,
+      priceMinor: productVariants.priceMinor,
+      currency: productVariants.currency,
+      inventoryPolicy: productVariants.inventoryPolicy,
+      inventoryQuantity: productVariants.inventoryQuantity,
+    })
+    .from(productVariants)
+    .where(eq(productVariants.productId, productId))
+    .orderBy(asc(productVariants.createdAt))
+    .limit(1);
+
+  return {
+    ...product,
+    primaryVariant: primaryVariant ?? null,
+  };
 }

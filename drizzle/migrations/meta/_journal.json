@@ -15,6 +15,13 @@
       "when": 1788033716284,
       "tag": "0001_bizarre_loners",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788038656131,
+      "tag": "0002_gigantic_wraith",
+      "breakpoints": true
     }
   ]
 }

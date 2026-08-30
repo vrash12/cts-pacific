@@ -4,7 +4,17 @@ export type ServiceSlug =
   | "cctv"
   | "access-control"
   | "micro-trenching"
-  | "civil-underground";
+  | "civil-underground"
+  | "troubleshooting"
+  | "maintenance"
+  | "pbx-systems"
+  | "electrical"
+  | "server-infrastructure"
+  | "telecommunication-specialist"
+  | "it-support"
+  | "facility-locating";
+
+export type ServiceGroup = "core-infrastructure" | "technical-support";
 
 export type ServiceProcessStep = {
   title: string;
@@ -13,6 +23,7 @@ export type ServiceProcessStep = {
 
 export type ServiceDefinition = {
   slug: ServiceSlug;
+  group: ServiceGroup;
   number: string;
   navigationTitle: string;
   title: string;
@@ -32,13 +43,13 @@ export type ServiceDefinition = {
   referenceImage: string;
   referenceImageAlt: string;
   referenceObjectPosition: string;
-  referenceCredit: string;
-  referenceUrl: string;
+  scopeNote?: string;
 };
 
-export const services = [
+export const services: readonly ServiceDefinition[] = [
   {
     slug: "fiber-optics",
+    group: "core-infrastructure",
     number: "01",
     navigationTitle: "Fiber Optics",
     title: "Fiber Optic Infrastructure",
@@ -94,11 +105,10 @@ export const services = [
     referenceImage: "/images/editorial/fiber-optic-reference.jpeg",
     referenceImageAlt: "Dense rows of aqua fiber-optic patch cords connected to rack-mounted adapter panels.",
     referenceObjectPosition: "50% 50%",
-    referenceCredit: "Brett Sayles / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/blue-coated-wire-2420212/",
   },
   {
     slug: "data-cabling",
+    group: "core-infrastructure",
     number: "02",
     navigationTitle: "Data Cabling",
     title: "Structured Data Cabling",
@@ -155,11 +165,10 @@ export const services = [
     referenceImage: "/images/editorial/data-cabling-reference.jpeg",
     referenceImageAlt: "Organized network patch cords connected to rack-mounted communications equipment.",
     referenceObjectPosition: "62% 50%",
-    referenceCredit: "Brett Sayles / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/cables-connected-on-server-2881229/",
   },
   {
     slug: "cctv",
+    group: "core-infrastructure",
     number: "03",
     navigationTitle: "CCTV Systems",
     title: "CCTV Surveillance Systems",
@@ -215,11 +224,10 @@ export const services = [
     referenceImage: "/images/editorial/cctv-reference.jpeg",
     referenceImageAlt: "Dome surveillance camera mounted at the corner of a modern commercial building.",
     referenceObjectPosition: "50% 46%",
-    referenceCredit: "Giant Asparagus / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/close-up-of-security-camera-on-modern-building-37591155/",
   },
   {
     slug: "access-control",
+    group: "core-infrastructure",
     number: "04",
     navigationTitle: "Access Control",
     title: "Access Control Systems",
@@ -275,11 +283,10 @@ export const services = [
     referenceImage: "/images/editorial/access-control-reference.jpeg",
     referenceImageAlt: "Employee presenting an RFID badge to an electronic wall-mounted access reader.",
     referenceObjectPosition: "64% 50%",
-    referenceCredit: "Susanne Plank / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/close-up-of-man-holding-access-card-over-reader-13657375/",
   },
   {
     slug: "micro-trenching",
+    group: "core-infrastructure",
     number: "05",
     navigationTitle: "Micro Trenching",
     title: "Micro Trenching Technology",
@@ -335,11 +342,10 @@ export const services = [
     referenceImage: "/images/editorial/micro-trenching-reference.jpeg",
     referenceImageAlt: "Road worker operating a compact pavement saw beside a traffic cone.",
     referenceObjectPosition: "48% 50%",
-    referenceCredit: "Thomas Fuhrmann / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/road-construction-worker-cutting-asphalt-with-saw-33484882/",
   },
   {
     slug: "civil-underground",
+    group: "core-infrastructure",
     number: "06",
     navigationTitle: "Civil & Underground Works",
     title: "Civil & Underground Works",
@@ -396,10 +402,496 @@ export const services = [
     referenceImage: "/images/editorial/civil-underground-reference.jpeg",
     referenceImageAlt: "Construction crew inspecting an open underground utility excavation.",
     referenceObjectPosition: "50% 58%",
-    referenceCredit: "Miguel Castillo / Pexels",
-    referenceUrl: "https://www.pexels.com/photo/construction-workers-inspecting-underground-utilities-31460017/",
   },
-] as const satisfies readonly ServiceDefinition[];
+  {
+    slug: "troubleshooting",
+    group: "technical-support",
+    number: "07",
+    navigationTitle: "Troubleshooting",
+    title: "Infrastructure Troubleshooting",
+    eyebrow: "Structured issue isolation",
+    description:
+      "Project-specific review and fault isolation for supported telecommunications, network, security, and connected infrastructure systems.",
+    overview: [
+      "Troubleshooting begins with the reported symptom, the affected environment, and the available system information. Supported systems, access requirements, and response arrangements are confirmed before work begins.",
+      "The review can cover visible connections, pathways, endpoints, and relevant system conditions so findings and an appropriate corrective scope can be organized without assuming the cause in advance.",
+    ],
+    capabilities: [
+      "Reported-issue intake",
+      "Existing-system review",
+      "Physical-connection inspection",
+      "Pathway and endpoint checks",
+      "Fault isolation",
+      "Corrective-scope coordination",
+      "Post-work verification",
+    ],
+    applications: [
+      "Connectivity interruptions",
+      "Degraded system behavior",
+      "Existing infrastructure concerns",
+      "Moves, additions, and changes",
+      "Post-installation issue review",
+      "Multi-system environments",
+    ],
+    process: [
+      {
+        title: "Issue intake",
+        description: "Document the reported condition, affected area, system context, and available history.",
+      },
+      {
+        title: "Baseline review",
+        description: "Review accessible pathways, connections, endpoints, and relevant system conditions.",
+      },
+      {
+        title: "Fault isolation",
+        description: "Narrow the issue to an identified area or next diagnostic action where possible.",
+      },
+      {
+        title: "Findings and next step",
+        description: "Document findings and coordinate an approved corrective or follow-up scope.",
+      },
+    ],
+    related: ["maintenance", "server-infrastructure"],
+    heroImage: "/images/field-work/network-equipment-integration.jpeg",
+    heroImageAlt: "Network and communications equipment at a CTS Pacific installation site.",
+    heroObjectPosition: "48% 48%",
+    detailImage: "/images/services 9.jpeg",
+    detailImageAlt: "Client-supplied field image of an exterior connected communications device.",
+    detailObjectPosition: "50% 48%",
+    referenceImage: "/images/editorial/network-troubleshooting-reference.jpeg",
+    referenceImageAlt: "Field engineer reviewing network equipment with a laptop.",
+    referenceObjectPosition: "50% 50%",
+    scopeNote:
+      "Supported platforms, response availability, diagnostic limits, and corrective-work coverage are confirmed for each request.",
+  },
+  {
+    slug: "maintenance",
+    group: "technical-support",
+    number: "08",
+    navigationTitle: "Maintenance",
+    title: "Infrastructure Maintenance",
+    eyebrow: "Support for installed systems",
+    description:
+      "Scheduled and project-specific maintenance coordination for supported telecommunications, security, and infrastructure systems.",
+    overview: [
+      "Maintenance scopes are organized around the installed system, current condition, facility access, documentation, and the work approved for the project.",
+      "A maintenance engagement can include condition review, connection and pathway checks, approved corrective work, documentation updates, and operational verification where those activities are included in the agreed scope.",
+    ],
+    capabilities: [
+      "Maintenance-scope review",
+      "Installed-condition checks",
+      "Connection and termination inspection",
+      "Pathway and endpoint review",
+      "Labeling and documentation updates",
+      "Approved maintenance work",
+      "Post-maintenance verification",
+    ],
+    applications: [
+      "Existing network infrastructure",
+      "Structured cabling systems",
+      "Fiber infrastructure",
+      "CCTV systems",
+      "Access-control systems",
+      "Communications spaces",
+    ],
+    process: [
+      {
+        title: "System and scope review",
+        description: "Confirm the installed environment, maintenance need, access, and approved work area.",
+      },
+      {
+        title: "Condition assessment",
+        description: "Review accessible components, connections, pathways, labels, and available records.",
+      },
+      {
+        title: "Approved maintenance",
+        description: "Complete the maintenance activities included in the confirmed project scope.",
+      },
+      {
+        title: "Verification and record",
+        description: "Verify the addressed area and document completed work and follow-up needs.",
+      },
+    ],
+    related: ["troubleshooting", "data-cabling"],
+    heroImage: "/images/services 18.jpeg",
+    heroImageAlt: "CTS Pacific field crew accessing elevated communications infrastructure.",
+    heroObjectPosition: "50% 46%",
+    detailImage: "/images/field-work/cctv-ptz-closeup.jpeg",
+    detailImageAlt: "Close view of an installed exterior surveillance camera.",
+    detailObjectPosition: "50% 48%",
+    referenceImage: "/images/editorial/maintenance-reference.jpeg",
+    referenceImageAlt: "Technician maintaining installed network hardware.",
+    referenceObjectPosition: "52% 50%",
+    scopeNote:
+      "Maintenance intervals, covered systems, service windows, exclusions, and any ongoing support agreement require project-specific confirmation.",
+  },
+  {
+    slug: "pbx-systems",
+    group: "technical-support",
+    number: "09",
+    navigationTitle: "PBX Systems",
+    title: "PBX Communication Systems",
+    eyebrow: "Coordinated business voice infrastructure",
+    description:
+      "Project-specific PBX planning, endpoint coordination, cabling integration, configuration support, and system verification.",
+    overview: [
+      "PBX work is planned around the organization’s communication requirements, existing telephone environment, network readiness, endpoints, and intended call flow.",
+      "The project scope can coordinate voice and data pathways, endpoints, system components, configuration requirements, testing, and handover after the supported platform and deliverables are confirmed.",
+    ],
+    capabilities: [
+      "PBX requirements review",
+      "Extension and endpoint planning",
+      "Voice and data pathway coordination",
+      "Network-readiness review",
+      "Endpoint setup and integration",
+      "Call-flow configuration support",
+      "System testing and handover",
+    ],
+    applications: [
+      "Commercial offices",
+      "Government environments",
+      "Industrial administration spaces",
+      "Multi-department communications",
+      "System replacements",
+      "Endpoint additions and expansions",
+    ],
+    process: [
+      {
+        title: "Communication review",
+        description: "Confirm users, endpoints, existing services, call-flow needs, and the intended platform.",
+      },
+      {
+        title: "Infrastructure coordination",
+        description: "Review cabling, network, rack, power, and endpoint-readiness requirements.",
+      },
+      {
+        title: "System integration",
+        description: "Coordinate supported components, endpoints, and approved configuration activities.",
+      },
+      {
+        title: "Testing and handover",
+        description: "Verify the agreed communication functions and document the completed scope.",
+      },
+    ],
+    related: ["data-cabling", "server-infrastructure"],
+    heroImage: "/images/field-work/network-equipment-integration.jpeg",
+    heroImageAlt: "Client-supplied image of network, communications, and telephone equipment.",
+    heroObjectPosition: "52% 50%",
+    detailImage: "/images/field-work/network-equipment-integration.jpeg",
+    detailImageAlt: "Client-supplied image of connected network and telephone equipment.",
+    detailObjectPosition: "52% 50%",
+    referenceImage: "/images/editorial/pbx-conference-phone-reference.jpeg",
+    referenceImageAlt: "Conference telephone installed in a professional meeting space.",
+    referenceObjectPosition: "50% 78%",
+    scopeNote:
+      "Supported PBX platforms, carrier responsibilities, licensing, handset models, and ongoing support coverage require client approval before final publication.",
+  },
+  {
+    slug: "electrical",
+    group: "technical-support",
+    number: "10",
+    navigationTitle: "Electrical",
+    title: "Electrical Infrastructure Support",
+    eyebrow: "Power coordination for connected systems",
+    description:
+      "Project-specific electrical coordination related to telecommunications and infrastructure installations, subject to confirmed scope and applicable requirements.",
+    overview: [
+      "Electrical requirements can affect telecommunications rooms, network racks, security devices, exterior equipment, and other connected infrastructure. CTS Pacific can review those project interfaces and organize the supported scope.",
+      "Voltage class, permits, licensed-trade responsibilities, equipment power, grounding, and the boundary between telecommunications and electrical work must be confirmed before execution.",
+    ],
+    capabilities: [
+      "Project electrical-requirement review",
+      "Equipment-power coordination",
+      "Pathway and interface planning",
+      "Telecommunications-room coordination",
+      "Existing-condition documentation",
+      "Applicable-trade coordination",
+      "Testing and handover planning",
+    ],
+    applications: [
+      "Telecommunications rooms",
+      "Network-rack environments",
+      "Security-system power interfaces",
+      "Exterior connected devices",
+      "New construction coordination",
+      "Infrastructure upgrades",
+    ],
+    process: [
+      {
+        title: "Requirement review",
+        description: "Confirm equipment, location, available documentation, voltage, and project constraints.",
+      },
+      {
+        title: "Scope boundary",
+        description: "Define supported work, permit needs, and responsibilities for every applicable trade.",
+      },
+      {
+        title: "Project coordination",
+        description: "Coordinate the approved electrical interfaces with the broader infrastructure installation.",
+      },
+      {
+        title: "Verification and handover",
+        description: "Complete the agreed checks and document the supported project scope.",
+      },
+    ],
+    related: ["data-cabling", "civil-underground"],
+    heroImage: "/images/services 4.jpeg",
+    heroImageAlt: "Client-supplied field image showing utility, conduit, and connected infrastructure interfaces.",
+    heroObjectPosition: "50% 48%",
+    detailImage: "/images/services 8.jpeg",
+    detailImageAlt: "Client-supplied field image of exterior conduit routed along a utility pole.",
+    detailObjectPosition: "50% 48%",
+    referenceImage: "/images/editorial/electrical-support-reference.jpeg",
+    referenceImageAlt: "Technician working inside an electrical control panel.",
+    referenceObjectPosition: "50% 50%",
+    scopeNote:
+      "The client must confirm electrical licenses, voltage classes, permitting responsibility, and whether regulated work is self-performed or delivered through an approved electrical trade partner.",
+  },
+  {
+    slug: "server-infrastructure",
+    group: "technical-support",
+    number: "11",
+    navigationTitle: "Server Infrastructure",
+    title: "Server Infrastructure",
+    eyebrow: "Physical systems and network readiness",
+    description:
+      "Physical server and communications-space planning, installation coordination, connectivity integration, and project-specific support.",
+    overview: [
+      "Server infrastructure work is organized around the physical environment, rack and pathway readiness, network connectivity, equipment requirements, and the system owner’s approved configuration scope.",
+      "CTS Pacific can coordinate the physical infrastructure and connected network elements while platform administration, operating systems, cloud services, backup, cybersecurity, and managed support remain subject to explicit project confirmation.",
+    ],
+    capabilities: [
+      "Server-requirement review",
+      "Rack and space readiness",
+      "Structured-cabling integration",
+      "Network-connectivity coordination",
+      "Hardware placement and organization",
+      "Expansion and upgrade planning",
+      "System testing and handover",
+    ],
+    applications: [
+      "Server rooms",
+      "MDF and IDF environments",
+      "Commercial networks",
+      "Government systems",
+      "Industrial operations",
+      "Infrastructure upgrades",
+    ],
+    process: [
+      {
+        title: "Environment review",
+        description: "Confirm equipment, rack, network, pathway, power, access, and ownership requirements.",
+      },
+      {
+        title: "Readiness coordination",
+        description: "Organize the physical space, cabling, connectivity, and related infrastructure dependencies.",
+      },
+      {
+        title: "Infrastructure integration",
+        description: "Complete the approved physical installation and connectivity coordination scope.",
+      },
+      {
+        title: "Testing and handover",
+        description: "Verify agreed connections and document the completed infrastructure scope.",
+      },
+    ],
+    related: ["data-cabling", "pbx-systems"],
+    heroImage: "/images/field-work/network-equipment-integration.jpeg",
+    heroImageAlt: "Client-supplied image of network and communications equipment integration.",
+    heroObjectPosition: "45% 50%",
+    detailImage: "/images/field-work/fiber-enclosure-conduit-wide.jpeg",
+    detailImageAlt: "Client-supplied field image of a connected fiber pathway and enclosure.",
+    detailObjectPosition: "52% 54%",
+    referenceImage: "/images/editorial/server-infrastructure-reference.jpeg",
+    referenceImageAlt: "Physical server equipment installed in enclosed racks.",
+    referenceObjectPosition: "62% 50%",
+    scopeNote:
+      "Supported server hardware, operating systems, virtualization, backup, cybersecurity, cloud, warranty, and managed-service responsibilities require explicit client confirmation.",
+  },
+  {
+    slug: "telecommunication-specialist",
+    group: "technical-support",
+    number: "12",
+    navigationTitle: "Telecommunication Specialist",
+    title: "Telecommunications Project Support",
+    eyebrow: "Specialized project coordination",
+    description:
+      "Project-specific telecommunications planning and field coordination across confirmed connectivity, pathway, equipment, and documentation requirements.",
+    overview: [
+      "Telecommunications projects often connect outside pathways, building cabling, communications spaces, active equipment, and multiple project stakeholders. The supported scope begins with the requirements and responsibilities confirmed for that environment.",
+      "CTS Pacific can organize approved telecommunications work across existing-condition review, pathway and system coordination, installation planning, field execution, testing coordination, and handover documentation without assuming staffing or consulting services that have not been confirmed.",
+    ],
+    capabilities: [
+      "Telecommunications requirement review",
+      "Existing-infrastructure review",
+      "Pathway and system coordination",
+      "Installation-scope planning",
+      "Field-work coordination",
+      "Testing and documentation coordination",
+      "Project handover support",
+    ],
+    applications: [
+      "New telecommunications installations",
+      "Infrastructure upgrades",
+      "Commercial facilities",
+      "Government environments",
+      "Industrial sites",
+      "Multi-system project coordination",
+    ],
+    process: [
+      {
+        title: "Requirements review",
+        description: "Confirm the project environment, intended systems, stakeholders, records, and required deliverables.",
+      },
+      {
+        title: "Scope coordination",
+        description: "Define pathways, interfaces, responsibilities, access constraints, and the supported telecommunications work.",
+      },
+      {
+        title: "Field execution",
+        description: "Coordinate the approved installation or technical-support activities within the confirmed project scope.",
+      },
+      {
+        title: "Verification and handover",
+        description: "Coordinate agreed testing, records, open items, and handover documentation.",
+      },
+    ],
+    related: ["fiber-optics", "data-cabling"],
+    heroImage: "/images/services 21.jpeg",
+    heroImageAlt: "CTS Pacific field personnel coordinating telecommunications infrastructure work.",
+    heroObjectPosition: "50% 48%",
+    detailImage: "/images/field-work/network-equipment-integration.jpeg",
+    detailImageAlt: "Client-supplied image of network and communications equipment at a project site.",
+    detailObjectPosition: "48% 50%",
+    referenceImage: "/images/editorial/telecommunications-specialist-reference.jpeg",
+    referenceImageAlt: "Telecommunications specialist configuring network equipment and cabling.",
+    referenceObjectPosition: "55% 50%",
+    scopeNote:
+      "The client must confirm whether this offering includes consulting, staffing, direct installation, or another delivery model, together with the supported disciplines, credentials, contract boundaries, and technical responsibilities.",
+  },
+  {
+    slug: "it-support",
+    group: "technical-support",
+    number: "13",
+    navigationTitle: "IT Support",
+    title: "IT Infrastructure Support",
+    eyebrow: "Connected-system readiness",
+    description:
+      "Project-specific support for physical network connectivity, connected devices, and infrastructure readiness within a confirmed technical scope.",
+    overview: [
+      "IT support requirements vary by device, platform, network, facility, and system owner. Each request begins by identifying the affected environment, available records, access requirements, and the outcome that the client needs reviewed.",
+      "The supported project can coordinate physical connectivity checks, device and network readiness, infrastructure changes, documentation, and verification. Operating-system administration, cloud services, cybersecurity, remote support, and managed-service commitments are not assumed.",
+    ],
+    capabilities: [
+      "Support-request intake",
+      "Physical connectivity review",
+      "Device and network-readiness checks",
+      "Endpoint onboarding coordination",
+      "Infrastructure change support",
+      "Technical documentation updates",
+      "Post-work verification",
+    ],
+    applications: [
+      "Commercial workstations and devices",
+      "Communications spaces",
+      "Network-connected equipment",
+      "New device deployment",
+      "Infrastructure changes",
+      "Connectivity issue coordination",
+    ],
+    process: [
+      {
+        title: "Request intake",
+        description: "Identify the devices, users, locations, symptoms, dependencies, and required outcome.",
+      },
+      {
+        title: "Environment review",
+        description: "Review accessible connectivity, physical infrastructure, available documentation, and ownership boundaries.",
+      },
+      {
+        title: "Approved support",
+        description: "Complete the agreed connectivity, device-readiness, infrastructure, or coordination activities.",
+      },
+      {
+        title: "Verify and document",
+        description: "Confirm the addressed scope, record completed work, and identify any separately owned follow-up items.",
+      },
+    ],
+    related: ["troubleshooting", "server-infrastructure"],
+    heroImage: "/images/field-work/network-equipment-integration.jpeg",
+    heroImageAlt: "Client-supplied image of connected network, communications, and endpoint equipment.",
+    heroObjectPosition: "50% 50%",
+    detailImage: "/images/field-work/fiber-enclosure-conduit-wide.jpeg",
+    detailImageAlt: "Client-supplied field image of a connected fiber pathway and enclosure.",
+    detailObjectPosition: "50% 52%",
+    referenceImage: "/images/editorial/it-support-reference.jpeg",
+    referenceImageAlt: "IT technician working among network-rack cabling.",
+    referenceObjectPosition: "50% 45%",
+    scopeNote:
+      "Supported devices, operating systems, applications, remote or on-site delivery, service windows, cybersecurity boundaries, response commitments, warranties, and managed-support terms require explicit client confirmation.",
+  },
+  {
+    slug: "facility-locating",
+    group: "technical-support",
+    number: "14",
+    navigationTitle: "Facility Locating",
+    title: "Facility Locating Support",
+    eyebrow: "Pre-work site coordination",
+    description:
+      "Project-specific locating and pre-work coordination for existing facility infrastructure and planned pathways, subject to confirmed methods and responsibilities.",
+    overview: [
+      "Locating requirements depend on the site, records, infrastructure owner, work area, proposed route, and the methods approved for the project. CTS Pacific can organize the initial review and field coordination around those confirmed conditions.",
+      "The scope can include available-record review, visible access-point review, work-area and route coordination, locating-method confirmation, marking responsibility, and documentation. It does not replace required utility notifications, permits, owner clearances, or regulated locating unless those responsibilities are explicitly confirmed.",
+    ],
+    capabilities: [
+      "Available-record review",
+      "Work-area coordination",
+      "Visible access-point review",
+      "Proposed-route review",
+      "Locating-method confirmation",
+      "Marking-responsibility coordination",
+      "Field documentation and handover",
+    ],
+    applications: [
+      "Underground pathway planning",
+      "Trenching work areas",
+      "Conduit-route coordination",
+      "Campus and facility infrastructure",
+      "Renovation and expansion planning",
+      "Pre-construction site review",
+    ],
+    process: [
+      {
+        title: "Request and records",
+        description: "Confirm the site, proposed work, infrastructure owners, available records, and required notifications.",
+      },
+      {
+        title: "Method and responsibility",
+        description: "Define approved locating methods, utility types, mark-out ownership, permits, exclusions, and reporting needs.",
+      },
+      {
+        title: "Field coordination",
+        description: "Coordinate the agreed site review and locating activities within the authorized work area.",
+      },
+      {
+        title: "Documentation and handoff",
+        description: "Record the supported findings, limitations, markings, and required next steps for the project team.",
+      },
+    ],
+    related: ["civil-underground", "micro-trenching"],
+    heroImage: "/images/services 7.jpeg",
+    heroImageAlt: "Client-supplied field image of an existing facility infrastructure environment.",
+    heroObjectPosition: "50% 52%",
+    detailImage: "/images/services 8.jpeg",
+    detailImageAlt: "Client-supplied field image of exterior conduit and utility infrastructure.",
+    detailObjectPosition: "50% 48%",
+    referenceImage: "/images/editorial/civil-underground-reference.jpeg",
+    referenceImageAlt: "Construction crew inspecting an open underground utility excavation.",
+    referenceObjectPosition: "50% 58%",
+    scopeNote:
+      "The client must confirm supported locating methods and equipment, utility types, accuracy and reporting expectations, notification and permit responsibilities, mark-out ownership, exclusions, and whether regulated locating is included.",
+  },
+] as const;
 
 export function getServiceBySlug(slug: string) {
   return services.find((service) => service.slug === slug);

@@ -20,3 +20,19 @@ export function canManageCatalog(role: AdminRole) {
     role as (typeof catalogManagerRoles)[number],
   );
 }
+
+export function assertCatalogViewerRole(role: AdminRole) {
+  if (
+    !catalogViewerRoles.includes(
+      role as (typeof catalogViewerRoles)[number],
+    )
+  ) {
+    throw new Error("ADMIN_CATALOG_FORBIDDEN");
+  }
+}
+
+export function assertCatalogManagerRole(role: AdminRole) {
+  if (!canManageCatalog(role)) {
+    throw new Error("ADMIN_CATALOG_WRITE_FORBIDDEN");
+  }
+}

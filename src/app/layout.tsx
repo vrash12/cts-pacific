@@ -59,7 +59,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
+    <html
+      className={`${inter.variable} ${manrope.variable}`}
+      data-scroll-behavior="smooth"
+      lang="en"
+    >
       <body>{children}</body>
     </html>
   );

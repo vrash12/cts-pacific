@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { NetworkMotif } from "@/components/marketing/network-motif";
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
@@ -22,17 +21,14 @@ export function SiteFooter() {
             <br />
             Infrastructure Solutions
           </p>
-          <NetworkMotif inverse />
         </div>
 
         <div>
-          <p className="site-footer__heading">Services</p>
+          <p className="site-footer__heading">Start a project</p>
           <ul>
-            {siteConfig.services.map((service) => (
-              <li key={service.href}>
-                <Link href={service.href}>{service.label}</Link>
-              </li>
-            ))}
+            <li><Link href="/services">All services</Link></li>
+            <li><Link href="/quote">Request a quote</Link></li>
+            <li><Link href="/contact">Contact CTS Pacific</Link></li>
           </ul>
         </div>
 
@@ -42,7 +38,6 @@ export function SiteFooter() {
             <li><Link href="/about">About</Link></li>
             <li><Link href="/industries">Industries</Link></li>
             <li><Link href="/certifications">Certifications</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 

@@ -26,6 +26,20 @@ This file tracks business information and production assets that have not been s
 - Confirmation of the intended ANSI/TIA/EIA standards-compliance wording
 - Final confirmation of any third-party mark-use requirements for the supplied GCA, FOA, and ETA artwork
 
+## Expanded service scope
+
+The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical, Server Infrastructure, Telecommunication Specialist, IT Support, and Facility Locating as service categories. Confirm the following before treating the current project-specific wording as a complete service specification:
+
+- Troubleshooting: supported systems and manufacturers, diagnostic limits, response availability, remote/on-site coverage, and corrective-work boundaries
+- Maintenance: covered systems, preventive versus corrective work, service intervals, support windows, exclusions, and any recurring agreement terms
+- PBX Systems: supported platforms, carrier responsibilities, handset models, licensing, migration responsibilities, and ongoing support coverage
+- Electrical: contractor licenses, voltage classes, permitted work, permitting responsibility, inspection requirements, and whether regulated work is self-performed or delivered through a trade partner
+- Server Infrastructure: supported hardware, operating systems, virtualization, storage, backup, cybersecurity, cloud, warranty, and managed-service responsibilities
+- Telecommunication Specialist: whether this means consulting, staffing, direct installation, project coordination, or company-positioning language; supported disciplines, credentials, contract model, and technical responsibilities
+- IT Support: supported devices, operating systems, applications, remote/on-site delivery, service windows, cybersecurity boundaries, response commitments, warranties, and managed-support terms
+- Facility Locating: supported locating methods and equipment, utility types, accuracy and reporting expectations, required notifications and permits, mark-out responsibility, exclusions, and whether any regulated locating is included
+- Approved client-supplied photographs or approved representative imagery specifically depicting each expanded service
+
 ## Projects and credibility
 
 - Captions, dates, and final web-use approval for the supplied CTS Pacific field photography
@@ -52,6 +66,11 @@ This file tracks business information and production assets that have not been s
 ## Future commerce
 
 - Product catalog, categories, descriptions, imagery, pricing, SKUs, and inventory rules
+- Confirmation whether Safety & Construction Equipment is sold, rented, CTS-operated, sourced, or delivered through another model
+- Approved Safety & Construction Equipment categories, including which safety-equipment classes are actually offered
+- Confirmation whether Heavy Equipment is sold, rented, CTS-operated, subcontracted, sourced, or offered as a service
+- Approved Heavy Equipment classes and confirmation of equipment ownership, operator, transport, mobilization, scheduling, permit, and insurance responsibilities
+- Any rental duration, deposit, damage, inspection, pickup/return, operator, cancellation, and availability terms, if rentals are approved
 - Tax, shipping, delivery, return, refund, cancellation, and warranty policies
 - PayPal Business credentials and verified webhook configuration
 - Confirmation that card payments will use PayPal Advanced Card Payments, plus confirmation of merchant eligibility; otherwise the selected PCI-compliant card provider and credentials

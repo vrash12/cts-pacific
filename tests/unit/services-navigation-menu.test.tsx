@@ -5,8 +5,8 @@ import { describe, expect, it } from "vitest";
 import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
 
 const services = [
-  { label: "Fiber Optics", href: "/services/fiber-optics" },
-  { label: "Data Cabling", href: "/services/data-cabling" },
+  { label: "Fiber Optics", href: "/services/fiber-optics", group: "Core infrastructure" },
+  { label: "Maintenance", href: "/services/maintenance", group: "Technical support & systems" },
 ] as const;
 
 describe("ServicesNavigationMenu", () => {
@@ -26,6 +26,17 @@ describe("ServicesNavigationMenu", () => {
     await user.click(screen.getByRole("link", { name: "Fiber Optics" }));
 
     expect(details.open).toBe(false);
+  });
+
+  it("presents core and additional services as separate groups", () => {
+    render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+
+    expect(screen.getByText("Core infrastructure")).toBeInTheDocument();
+    expect(screen.getByText("Technical support & systems")).toBeInTheDocument();
   });
 
   it("also closes after All services is activated", async () => {

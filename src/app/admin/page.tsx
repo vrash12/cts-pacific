@@ -5,8 +5,10 @@ import {
   Construction,
   CreditCard,
   EyeOff,
+  HardHat,
   PackagePlus,
   ShieldCheck,
+  Truck,
   TriangleAlert,
   WalletCards,
 } from "lucide-react";
@@ -18,6 +20,7 @@ import { AdminSignOutButton } from "@/components/admin/admin-sign-out-button";
 import { publicEnvironment } from "@/config/env/public";
 import { featureFlags } from "@/config/features";
 import { getAdminCatalogOverview } from "@/modules/products/queries";
+import { privateSalesPlanningItems } from "@/modules/products/sales-planning";
 import { supportedPaymentMethods } from "@/modules/payments/payment-methods";
 import { canManageCatalog } from "@/server/auth/roles";
 import { requireAdmin } from "@/server/auth/require-admin";
@@ -171,15 +174,17 @@ export default async function AdminPage() {
             <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Catalog summary</p>
             <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="catalog-summary-title">Product readiness</h2>
           </div>
-          <button
-            className="inline-flex min-h-12 cursor-not-allowed items-center gap-2 border border-[var(--color-border-strong)] bg-white px-5 text-xs font-extrabold uppercase tracking-[0.1em] text-[var(--color-ink-muted)] opacity-70"
-            disabled
-            title={mayManageCatalog ? "Product editor is prepared for the next commerce increment." : "Your role has read-only catalog access."}
-            type="button"
+          <Link
+            className="inline-flex min-h-12 items-center gap-2 border border-[var(--color-brand-blue)] bg-[var(--color-brand-blue)] px-5 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition hover:border-[var(--color-brand-navy)] hover:bg-[var(--color-brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
+            href={mayManageCatalog ? "/admin/products/new" : "/admin/products"}
           >
-            <PackagePlus aria-hidden="true" size={17} />
-            Add draft product — next step
-          </button>
+            {mayManageCatalog ? (
+              <PackagePlus aria-hidden="true" size={17} />
+            ) : (
+              <Boxes aria-hidden="true" size={17} />
+            )}
+            {mayManageCatalog ? "Add draft product" : "View products"}
+          </Link>
         </div>
 
         <div className="grid gap-px border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 xl:grid-cols-4">
@@ -221,6 +226,44 @@ export default async function AdminPage() {
                   <span>{category.productCount} products</span>
                   <span>/{category.slug}</span>
                 </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section aria-labelledby="sales-planning-title" className="border-t border-[var(--color-border)] py-10">
+        <div className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Private planning</p>
+            <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="sales-planning-title">Equipment scope decisions</h2>
+          </div>
+          <p className="text-sm leading-7 text-[var(--color-ink-muted)]">
+            These client-supplied labels are not approved inventory or public offerings. Complete the listed decisions before creating categories or product records.
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          {privateSalesPlanningItems.map((item, index) => {
+            const Icon = index === 0 ? HardHat : Truck;
+
+            return (
+              <article className="border border-[var(--color-border)] bg-white p-7" key={item.name}>
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <Icon aria-hidden="true" className="text-[var(--color-brand-blue)]" size={29} strokeWidth={1.6} />
+                  <StatusPill ready={false}>Client details required</StatusPill>
+                </div>
+                <h3 className="mt-8 text-3xl uppercase text-[var(--color-brand-navy)]">{item.name}</h3>
+                <p className="mt-4 text-sm leading-7 text-[var(--color-ink-muted)]">{item.catalogFoundation}</p>
+                <ul className="mt-6 border-t border-[var(--color-border)] text-sm">
+                  {item.decisionsRequired.map((decision) => (
+                    <li className="flex gap-3 border-b border-[var(--color-border)] py-4 leading-6 text-[var(--color-ink-muted)]" key={decision}>
+                      <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--color-brand-teal)]" />
+                      {decision}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.1em] text-amber-800">Admin planning only · Not public</p>
               </article>
             );
           })}
