@@ -4,7 +4,7 @@ Internal provenance register. Do not render this document, creator credits, or i
 
 The photographs listed below are representative technical imagery. They must not be described as CTS Pacific project photography. Files are stored locally so the production site does not hotlink third-party assets.
 
-Last retrieved: 2026-08-30
+Last retrieved: 2026-08-31
 
 License: [Pexels License](https://www.pexels.com/license/)
 
@@ -23,3 +23,4 @@ License: [Pexels License](https://www.pexels.com/license/)
 | `public/images/editorial/telecommunications-specialist-reference.jpeg` | Telecommunications specialist configuring network equipment | Field Engineer / Pexels | https://www.pexels.com/photo/electronics-engineer-fixing-cables-on-server-442150/ |
 | `public/images/editorial/pbx-conference-phone-reference.jpeg` | Conference telephone in a professional meeting space | Vladimír Sládek / Pexels | https://www.pexels.com/photo/modern-telephone-on-a-desk-in-office-10059345/ |
 | `public/images/editorial/server-infrastructure-reference.jpeg` | Physical server equipment in enclosed racks | Sergei Starostin / Pexels | https://www.pexels.com/photo/network-servers-on-an-enclosure-6466141/ |
+| `public/images/editorial/facility-locating-reference.jpeg` | Engineer surveying an underground cable route | Michael Singer / Pexels | https://www.pexels.com/photo/engineer-surveying-construction-site-with-equipment-34052052/ |

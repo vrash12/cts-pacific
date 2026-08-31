@@ -911,9 +911,10 @@ export const services: readonly ServiceDefinition[] = [
     detailImage: "/images/services 8.jpeg",
     detailImageAlt: "Client-supplied field image of exterior conduit and utility infrastructure.",
     detailObjectPosition: "50% 48%",
-    referenceImage: "/images/editorial/civil-underground-reference.jpeg",
-    referenceImageAlt: "Construction crew inspecting an open underground utility excavation.",
-    referenceObjectPosition: "50% 58%",
+    referenceImage: "/images/editorial/facility-locating-reference.jpeg",
+    referenceImageAlt:
+      "Engineer using surveying equipment beside an exposed underground cable route.",
+    referenceObjectPosition: "54% 52%",
     scopeNote:
       "The client must confirm supported locating methods and equipment, utility types, accuracy and reporting expectations, notification and permit responsibilities, mark-out ownership, exclusions, and whether regulated locating is included.",
   },

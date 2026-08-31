@@ -222,7 +222,10 @@ The homepage includes:
 - Certification and service-area credibility line
 - Trust bar
 - Supplied GTA and IT&E customer marks
-- Six visual service modules
+- Accessible six-service slideshow using the current locally stored CTS Pacific imagery
+- Native touch/swipe scrolling, previous/next controls, numbered service selectors, and explicit pause/play
+- Seven-second autoplay that pauses on hover, keyboard focus, hidden tabs, and while the section is offscreen
+- Reduced-motion handling that disables autoplay and removes nonessential transition motion
 - Interactive project-needs navigator
 - Technical-capability section
 - Micro-trenching feature
@@ -294,6 +297,7 @@ Additional project-specific routes:
 - Supplemental service imagery is stored locally and does not hotlink third-party assets
 - Image provenance and licensing remain in the internal `IMAGE_LICENSES.md` register and are not rendered on the public website
 - Public service pages show the imagery without stock-reference labels, creator credits, or outbound source links
+- Facility Locating uses a locally stored, licensed Pexels surveying image as representative imagery until approved CTS Pacific photography is supplied
 
 Supporting imagery must never be described as CTS Pacific project work.
 
@@ -585,15 +589,18 @@ pnpm check
 
 GitHub Actions currently runs install, lint, typecheck, unit/integration tests, and build on pushes to `main` and pull requests.
 
-Most recent validation after the private product-category CRUD increment:
+Most recent validation after the accessible service-slideshow increment:
 
 - ESLint passed
 - Strict TypeScript passed
-- 22 test files passed
-- 67 tests passed
+- 23 test files passed
+- 72 tests passed
 - Production build passed
 - 23 static pages generated
-- 38 Playwright checks passed across desktop Chromium and mobile Chromium
+- 42 Playwright checks passed across desktop Chromium and mobile Chromium
+- Homepage service slideshow verified with current local imagery, precise programmatic alignment, direct selectors, previous/next controls, pause/play, and mobile presentation
+- Autoplay verified with hover, keyboard-focus, hidden-document, offscreen, and reduced-motion safeguards
+- Desktop and 390px mobile visual inspection passed with no browser console warnings or errors
 - About-page field image verified at desktop and mobile breakpoints
 - Project-intake replacement verified at desktop and mobile breakpoints
 - Curated six-service desktop dropdown and concise mobile navigation verified in the local browser
@@ -611,9 +618,11 @@ Run the entire suite again after future changes; do not rely indefinitely on thi
 
 ## 12. Current Git state at handoff creation
 
-The admin/commerce foundation was pushed to `origin/main` in commit `81ead94`.
-
-The product-administration MVP, audit-log migration, visual-motif cleanup, completed fourteen-service catalog, curated navigation, supporting-image integration, and continuation documents were implemented after that push. At the time of this update they are local working-tree changes. The next developer must run:
+The admin leads, private catalog, completed service catalog, Supabase integration,
+and email integration were pushed to `origin/main` in commit `22635dd`. The
+homepage service slideshow increment was implemented after that baseline; its
+exact local and remote commit state may advance after this document is written.
+The next developer must run:
 
 ```powershell
 git status
@@ -856,7 +865,8 @@ If a required fact is missing, add or preserve a clearly marked placeholder and 
 
 - `AGENTS.md` — authoritative system requirements
 - `SYSTEM_FEATURES_AND_FUTURE_ROADMAP.md` — current implementation status and continuation plan
-- `NEXT_AI_REMAINING_SERVICES_PROMPT.md` — copyable task prompt for the remaining sales and service categories
+- `NEXT_AI_REMAINING_SERVICES_PROMPT.md` — historical prompt for the now-completed service expansion
+- `NEXT_AI_SERVICE_SLIDESHOW_PROMPT.md` — copyable continuation and verification prompt for the service slideshow increment
 - `CLIENT_CONTENT_REQUIRED.md` — missing or unverified client information
 - `README.md` — concise setup entry point
 - `docs/architecture/IMPLEMENTATION_PLAN.md` — original architecture and milestones

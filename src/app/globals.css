@@ -613,50 +613,50 @@ a {
   font-size: 1.05rem;
 }
 
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--color-border);
-  background: var(--color-border);
+.services-slideshow {
+  margin-top: clamp(3rem, 6vw, 5rem);
 }
 
-.service-card {
-  display: grid;
-  grid-column: span 6;
-  grid-template-rows: 18rem 1fr;
+.services-slideshow__viewport {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
   background: white;
 }
 
-.service-card:first-child {
-  grid-column: span 7;
-  grid-template-rows: 24rem 1fr;
+.services-slideshow__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-.service-card:nth-child(2) {
-  grid-column: span 5;
-  grid-template-rows: 24rem 1fr;
+.services-slideshow__track::-webkit-scrollbar {
+  display: none;
 }
 
-.service-card:nth-child(n + 3):nth-child(-n + 5) {
-  grid-column: span 4;
+.services-slideshow__slide {
+  display: grid;
+  min-width: 0;
+  min-height: 32rem;
+  flex: 0 0 100%;
+  grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+  background: white;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-.service-card:last-child {
-  grid-column: span 12;
-  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-  grid-template-rows: 24rem;
+.services-slideshow__slide + .services-slideshow__slide {
+  border-left: 1px solid var(--color-border);
 }
 
-.service-card :is(.image-placeholder, .field-image) {
-  min-height: 100%;
+.services-slideshow__slide .field-image {
+  min-height: 32rem;
   border: 0;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .service-card:hover .field-image__asset {
-    transform: scale(1.025);
-  }
+.services-slideshow__slide .field-image__asset {
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .service-card__body {
@@ -675,12 +675,13 @@ a {
   font-weight: 800;
 }
 
-.service-card h3 {
+.services-slideshow__slide h3 {
   color: var(--color-brand-navy);
   font-family: var(--font-heading), Arial, sans-serif;
-  font-size: clamp(1.5rem, 2.25vw, 2.2rem);
+  font-size: clamp(2rem, 3.5vw, 3.4rem);
   letter-spacing: -0.035em;
   line-height: 1.05;
+  text-transform: uppercase;
 }
 
 .service-card__body > p:not(.service-card__number) {
@@ -708,7 +709,145 @@ a {
 .service-card__body > a:hover,
 .service-card__body > a:focus-visible {
   color: var(--color-brand-blue);
-  outline: none;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 0.35rem;
+}
+
+.services-slideshow__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.services-slideshow__status {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-brand-navy);
+}
+
+.services-slideshow__status span {
+  color: var(--color-brand-teal);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.services-slideshow__status strong {
+  overflow: hidden;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.services-slideshow__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.services-slideshow__control,
+.services-slideshow__pagination-button {
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  color: var(--color-brand-navy);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.services-slideshow__control {
+  display: inline-flex;
+  min-width: 3rem;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.services-slideshow__control--toggle {
+  min-width: 7.25rem;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.services-slideshow__control:disabled {
+  border-color: var(--color-border);
+  background: var(--color-surface-muted);
+  color: var(--color-ink-muted);
+  cursor: not-allowed;
+}
+
+.services-slideshow__pagination {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 1rem;
+  border-block: 1px solid var(--color-border);
+}
+
+.services-slideshow__pagination-button {
+  position: relative;
+  min-height: 3rem;
+  border-width: 0;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 800;
+}
+
+.services-slideshow__pagination-button + .services-slideshow__pagination-button {
+  border-left: 1px solid var(--color-border);
+}
+
+.services-slideshow__pagination-button::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  background: var(--color-brand-blue);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-standard);
+}
+
+.services-slideshow__pagination-button[data-active="true"] {
+  background: var(--color-brand-navy);
+  color: white;
+}
+
+.services-slideshow__pagination-button[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+.services-slideshow__control:focus-visible,
+.services-slideshow__pagination-button:focus-visible {
+  z-index: 1;
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .services-slideshow__slide:hover .field-image__asset {
+    transform: scale(1.025);
+  }
+
+  .services-slideshow__control:not(:disabled):hover,
+  .services-slideshow__pagination-button:hover {
+    border-color: var(--color-brand-blue);
+    background: var(--color-brand-blue);
+    color: white;
+  }
 }
 
 /* Technical capabilities */
@@ -3398,16 +3537,6 @@ a {
     padding-right: 3.25rem;
   }
 
-  .service-card:nth-child(n + 3):nth-child(-n + 5) {
-    grid-column: span 6;
-  }
-
-  .service-card:nth-child(5) {
-    grid-column: span 12;
-    grid-template-columns: minmax(0, 0.8fr) minmax(21rem, 1.2fr);
-    grid-template-rows: 21rem;
-  }
-
   .proof-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -3529,18 +3658,6 @@ a {
   .section-heading {
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
-  }
-
-  .service-card:first-child,
-  .service-card:nth-child(2) {
-    grid-column: span 6;
-    grid-template-rows: 20rem 1fr;
-  }
-
-  .service-card:nth-child(n + 3):nth-child(-n + 5) {
-    grid-column: span 6;
-    grid-template-columns: 1fr;
-    grid-template-rows: 18rem 1fr;
   }
 
   .technical-section__heading,
@@ -3733,24 +3850,31 @@ a {
     font-size: clamp(2.25rem, 10vw, 3rem);
   }
 
-  .service-grid {
-    display: grid;
+  .services-slideshow__slide {
     grid-template-columns: 1fr;
+    grid-template-rows: 20rem minmax(20rem, auto);
   }
 
-  .service-card,
-  .service-card:first-child,
-  .service-card:nth-child(2),
-  .service-card:nth-child(n + 3):nth-child(-n + 5),
-  .service-card:nth-child(5),
-  .service-card:last-child {
-    grid-column: 1;
-    grid-template-columns: 1fr;
-    grid-template-rows: 18rem 1fr;
+  .services-slideshow__slide,
+  .services-slideshow__slide .field-image {
+    min-height: 20rem;
   }
 
   .service-card__body {
     padding: 1.5rem;
+  }
+
+  .services-slideshow__controls {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .services-slideshow__actions {
+    justify-content: space-between;
+  }
+
+  .services-slideshow__control--toggle {
+    flex: 1;
   }
 
   .technical-section__heading h2,
@@ -3989,7 +4113,6 @@ summary > svg {
   transform: rotate(90deg);
 }
 
-.service-card,
 .services-index-grid article,
 .related-services article,
 .service-process__steps li,
@@ -4009,7 +4132,6 @@ summary > svg {
   transition: opacity 320ms ease;
 }
 
-.service-card:focus-within,
 .services-index-grid article:focus-within,
 .related-services article:focus-within {
   z-index: 1;
@@ -4017,7 +4139,6 @@ summary > svg {
   transform: translateY(-0.2rem);
 }
 
-.service-card:focus-within .field-image__asset,
 .services-index-grid article:focus-within .field-image__asset,
 .related-services article:focus-within .field-image__asset {
   transform: scale(1.028);
@@ -4029,7 +4150,6 @@ summary > svg {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .service-card:hover,
   .services-index-grid article:hover,
   .related-services article:hover {
     z-index: 1;

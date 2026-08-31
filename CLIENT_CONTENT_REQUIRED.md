@@ -40,6 +40,14 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 - Facility Locating: supported locating methods and equipment, utility types, accuracy and reporting expectations, required notifications and permits, mark-out responsibility, exclusions, and whether any regulated locating is included
 - Approved client-supplied photographs or approved representative imagery specifically depicting each expanded service
 
+## Service slideshow imagery
+
+- Final approval of every image included in the public service slideshow
+- Confirmation of which supplied photographs document genuine CTS Pacific field work
+- Approved slide order, captions, and any photographs the client wants prioritized or removed
+- Replacement CTS Pacific photographs for representative stock imagery, especially structured cabling, access-control installations, fusion splicing and testing, racks/MDF/IDF, NVR/VMS, PBX, server/IT work, and facility locating
+- Confirmation that the current locally stored Pexels images may remain as representative service imagery until CTS Pacific replacements are supplied
+
 ## Partners and hotel locks
 
 - Approved public wording for the CTS Pacific and VCE Pacific partnership beyond the confirmed hotel-lock relationship

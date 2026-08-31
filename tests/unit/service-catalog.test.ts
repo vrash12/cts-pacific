@@ -72,6 +72,12 @@ describe("service catalog", () => {
     ).toEqual(["access-control"]);
   });
 
+  it("uses service-specific representative imagery for facility locating", () => {
+    expect(getServiceBySlug("facility-locating")?.referenceImage).toBe(
+      "/images/editorial/facility-locating-reference.jpeg",
+    );
+  });
+
   it("resolves only valid services and valid related capabilities", () => {
     expect(getServiceBySlug("fiber-optics")?.title).toBe("Fiber Optic Infrastructure");
     expect(getServiceBySlug("not-a-service")).toBeUndefined();

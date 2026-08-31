@@ -4,6 +4,7 @@ import { ArrowDownRight, ArrowRight } from "lucide-react";
 
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectNavigator } from "@/components/marketing/project-navigator";
+import { ServicesSlideshow } from "@/components/marketing/services-slideshow";
 import { buttonVariants } from "@/components/ui/button";
 import {
   credibilityItems,
@@ -130,7 +131,7 @@ export default function HomePage() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Our capabilities</p>
-              <h2>One team. Complete infrastructure capability.</h2>
+              <h2 id="services-heading">One team. Complete infrastructure capability.</h2>
             </div>
             <p>
               From underground pathways to final network commissioning, CTS Pacific
@@ -138,27 +139,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="service-grid">
-            {homepageServices.map((service) => (
-              <article className="service-card" key={service.href}>
-                <FieldImage
-                  alt={service.imageAlt}
-                  objectPosition={service.objectPosition}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 42vw"
-                  src={service.imageSrc}
-                />
-                <div className="service-card__body">
-                  <p className="service-card__number">{service.number}</p>
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                  <Link href={service.href}>
-                    Explore
-                    <ArrowRight aria-hidden="true" size={17} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <ServicesSlideshow headingId="services-heading" services={homepageServices} />
         </div>
       </section>
 
