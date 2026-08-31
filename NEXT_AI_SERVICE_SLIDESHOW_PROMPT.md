@@ -43,6 +43,9 @@ Implemented behavior:
   aligns correctly at desktop and mobile widths
 - Accessible labels, live announcements for manual changes, focus styles, and
   stable responsive image sizing
+- A follow-up desktop layout defect in the homepage Industries section was fixed
+  by constraining that section's headline scale; the `01` index and Commercial
+  label remain clear at the reported 1852px viewport
 
 Do not install a carousel dependency unless this native implementation becomes
 insufficient.
@@ -63,7 +66,7 @@ At the time this handoff was written:
 - Strict TypeScript passed
 - 23 Vitest files and 72 tests passed
 - Production build passed and generated 23 static pages
-- 42 Playwright checks passed across desktop and mobile Chromium
+- 44 Playwright checks passed across desktop and mobile Chromium
 - Desktop and 390px mobile browser inspection passed
 - Slide alignment measured within one pixel in the browser
 - Browser console contained no warnings or errors

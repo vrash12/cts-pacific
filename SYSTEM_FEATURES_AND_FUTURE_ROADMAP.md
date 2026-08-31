@@ -597,10 +597,11 @@ Most recent validation after the accessible service-slideshow increment:
 - 72 tests passed
 - Production build passed
 - 23 static pages generated
-- 42 Playwright checks passed across desktop Chromium and mobile Chromium
+- 44 Playwright checks passed across desktop Chromium and mobile Chromium
 - Homepage service slideshow verified with current local imagery, precise programmatic alignment, direct selectors, previous/next controls, pause/play, and mobile presentation
 - Autoplay verified with hover, keyboard-focus, hidden-document, offscreen, and reduced-motion safeguards
 - Desktop and 390px mobile visual inspection passed with no browser console warnings or errors
+- Industries-section headline sizing verified at the reported 1852px viewport so the heading no longer obscures the `01` index or Commercial label
 - About-page field image verified at desktop and mobile breakpoints
 - Project-intake replacement verified at desktop and mobile breakpoints
 - Curated six-service desktop dropdown and concise mobile navigation verified in the local browser

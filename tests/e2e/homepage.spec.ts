@@ -67,3 +67,24 @@ test("service slideshow remains usable at a mobile viewport", async ({ page }) =
     carousel.getByRole("button", { name: /show cctv systems, slide 3 of 6/i }),
   ).toHaveAttribute("aria-current", "true");
 });
+
+test("industry heading stays clear of the first industry row", async ({ page }) => {
+  await page.setViewportSize({ width: 1852, height: 775 });
+  await page.goto("/");
+
+  const spacing = await page.locator(".industries-section").evaluate((section) => {
+    const heading = section.querySelector<HTMLElement>(".industries-section__intro h2");
+    const firstNumber = section.querySelector<HTMLElement>(".industry-list article > p");
+
+    if (!heading || !firstNumber) {
+      throw new Error("Industries section layout elements are missing.");
+    }
+
+    const headingLeft = heading.getBoundingClientRect().left;
+    const numberLeft = firstNumber.getBoundingClientRect().left;
+
+    return numberLeft - (headingLeft + heading.scrollWidth);
+  });
+
+  expect(spacing).toBeGreaterThanOrEqual(16);
+});
