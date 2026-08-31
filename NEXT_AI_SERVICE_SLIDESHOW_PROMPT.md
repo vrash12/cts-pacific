@@ -46,6 +46,9 @@ Implemented behavior:
 - A follow-up desktop layout defect in the homepage Industries section was fixed
   by constraining that section's headline scale; the `01` index and Commercial
   label remain clear at the reported 1852px viewport
+- A follow-up credential-card defect was fixed by constraining each logo grid
+  track and image height; the tall GCA member mark no longer crosses into its
+  text panel
 
 Do not install a carousel dependency unless this native implementation becomes
 insufficient.
@@ -66,7 +69,7 @@ At the time this handoff was written:
 - Strict TypeScript passed
 - 23 Vitest files and 72 tests passed
 - Production build passed and generated 23 static pages
-- 44 Playwright checks passed across desktop and mobile Chromium
+- 46 Playwright checks passed across desktop and mobile Chromium
 - Desktop and 390px mobile browser inspection passed
 - Slide alignment measured within one pixel in the browser
 - Browser console contained no warnings or errors

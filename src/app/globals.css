@@ -1278,7 +1278,10 @@ a {
 
 .credential-mark {
   display: grid;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
+  overflow: hidden;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface-muted);
   padding: 1.5rem;
@@ -1287,7 +1290,8 @@ a {
 .credential-mark img {
   width: auto;
   max-width: 100%;
-  height: min(9rem, 100%);
+  height: auto;
+  max-height: 9rem;
   object-fit: contain;
 }
 
@@ -3957,7 +3961,7 @@ a {
   }
 
   .credential-mark img {
-    height: 8rem;
+    max-height: 8rem;
   }
 
   .final-cta__content > div {

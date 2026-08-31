@@ -88,3 +88,34 @@ test("industry heading stays clear of the first industry row", async ({ page }) 
 
   expect(spacing).toBeGreaterThanOrEqual(16);
 });
+
+test("credential artwork stays inside each image panel", async ({ page }) => {
+  await page.setViewportSize({ width: 1481, height: 755 });
+  await page.goto("/");
+
+  const overflows = await page
+    .locator(".certification-grid article")
+    .evaluateAll((cards) =>
+      cards.map((card) => {
+        const panel = card.querySelector<HTMLElement>(".credential-mark");
+        const image = panel?.querySelector<HTMLElement>("img");
+
+        if (!panel || !image) {
+          throw new Error("Credential image panel is incomplete.");
+        }
+
+        const panelRect = panel.getBoundingClientRect();
+        const imageRect = image.getBoundingClientRect();
+
+        return {
+          above: Math.max(0, panelRect.top - imageRect.top),
+          below: Math.max(0, imageRect.bottom - panelRect.bottom),
+        };
+      }),
+    );
+
+  for (const overflow of overflows) {
+    expect(overflow.above).toBeLessThanOrEqual(1);
+    expect(overflow.below).toBeLessThanOrEqual(1);
+  }
+});
