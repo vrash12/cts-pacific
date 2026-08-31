@@ -14,6 +14,18 @@ const navigationItems = [
 ] as const;
 
 describe("MobileNavigation", () => {
+  it("marks the current page for assistive technology", () => {
+    render(<MobileNavigation items={navigationItems} />);
+
+    expect(screen.getByRole("link", { name: "Services" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute(
+      "aria-current",
+    );
+  });
+
   it("closes immediately when a navigation link is activated", async () => {
     const user = userEvent.setup();
     const { container } = render(<MobileNavigation items={navigationItems} />);

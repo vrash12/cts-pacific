@@ -2,7 +2,10 @@
 
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { type KeyboardEvent, useRef } from "react";
+
+import { isPathActive } from "@/lib/navigation";
 
 type NavigationLink = {
   label: string;
@@ -20,6 +23,8 @@ export function ServicesNavigationMenu({
   children,
 }: ServicesNavigationMenuProps) {
   const menuRef = useRef<HTMLDetailsElement>(null);
+  const pathname = usePathname();
+  const isActive = isPathActive(pathname, href);
   const groups = children.reduce<{ label: string; links: NavigationLink[] }[]>(
     (result, child) => {
       const groupLabel = child.group ?? "Services";
@@ -54,7 +59,7 @@ export function ServicesNavigationMenu({
       onKeyDown={handleKeyDown}
       ref={menuRef}
     >
-      <summary>
+      <summary aria-current={isActive ? "page" : undefined}>
         {label}
         <ChevronDown aria-hidden="true" size={15} />
       </summary>

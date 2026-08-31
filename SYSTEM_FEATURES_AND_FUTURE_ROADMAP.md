@@ -211,6 +211,8 @@ The Projects section and route were removed from the visible site following the 
 - Escape closes the dropdown and restores focus to the summary control
 - Mobile navigation closes on link activation, route changes, and Escape instead of persisting after navigation
 - Desktop and mobile navigation panels use a subtle 190ms entrance animation when reduced motion is not requested
+- The current route is identified with `aria-current`; desktop navigation keeps the technical-blue underline visible, while mobile navigation uses a restrained teal rail and tinted row
+- Section routes remain active on their detail pages, including Services across every `/services/*` route
 - Products are absent from desktop and mobile navigation while commerce is disabled
 
 ### 5.3 Homepage
@@ -232,6 +234,7 @@ The homepage includes:
 - Why CTS Pacific pillars
 - Commercial, Government, Industrial, and Residential sectors
 - GCA membership certificate plus GCA, FOA, ETA Certified FOI, and ETA International supplied artwork
+- Responsive GCA membership feature with the full Guam Contractors Association name contained inside its navy information panel
 - Final project quote call to action
 - Subtle microinteractions and restrained motion
 
@@ -589,20 +592,22 @@ pnpm check
 
 GitHub Actions currently runs install, lint, typecheck, unit/integration tests, and build on pushes to `main` and pull requests.
 
-Most recent validation after the accessible service-slideshow increment:
+Most recent validation after the active-navigation and GCA certificate-layout increment:
 
 - ESLint passed
 - Strict TypeScript passed
-- 23 test files passed
-- 72 tests passed
+- 24 test files passed
+- 76 tests passed
 - Production build passed
 - 23 static pages generated
-- 46 Playwright checks passed across desktop Chromium and mobile Chromium
+- 48 Playwright checks passed across desktop Chromium and mobile Chromium
 - Homepage service slideshow verified with current local imagery, precise programmatic alignment, direct selectors, previous/next controls, pause/play, and mobile presentation
 - Autoplay verified with hover, keyboard-focus, hidden-document, offscreen, and reduced-motion safeguards
 - Desktop and 390px mobile visual inspection passed with no browser console warnings or errors
 - Industries-section headline sizing verified at the reported 1852px viewport so the heading no longer obscures the `01` index or Commercial label
 - Credential artwork containment verified so tall supplied marks, including the GCA member logo, remain centered inside their media panels at desktop and mobile widths
+- Certifications active-route styling and semantics verified in desktop and mobile navigation
+- Guam Contractors Association heading containment verified at the reported 1774px desktop viewport and at 390px mobile width
 - About-page field image verified at desktop and mobile breakpoints
 - Project-intake replacement verified at desktop and mobile breakpoints
 - Curated six-service desktop dropdown and concise mobile navigation verified in the local browser

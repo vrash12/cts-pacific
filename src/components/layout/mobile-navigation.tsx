@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { type KeyboardEvent, useEffect, useRef } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { isPathActive } from "@/lib/navigation";
 
 type MobileNavigationItem = {
   label: string;
@@ -50,11 +51,20 @@ export function MobileNavigation({ items }: MobileNavigationProps) {
         <span>Menu</span>
       </summary>
       <nav className="mobile-navigation__panel" aria-label="Mobile navigation">
-        {items.map((item) => (
-          <Link href={item.href} key={item.href} onClick={closeMenu}>
-            {item.label}
-          </Link>
-        ))}
+        {items.map((item) => {
+          const isActive = isPathActive(pathname, item.href);
+
+          return (
+            <Link
+              aria-current={isActive ? "page" : undefined}
+              href={item.href}
+              key={item.href}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
         <Link
           className={buttonVariants({ size: "compact" })}
           href="/quote"

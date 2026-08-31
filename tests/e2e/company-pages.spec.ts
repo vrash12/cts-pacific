@@ -37,6 +37,43 @@ test("certifications presents the client-supplied GCA membership certificate", a
       (image) => image instanceof HTMLImageElement && image.naturalWidth > 0,
     ),
   ).toBe(true);
+
+  const headingFitsPanel = await page
+    .locator(".membership-certificate__content h3")
+    .evaluate((heading) => {
+      const panel = heading.parentElement;
+      if (!panel) return false;
+
+      const headingRect = heading.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
+      return headingRect.left >= panelRect.left && headingRect.right <= panelRect.right;
+    });
+
+  expect(headingFitsPanel).toBe(true);
+});
+
+test("certifications is identified as the current navigation destination", async ({
+  isMobile,
+  page,
+}) => {
+  await page.goto("/certifications");
+
+  if (isMobile) {
+    const menu = page.locator("details.mobile-navigation");
+    await menu.locator("summary").click();
+    await expect(
+      page
+        .getByRole("navigation", { name: "Mobile navigation" })
+        .getByRole("link", { name: "Certifications", exact: true }),
+    ).toHaveAttribute("aria-current", "page");
+    return;
+  }
+
+  await expect(
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Certifications", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
 });
 
 test("contact exposes the validated general inquiry workflow", async ({ page }) => {

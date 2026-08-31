@@ -221,8 +221,10 @@ a {
 
 .desktop-navigation > a:hover,
 .desktop-navigation > a:focus-visible,
+.desktop-navigation > a[aria-current="page"],
 .navigation-menu > summary:hover,
-.navigation-menu > summary:focus-visible {
+.navigation-menu > summary:focus-visible,
+.navigation-menu > summary[aria-current="page"] {
   color: var(--color-brand-blue);
   outline: none;
 }
@@ -1031,7 +1033,7 @@ a {
 
 .membership-certificate {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.62fr) minmax(0, 1.38fr);
+  grid-template-columns: minmax(22rem, 0.78fr) minmax(0, 1.22fr);
   margin-top: clamp(3.5rem, 6vw, 5.5rem);
   background: var(--color-brand-navy-deep);
 }
@@ -1040,7 +1042,8 @@ a {
   display: grid;
   align-content: center;
   gap: 1.15rem;
-  padding: clamp(2rem, 4.5vw, 4rem);
+  min-width: 0;
+  padding: clamp(2rem, 3.75vw, 3.5rem);
 }
 
 .membership-certificate__content > p {
@@ -1054,7 +1057,7 @@ a {
 .membership-certificate__content h3 {
   max-width: 12ch;
   color: white;
-  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-size: clamp(2rem, 3.5vw, 3.1rem);
   line-height: 1;
   text-transform: uppercase;
 }
@@ -3606,6 +3609,13 @@ a {
     font-size: 0.875rem;
   }
 
+  .mobile-navigation__panel > a[aria-current="page"] {
+    border-left: 3px solid #65c8cf;
+    background: rgb(255 255 255 / 6%);
+    color: #8edee2;
+    padding-left: 0.75rem;
+  }
+
   .mobile-navigation__panel > a:last-child {
     margin-top: 1rem;
   }
@@ -4102,8 +4112,10 @@ summary > svg {
 
 .desktop-navigation > a:hover::after,
 .desktop-navigation > a:focus-visible::after,
+.desktop-navigation > a[aria-current="page"]::after,
 .navigation-menu > summary:hover::after,
 .navigation-menu > summary:focus-visible::after,
+.navigation-menu > summary[aria-current="page"]::after,
 .navigation-menu[open] > summary::after {
   transform: scaleX(1);
   transform-origin: left;

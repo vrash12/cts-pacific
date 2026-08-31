@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ActiveNavigationLink } from "@/components/layout/active-navigation-link";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
 import { buttonVariants } from "@/components/ui/button";
@@ -49,9 +50,11 @@ export function SiteHeader() {
             }
 
             return (
-              <Link href={item.href} key={item.href}>
-                {item.label}
-              </Link>
+              <ActiveNavigationLink
+                href={item.href}
+                key={item.href}
+                label={item.label}
+              />
             );
           })}
         </nav>

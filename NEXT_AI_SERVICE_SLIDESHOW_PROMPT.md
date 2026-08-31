@@ -49,6 +49,12 @@ Implemented behavior:
 - A follow-up credential-card defect was fixed by constraining each logo grid
   track and image height; the tall GCA member mark no longer crosses into its
   text panel
+- Primary navigation now exposes the active route with `aria-current`, a
+  persistent technical-blue desktop underline, and a restrained active mobile
+  row; Services remains active on its detail routes
+- The Certifications-page GCA feature was rebalanced so the full Guam
+  Contractors Association heading stays inside its navy panel at desktop and
+  mobile widths
 
 Do not install a carousel dependency unless this native implementation becomes
 insufficient.
@@ -67,9 +73,9 @@ At the time this handoff was written:
 
 - ESLint passed
 - Strict TypeScript passed
-- 23 Vitest files and 72 tests passed
+- 24 Vitest files and 76 tests passed
 - Production build passed and generated 23 static pages
-- 46 Playwright checks passed across desktop and mobile Chromium
+- 48 Playwright checks passed across desktop and mobile Chromium
 - Desktop and 390px mobile browser inspection passed
 - Slide alignment measured within one pixel in the browser
 - Browser console contained no warnings or errors
