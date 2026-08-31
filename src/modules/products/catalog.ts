@@ -1,8 +1,13 @@
 export const initialProductCategories = [
   {
+    name: "Cameras",
+    slug: "cameras",
+    description: "Client-approved camera products prepared for future catalog entry.",
+  },
+  {
     name: "Electronics",
     slug: "electronics",
-    description: "Cameras and other approved electronic products.",
+    description: "Client-approved electronic products prepared for future catalog entry.",
   },
   {
     name: "Construction Equipment",

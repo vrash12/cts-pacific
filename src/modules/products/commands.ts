@@ -2,10 +2,6 @@ import "server-only";
 
 import { asc, eq } from "drizzle-orm";
 
-import {
-  initialProductCategorySlugs,
-  type InitialProductCategorySlug,
-} from "@/modules/products/catalog";
 import { parsePriceToMinorUnits } from "@/modules/products/money";
 import {
   productAdminFormSchema,
@@ -35,15 +31,7 @@ export class ProductCommandError extends Error {
   }
 }
 
-function isApprovedCategorySlug(
-  slug: string,
-): slug is InitialProductCategorySlug {
-  return initialProductCategorySlugs.includes(
-    slug as InitialProductCategorySlug,
-  );
-}
-
-async function requireApprovedCategory(
+async function requireActiveCategory(
   transaction: Parameters<
     Parameters<ReturnType<typeof getDatabase>["transaction"]>[0]
   >[0],
@@ -59,10 +47,7 @@ async function requireApprovedCategory(
     .where(eq(productCategories.id, categoryId))
     .limit(1);
 
-  if (
-    !category?.isActive ||
-    !isApprovedCategorySlug(category.slug)
-  ) {
+  if (!category?.isActive) {
     throw new ProductCommandError("CATEGORY_INVALID");
   }
 
@@ -78,7 +63,7 @@ export async function createProductDraft(
   const database = getDatabase();
 
   return database.transaction(async (transaction) => {
-    await requireApprovedCategory(transaction, productInput.categoryId);
+    await requireActiveCategory(transaction, productInput.categoryId);
 
     const [product] = await transaction
       .insert(products)
@@ -135,7 +120,7 @@ export async function updateProduct(
   const database = getDatabase();
 
   return database.transaction(async (transaction) => {
-    await requireApprovedCategory(transaction, productInput.categoryId);
+    await requireActiveCategory(transaction, productInput.categoryId);
 
     const [existingProduct] = await transaction
       .select({ id: products.id, updatedAt: products.updatedAt })

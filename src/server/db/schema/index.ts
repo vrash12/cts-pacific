@@ -79,3 +79,47 @@ export const quoteRequestServices = pgTable(
     index("quote_request_services_service_idx").on(table.service),
   ],
 );
+
+export const contactInquiryType = pgEnum("contact_inquiry_type", [
+  "general",
+  "service-question",
+  "project-coordination",
+  "other",
+]);
+
+export const contactSubmissionStatus = pgEnum("contact_submission_status", [
+  "NEW",
+  "REVIEWING",
+  "CONTACTED",
+  "CLOSED",
+]);
+
+export const contactSubmissions = pgTable(
+  "contact_submissions",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    submissionId: uuid("submission_id").notNull(),
+    referenceNumber: text("reference_number").notNull(),
+    name: text("name").notNull(),
+    company: text("company"),
+    email: text("email").notNull(),
+    phone: text("phone"),
+    inquiryType: contactInquiryType("inquiry_type").notNull(),
+    subject: text("subject").notNull(),
+    message: text("message").notNull(),
+    status: contactSubmissionStatus("status").default("NEW").notNull(),
+    sourcePage: text("source_page").default("/contact").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("contact_submissions_submission_id_unique").on(table.submissionId),
+    uniqueIndex("contact_submissions_reference_number_unique").on(table.referenceNumber),
+    index("contact_submissions_status_created_at_idx").on(table.status, table.createdAt),
+    index("contact_submissions_email_idx").on(table.email),
+    check(
+      "contact_submissions_message_length",
+      sql`char_length(${table.message}) between 20 and 3000`,
+    ),
+  ],
+);

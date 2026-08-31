@@ -59,6 +59,19 @@ describe("service catalog", () => {
     ).toBe(true);
   });
 
+  it("defines the approved hotel-lock partner only for access control", () => {
+    const accessControl = getServiceBySlug("access-control");
+
+    expect(accessControl?.partner).toMatchObject({
+      name: "VCE Pacific",
+      website: "https://www.vcepacific.com/",
+      logo: "/images/partners/vce-pacific-logo.png",
+    });
+    expect(
+      services.filter((service) => service.partner).map((service) => service.slug),
+    ).toEqual(["access-control"]);
+  });
+
   it("resolves only valid services and valid related capabilities", () => {
     expect(getServiceBySlug("fiber-optics")?.title).toBe("Fiber Optic Infrastructure");
     expect(getServiceBySlug("not-a-service")).toBeUndefined();

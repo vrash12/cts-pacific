@@ -20,12 +20,14 @@ const validDraft = {
 };
 
 describe("commerce catalog foundation", () => {
-  it("contains only the two client-requested initial categories", () => {
+  it("contains only the three client-requested initial categories", () => {
     expect(initialProductCategories.map((category) => category.name)).toEqual([
+      "Cameras",
       "Electronics",
       "Construction Equipment",
     ]);
     expect(initialProductCategorySlugs).toEqual([
+      "cameras",
       "electronics",
       "construction-equipment",
     ]);
@@ -47,11 +49,17 @@ describe("commerce catalog foundation", () => {
     ).toBe(false);
   });
 
-  it("rejects unapproved initial categories", () => {
+  it("accepts an admin-managed category slug and rejects malformed slugs", () => {
     expect(
       productDraftSchema.safeParse({
         ...validDraft,
-        categorySlug: "invented-category",
+        categorySlug: "client-approved-category",
+      }).success,
+    ).toBe(true);
+    expect(
+      productDraftSchema.safeParse({
+        ...validDraft,
+        categorySlug: "Invalid Category",
       }).success,
     ).toBe(false);
   });

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { AdminSignOutButton } from "@/components/admin/admin-sign-out-button";
 import { publicEnvironment } from "@/config/env/public";
+import { canManageLeads } from "@/server/auth/roles";
 import type { AdminActor } from "@/server/auth/require-admin";
 
 type AdminShellProps = {
@@ -74,6 +75,20 @@ export function AdminShell({ actor, children }: AdminShellProps) {
             >
               Products
             </Link>
+            <Link
+              className="inline-flex min-h-10 shrink-0 items-center px-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+              href="/admin/categories"
+            >
+              Categories
+            </Link>
+            {canManageLeads(actor.role) ? (
+              <Link
+                className="inline-flex min-h-10 shrink-0 items-center px-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+                href="/admin/leads"
+              >
+                Leads
+              </Link>
+            ) : null}
           </div>
         </nav>
       </header>

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { asc, count, desc, eq } from "drizzle-orm";
+import { asc, count, desc, eq, or } from "drizzle-orm";
 
 import { assertCatalogViewerRole } from "@/server/auth/roles";
 import type { AdminActor } from "@/server/auth/require-admin";
@@ -57,7 +57,10 @@ export async function getAdminCatalogOverview(actor: AdminActor) {
   return { categories, totals };
 }
 
-export async function getAdminProductFormCategories(actor: AdminActor) {
+export async function getAdminProductFormCategories(
+  actor: AdminActor,
+  includeCategoryId?: string,
+) {
   assertCatalogViewer(actor);
 
   return getDatabase()
@@ -65,10 +68,61 @@ export async function getAdminProductFormCategories(actor: AdminActor) {
       id: productCategories.id,
       name: productCategories.name,
       slug: productCategories.slug,
+      isActive: productCategories.isActive,
     })
     .from(productCategories)
-    .where(eq(productCategories.isActive, true))
+    .where(
+      includeCategoryId
+        ? or(
+            eq(productCategories.isActive, true),
+            eq(productCategories.id, includeCategoryId),
+          )
+        : eq(productCategories.isActive, true),
+    )
     .orderBy(productCategories.displayOrder, productCategories.name);
+}
+
+export async function getAdminProductCategories(actor: AdminActor) {
+  assertCatalogViewer(actor);
+
+  return getDatabase()
+    .select({
+      id: productCategories.id,
+      name: productCategories.name,
+      slug: productCategories.slug,
+      description: productCategories.description,
+      displayOrder: productCategories.displayOrder,
+      isActive: productCategories.isActive,
+      updatedAt: productCategories.updatedAt,
+      productCount: count(products.id),
+    })
+    .from(productCategories)
+    .leftJoin(products, eq(products.categoryId, productCategories.id))
+    .groupBy(productCategories.id)
+    .orderBy(productCategories.displayOrder, productCategories.name);
+}
+
+export async function getAdminProductCategoryForEdit(
+  actor: AdminActor,
+  categoryId: string,
+) {
+  assertCatalogViewer(actor);
+
+  const [category] = await getDatabase()
+    .select({
+      id: productCategories.id,
+      name: productCategories.name,
+      slug: productCategories.slug,
+      description: productCategories.description,
+      displayOrder: productCategories.displayOrder,
+      isActive: productCategories.isActive,
+      updatedAt: productCategories.updatedAt,
+    })
+    .from(productCategories)
+    .where(eq(productCategories.id, categoryId))
+    .limit(1);
+
+  return category ?? null;
 }
 
 export async function getAdminProducts(actor: AdminActor) {

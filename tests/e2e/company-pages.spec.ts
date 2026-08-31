@@ -15,3 +15,57 @@ for (const entry of pages) {
     await expect(page.getByRole("link", { name: /request a quote/i }).first()).toBeVisible();
   });
 }
+
+test("certifications presents the client-supplied GCA membership certificate", async ({
+  page,
+}) => {
+  await page.goto("/certifications");
+
+  const certificate = page.getByRole("img", {
+    name: /guam contractors association certificate of membership/i,
+  });
+
+  await expect(certificate).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /view full certificate/i }),
+  ).toHaveAttribute(
+    "href",
+    "/images/credentials/gca-membership-certificate-2026.jpeg",
+  );
+  expect(
+    await certificate.evaluate(
+      (image) => image instanceof HTMLImageElement && image.naturalWidth > 0,
+    ),
+  ).toBe(true);
+});
+
+test("contact exposes the validated general inquiry workflow", async ({ page }) => {
+  await page.goto("/contact");
+
+  await expect(
+    page.getByRole("heading", { name: "Send a message to CTS Pacific." }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Inquiry type")).toBeVisible();
+
+  await page.getByRole("button", { name: "Send inquiry" }).click();
+
+  await expect(page.getByText("Enter your name.")).toBeVisible();
+  await expect(page.getByText("Select an inquiry type.")).toBeVisible();
+});
+
+test("access control presents the VCE Pacific hotel-lock partnership", async ({
+  page,
+}) => {
+  await page.goto("/services/access-control");
+
+  await expect(
+    page.getByRole("heading", {
+      name: /hotel locking coordinated with a guam security specialist/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByRole("img", { name: "VCE Pacific logo" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /visit vce pacific/i })).toHaveAttribute(
+    "href",
+    "https://www.vcepacific.com/",
+  );
+});

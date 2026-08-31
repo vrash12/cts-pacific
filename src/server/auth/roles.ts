@@ -2,31 +2,16 @@ import type { adminRole } from "@/server/db/schema";
 
 export type AdminRole = (typeof adminRole.enumValues)[number];
 
-export const catalogViewerRoles = [
-  "SUPER_ADMIN",
-  "ADMIN",
-  "CONTENT_EDITOR",
-  "ORDER_MANAGER",
-] as const satisfies readonly AdminRole[];
-
-export const catalogManagerRoles = [
-  "SUPER_ADMIN",
-  "ADMIN",
-  "CONTENT_EDITOR",
-] as const satisfies readonly AdminRole[];
-
 export function canManageCatalog(role: AdminRole) {
-  return catalogManagerRoles.includes(
-    role as (typeof catalogManagerRoles)[number],
-  );
+  return role === "ADMIN";
+}
+
+export function canManageLeads(role: AdminRole) {
+  return role === "ADMIN";
 }
 
 export function assertCatalogViewerRole(role: AdminRole) {
-  if (
-    !catalogViewerRoles.includes(
-      role as (typeof catalogViewerRoles)[number],
-    )
-  ) {
+  if (role !== "ADMIN") {
     throw new Error("ADMIN_CATALOG_FORBIDDEN");
   }
 }
@@ -34,5 +19,11 @@ export function assertCatalogViewerRole(role: AdminRole) {
 export function assertCatalogManagerRole(role: AdminRole) {
   if (!canManageCatalog(role)) {
     throw new Error("ADMIN_CATALOG_WRITE_FORBIDDEN");
+  }
+}
+
+export function assertLeadManagerRole(role: AdminRole) {
+  if (!canManageLeads(role)) {
+    throw new Error("ADMIN_LEADS_FORBIDDEN");
   }
 }

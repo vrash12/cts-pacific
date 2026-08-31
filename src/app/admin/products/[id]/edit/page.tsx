@@ -40,14 +40,16 @@ export default async function EditAdminProductPage({
     notFound();
   }
 
-  const [product, categories] = await Promise.all([
-    getAdminProductForEdit(access.actor, parsedId.data),
-    getAdminProductFormCategories(access.actor),
-  ]);
+  const product = await getAdminProductForEdit(access.actor, parsedId.data);
 
   if (!product) {
     notFound();
   }
+
+  const categories = await getAdminProductFormCategories(
+    access.actor,
+    product.categoryId,
+  );
 
   return (
     <AdminShell actor={access.actor}>

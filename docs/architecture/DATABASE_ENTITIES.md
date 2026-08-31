@@ -79,7 +79,7 @@ Constraints: unique request/service pair; quote foreign key; service foreign key
 
 Fields: id matching the Supabase Auth user id, role, display name, active state, last-login timestamp, timestamps.
 
-Roles: `SUPER_ADMIN`, `ADMIN`, `CONTENT_EDITOR`, `ORDER_MANAGER`.
+Role: `ADMIN`. The current system uses one administrator account type with complete administrative access.
 
 Authorization must be enforced in server code and RLS, not inferred from the visible interface.
 
@@ -194,4 +194,3 @@ Constraints: session foreign key; bounded role; message-length limits.
 Fields: id, session id, name, company, email, phone, project summary, status, quote request id, timestamps.
 
 Constraints: session foreign key; optional quote foreign key; consent required before lead creation.
-

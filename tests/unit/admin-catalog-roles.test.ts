@@ -5,21 +5,16 @@ import {
   assertCatalogViewerRole,
   canManageCatalog,
 } from "@/server/auth/roles";
+import { adminRole } from "@/server/db/schema";
 
-describe("admin catalog roles", () => {
-  it.each(["SUPER_ADMIN", "ADMIN", "CONTENT_EDITOR"] as const)(
-    "allows %s to manage products",
-    (role) => {
-      expect(canManageCatalog(role)).toBe(true);
-      expect(() => assertCatalogManagerRole(role)).not.toThrow();
-    },
-  );
+describe("single administrator catalog access", () => {
+  it("defines ADMIN as the only administrator role", () => {
+    expect(adminRole.enumValues).toEqual(["ADMIN"]);
+  });
 
-  it("keeps ORDER_MANAGER read-only", () => {
-    expect(canManageCatalog("ORDER_MANAGER")).toBe(false);
-    expect(() => assertCatalogViewerRole("ORDER_MANAGER")).not.toThrow();
-    expect(() => assertCatalogManagerRole("ORDER_MANAGER")).toThrow(
-      "ADMIN_CATALOG_WRITE_FORBIDDEN",
-    );
+  it("allows the administrator to view and manage the catalog", () => {
+    expect(canManageCatalog("ADMIN")).toBe(true);
+    expect(() => assertCatalogViewerRole("ADMIN")).not.toThrow();
+    expect(() => assertCatalogManagerRole("ADMIN")).not.toThrow();
   });
 });

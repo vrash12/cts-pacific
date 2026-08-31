@@ -258,7 +258,7 @@ export const membershipsAndCredentials = [
     logoWidth: 308,
     logoHeight: 486,
     description:
-      "Membership mark supplied by CTS Pacific for publication on the company website.",
+      "Client-supplied documentation identifies CTS Pacific as a Guam Contractors Association contractor member.",
   },
   {
     category: "Professional credentialing",

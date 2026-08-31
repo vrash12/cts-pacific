@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 
+import { ContactRequestForm } from "@/components/forms/contact-request-form";
 import { BreadcrumbJsonLd } from "@/components/marketing/breadcrumb-json-ld";
 import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { ProjectCta } from "@/components/marketing/project-cta";
@@ -47,8 +48,8 @@ export default function ContactPage() {
           Request a quote
           <ArrowRight aria-hidden="true" size={18} />
         </Link>
-        <a className={buttonVariants({ variant: "ghost" })} href={`mailto:${siteConfig.email}`}>
-          Email CTS Pacific
+        <a className={buttonVariants({ variant: "ghost" })} href="#contact-form">
+          Send an inquiry
           <ArrowRight aria-hidden="true" size={17} />
         </a>
       </EditorialHero>
@@ -91,6 +92,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <ContactRequestForm />
 
       <section className="contact-brief">
         <div className="container contact-brief__grid">

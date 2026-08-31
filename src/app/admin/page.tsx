@@ -5,7 +5,9 @@ import {
   Construction,
   CreditCard,
   EyeOff,
+  FileText,
   HardHat,
+  Mail,
   PackagePlus,
   ShieldCheck,
   Truck,
@@ -19,10 +21,11 @@ import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminSignOutButton } from "@/components/admin/admin-sign-out-button";
 import { publicEnvironment } from "@/config/env/public";
 import { featureFlags } from "@/config/features";
+import { getAdminLeadOverview } from "@/modules/leads/queries";
 import { getAdminCatalogOverview } from "@/modules/products/queries";
 import { privateSalesPlanningItems } from "@/modules/products/sales-planning";
 import { supportedPaymentMethods } from "@/modules/payments/payment-methods";
-import { canManageCatalog } from "@/server/auth/roles";
+import { canManageCatalog, canManageLeads } from "@/server/auth/roles";
 import { requireAdmin } from "@/server/auth/require-admin";
 import { getPaymentReadiness } from "@/server/payments/readiness";
 
@@ -103,7 +106,7 @@ function AdminForbidden({ email }: { email: string | null }) {
       <div className="max-w-xl text-center">
         <ShieldCheck aria-hidden="true" className="mx-auto mb-7 text-[#78d2d4]" size={42} />
         <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#78d2d4]">Access restricted</p>
-        <h1 className="mt-4 text-[clamp(2.6rem,7vw,4.8rem)] uppercase">Admin role required.</h1>
+        <h1 className="mt-4 text-[clamp(2.6rem,7vw,4.8rem)] uppercase">Administrator access required.</h1>
         <p className="mt-6 leading-8 text-white/65">
           {email ?? "This account"} is authenticated but does not have an active CTS Pacific admin profile.
         </p>
@@ -137,11 +140,13 @@ export default async function AdminPage() {
     return <AdminForbidden email={access.email} />;
   }
 
-  const [catalog, paymentReadiness] = await Promise.all([
+  const mayManageCatalog = canManageCatalog(access.actor.role);
+  const mayManageLeads = canManageLeads(access.actor.role);
+  const [catalog, paymentReadiness, leadOverview] = await Promise.all([
     getAdminCatalogOverview(access.actor),
     Promise.resolve(getPaymentReadiness()),
+    mayManageLeads ? getAdminLeadOverview(access.actor) : Promise.resolve(null),
   ]);
-  const mayManageCatalog = canManageCatalog(access.actor.role);
 
   return (
     <AdminShell actor={access.actor}>
@@ -149,13 +154,13 @@ export default async function AdminPage() {
         <div>
           <p className="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--color-brand-teal)]">
             <span className="h-px w-9 bg-current" />
-            Commerce foundation
+            Administrative operations
           </p>
           <h1 className="max-w-4xl text-[clamp(3rem,6vw,5.8rem)] uppercase text-[var(--color-brand-navy)]">
-            Catalog control center.
+            CTS Pacific control center.
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--color-ink-muted)]">
-            Prepare electronics and construction equipment privately. Nothing in this workspace is exposed as a public storefront while commerce remains disabled.
+            Review incoming leads and prepare future catalog records through server-authorized administrative modules. Nothing in this workspace is exposed publicly.
           </p>
         </div>
 
@@ -167,6 +172,35 @@ export default async function AdminPage() {
           </div>
         </div>
       </section>
+
+      {leadOverview ? (
+        <section aria-labelledby="lead-summary-title" className="border-b border-[var(--color-border)] py-10">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Lead operations</p>
+              <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="lead-summary-title">Customer inquiries</h2>
+            </div>
+            <Link className="inline-flex min-h-12 items-center gap-2 border border-[var(--color-brand-blue)] bg-[var(--color-brand-blue)] px-5 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition hover:border-[var(--color-brand-navy)] hover:bg-[var(--color-brand-navy)]" href="/admin/leads">
+              Open lead center
+            </Link>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-2">
+            {[
+              { label: "Project quote requests", icon: FileText, href: "/admin/leads/quotes", summary: leadOverview.quotes },
+              { label: "Contact inquiries", icon: Mail, href: "/admin/leads/contacts", summary: leadOverview.contacts },
+            ].map((item) => (
+              <Link className="grid grid-cols-[auto_1fr_auto] items-center gap-5 border border-[var(--color-border)] bg-white p-6 shadow-[0_0.8rem_2rem_rgb(11_41_66_/_0.05)] transition hover:border-[var(--color-brand-blue)]" href={item.href} key={item.href}>
+                <item.icon aria-hidden="true" className="text-[var(--color-brand-blue)]" size={25} />
+                <div>
+                  <span className="block text-sm font-extrabold uppercase tracking-[0.08em] text-[var(--color-brand-navy)]">{item.label}</span>
+                  <span className="mt-1 block text-xs text-[var(--color-ink-muted)]">{item.summary.new} new · {item.summary.reviewing} reviewing</span>
+                </div>
+                <strong className="text-4xl text-[var(--color-brand-navy)]">{item.summary.all}</strong>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section aria-labelledby="catalog-summary-title" className="py-10">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
@@ -204,14 +238,23 @@ export default async function AdminPage() {
       </section>
 
       <section aria-labelledby="categories-title" className="border-t border-[var(--color-border)] py-10">
-        <div className="mb-6">
-          <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Approved structure</p>
-          <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="categories-title">Product categories</h2>
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Approved structure</p>
+            <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="categories-title">Product categories</h2>
+          </div>
+          <Link className="text-xs font-extrabold uppercase tracking-[0.1em] text-[var(--color-brand-blue)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]" href="/admin/categories">
+            Manage categories
+          </Link>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-2">
-          {catalog.categories.map((category, index) => {
-            const Icon = index === 0 ? Camera : Construction;
+        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          {catalog.categories.map((category) => {
+            const Icon = category.slug === "cameras"
+              ? Camera
+              : category.slug === "construction-equipment"
+                ? Construction
+                : Boxes;
             return (
               <article className="grid min-h-64 grid-rows-[auto_1fr_auto] border border-[var(--color-border)] bg-white p-7 shadow-[0_0.8rem_2rem_rgb(11_41_66_/_0.05)]" key={category.id}>
                 <div className="flex items-start justify-between gap-4">
@@ -322,7 +365,7 @@ export default async function AdminPage() {
           <ShieldCheck aria-hidden="true" className="mb-9 text-[#78d2d4]" size={30} strokeWidth={1.6} />
           <h2 className="text-3xl uppercase">Security boundary</h2>
           <p className="mt-5 text-sm leading-7 text-white/68">
-            Admin access is authenticated, role-checked on the server, and isolated from the public marketing layout.
+            Administrator access is authenticated, verified on the server, and isolated from the public marketing layout.
           </p>
         </div>
         <div className="border border-[var(--color-border)] bg-white p-7">

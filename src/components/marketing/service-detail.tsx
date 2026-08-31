@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -85,6 +86,48 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
           </div>
         </div>
       </section>
+
+      {service.partner ? (
+        <section
+          className="service-partner"
+          aria-labelledby={`service-partner-${service.slug}`}
+        >
+          <div className="container service-partner__grid">
+            <div className="service-partner__identity">
+              <p className="eyebrow">{service.partner.eyebrow}</p>
+              <div className="service-partner__logo">
+                <Image
+                  alt={service.partner.logoAlt}
+                  height={97}
+                  sizes="(max-width: 736px) 78vw, 30rem"
+                  src={service.partner.logo}
+                  width={600}
+                />
+              </div>
+              <p>{service.partner.name}</p>
+            </div>
+            <div className="service-partner__content">
+              <h2 id={`service-partner-${service.slug}`}>
+                {service.partner.title}
+              </h2>
+              <p>{service.partner.description}</p>
+              <aside className="service-partner__scope">
+                <strong>Project-specific responsibility</strong>
+                <p>{service.partner.scopeNote}</p>
+              </aside>
+              <a
+                href={service.partner.website}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Visit VCE Pacific
+                <ArrowRight aria-hidden="true" size={17} />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="service-capabilities" id="capabilities">
         <div className="container">

@@ -21,6 +21,17 @@ export type ServiceProcessStep = {
   description: string;
 };
 
+export type ServicePartner = {
+  name: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  scopeNote: string;
+  logo: string;
+  logoAlt: string;
+  website: string;
+};
+
 export type ServiceDefinition = {
   slug: ServiceSlug;
   group: ServiceGroup;
@@ -44,6 +55,7 @@ export type ServiceDefinition = {
   referenceImageAlt: string;
   referenceObjectPosition: string;
   scopeNote?: string;
+  partner?: ServicePartner;
 };
 
 export const services: readonly ServiceDefinition[] = [
@@ -236,7 +248,7 @@ export const services: readonly ServiceDefinition[] = [
       "Keycard readers, biometric systems, electric strikes, automated-gate integration, and centralized access control.",
     overview: [
       "CTS Pacific installs physical access-control infrastructure for facilities that need managed entry, controlled zones, and centralized system operation.",
-      "Solutions can coordinate readers, biometric devices, electric strikes, door hardware, automated gates, cabling, and centralized access-control components.",
+      "Solutions can coordinate readers, biometric devices, electric strikes, door hardware, automated gates, hotel locking requirements, cabling, and centralized access-control components.",
     ],
     capabilities: [
       "Keycard-reader installation",
@@ -246,6 +258,7 @@ export const services: readonly ServiceDefinition[] = [
       "Automated-gate integration",
       "Centralized access control",
       "System cabling and connectivity",
+      "Hotel-lock project coordination",
     ],
     applications: [
       "Commercial entrances",
@@ -254,6 +267,7 @@ export const services: readonly ServiceDefinition[] = [
       "Residential gates and entries",
       "Restricted facility zones",
       "Centralized building access",
+      "Hotels and hospitality facilities",
     ],
     process: [
       {
@@ -283,6 +297,18 @@ export const services: readonly ServiceDefinition[] = [
     referenceImage: "/images/editorial/access-control-reference.jpeg",
     referenceImageAlt: "Employee presenting an RFID badge to an electronic wall-mounted access reader.",
     referenceObjectPosition: "64% 50%",
+    partner: {
+      name: "VCE Pacific",
+      eyebrow: "Hotel lock partner",
+      title: "Hotel locking coordinated with a Guam security specialist.",
+      description:
+        "CTS Pacific works with VCE Pacific for hotel-lock requirements. VCE Pacific provides hotel locking and access-control solutions in Guam, including Vingcard systems, allowing hospitality projects to connect specialized door hardware with the broader access-control and infrastructure scope.",
+      scopeNote:
+        "Product selection, availability, installation responsibility, configuration, warranty, and continuing support are confirmed for each project before work begins.",
+      logo: "/images/partners/vce-pacific-logo.png",
+      logoAlt: "VCE Pacific logo",
+      website: "https://www.vcepacific.com/",
+    },
   },
   {
     slug: "micro-trenching",

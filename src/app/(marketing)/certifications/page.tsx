@@ -79,6 +79,41 @@ export default function CertificationsPage() {
             </p>
           </div>
 
+          <article className="membership-certificate">
+            <div className="membership-certificate__content">
+              <p>Membership documentation</p>
+              <h3>Guam Contractors Association</h3>
+              <span>
+                This client-supplied certificate identifies Corerin Technical
+                Solutions, LLC dba CTS Pacific as a contractor member of the Guam
+                Contractors Association.
+              </span>
+              <a
+                href="/images/credentials/gca-membership-certificate-2026.jpeg"
+                rel="noreferrer"
+                target="_blank"
+              >
+                View full certificate
+                <ArrowRight aria-hidden="true" size={17} />
+              </a>
+            </div>
+            <a
+              aria-label="Open the full-size Guam Contractors Association membership certificate"
+              className="membership-certificate__media"
+              href="/images/credentials/gca-membership-certificate-2026.jpeg"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Image
+                alt="Guam Contractors Association certificate of membership for Corerin Technical Solutions, LLC dba CTS Pacific"
+                height={900}
+                sizes="(max-width: 736px) 100vw, (max-width: 1024px) 92vw, 58vw"
+                src="/images/credentials/gca-membership-certificate-2026.jpeg"
+                width={1280}
+              />
+            </a>
+          </article>
+
           <div className="certification-grid">
             {membershipsAndCredentials.map((credential) => (
               <article key={credential.name}>

@@ -1,8 +1,11 @@
 import { z } from "zod";
 
-import { initialProductCategorySlugs } from "@/modules/products/catalog";
-
-const productCategorySlugSchema = z.enum(initialProductCategorySlugs);
+const productCategorySlugSchema = z
+  .string()
+  .trim()
+  .min(2)
+  .max(100)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
 const productNameSchema = z
   .string()

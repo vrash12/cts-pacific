@@ -15,7 +15,7 @@ export async function sendEmail(message: EmailMessage) {
   const { EMAIL_API_KEY, EMAIL_FROM } = readServerEnvironment();
 
   if (!EMAIL_API_KEY || !EMAIL_FROM) {
-    throw new Error("QUOTE_EMAIL_NOT_CONFIGURED");
+    throw new Error("EMAIL_NOT_CONFIGURED");
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -37,7 +37,7 @@ export async function sendEmail(message: EmailMessage) {
   });
 
   if (!response.ok) {
-    throw new Error(`QUOTE_EMAIL_DELIVERY_FAILED:${response.status}`);
+    throw new Error(`EMAIL_DELIVERY_FAILED:${response.status}`);
   }
 
   return (await response.json()) as { id: string };

@@ -9,12 +9,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-export const adminRole = pgEnum("admin_role", [
-  "SUPER_ADMIN",
-  "ADMIN",
-  "CONTENT_EDITOR",
-  "ORDER_MANAGER",
-]);
+export const adminRole = pgEnum("admin_role", ["ADMIN"]);
 
 export const adminProfiles = pgTable(
   "admin_profiles",

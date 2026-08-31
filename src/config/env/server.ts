@@ -18,6 +18,9 @@ const serverEnvironmentSchema = z.object({
   QUOTE_NOTIFICATION_EMAIL: z
     .email()
     .default("info@corerintechnicalsolutions.com"),
+  CONTACT_NOTIFICATION_EMAIL: z
+    .email()
+    .default("info@corerintechnicalsolutions.com"),
   TURNSTILE_SITE_KEY: z.string().min(1).optional(),
   TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
   AI_API_KEY: z.string().min(1).optional(),
@@ -39,6 +42,7 @@ export function readServerEnvironment(): ServerEnvironment {
     EMAIL_API_KEY: process.env.EMAIL_API_KEY || undefined,
     EMAIL_FROM: process.env.EMAIL_FROM || undefined,
     QUOTE_NOTIFICATION_EMAIL: process.env.QUOTE_NOTIFICATION_EMAIL,
+    CONTACT_NOTIFICATION_EMAIL: process.env.CONTACT_NOTIFICATION_EMAIL,
     TURNSTILE_SITE_KEY: process.env.TURNSTILE_SITE_KEY || undefined,
     TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY || undefined,
     AI_API_KEY: process.env.AI_API_KEY || undefined,

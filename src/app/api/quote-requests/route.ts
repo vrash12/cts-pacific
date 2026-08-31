@@ -16,13 +16,9 @@ import {
 } from "@/server/email/quote-templates";
 import { sendEmail } from "@/server/email/resend";
 import { checkRateLimit } from "@/server/security/rate-limit";
+import { getRequestClientKey } from "@/server/security/request-key";
 
 export const dynamic = "force-dynamic";
-
-function getRequestKey(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return forwarded || request.headers.get("x-real-ip") || "local";
-}
 
 function getOptionLabel<T extends readonly { value: string; label: string }[]>(
   options: T,
@@ -32,7 +28,7 @@ function getOptionLabel<T extends readonly { value: string; label: string }[]>(
 }
 
 export async function POST(request: Request) {
-  const rateLimit = checkRateLimit(getRequestKey(request));
+  const rateLimit = checkRateLimit(getRequestClientKey(request, "quote"));
 
   if (!rateLimit.allowed) {
     return NextResponse.json(

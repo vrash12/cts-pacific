@@ -1,4 +1,5 @@
 import type { QuoteRequestInput } from "@/schemas/quote-request";
+import { escapeEmailHtml } from "@/server/email/template-utils";
 
 type QuoteEmailContext = {
   referenceNumber: string;
@@ -7,15 +8,6 @@ type QuoteEmailContext = {
   projectTypeLabel: string;
   timelineLabel: string;
 };
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
 
 export function createInternalQuoteEmail(context: QuoteEmailContext) {
   const { referenceNumber, request, serviceLabels, projectTypeLabel, timelineLabel } = context;
@@ -40,17 +32,17 @@ export function createInternalQuoteEmail(context: QuoteEmailContext) {
     ].join("\n"),
     html: `
       <h1>New CTS Pacific project request</h1>
-      <p><strong>Reference:</strong> ${escapeHtml(referenceNumber)}</p>
-      <p><strong>Name:</strong> ${escapeHtml(request.name)}<br>
-      <strong>Company:</strong> ${escapeHtml(company)}<br>
-      <strong>Email:</strong> ${escapeHtml(request.email)}<br>
-      <strong>Phone:</strong> ${escapeHtml(request.phone)}</p>
-      <p><strong>Services:</strong> ${escapeHtml(serviceText)}<br>
-      <strong>Project location:</strong> ${escapeHtml(request.projectLocation)}<br>
-      <strong>Project type:</strong> ${escapeHtml(projectTypeLabel)}<br>
-      <strong>Target timeline:</strong> ${escapeHtml(timelineLabel)}</p>
+      <p><strong>Reference:</strong> ${escapeEmailHtml(referenceNumber)}</p>
+      <p><strong>Name:</strong> ${escapeEmailHtml(request.name)}<br>
+      <strong>Company:</strong> ${escapeEmailHtml(company)}<br>
+      <strong>Email:</strong> ${escapeEmailHtml(request.email)}<br>
+      <strong>Phone:</strong> ${escapeEmailHtml(request.phone)}</p>
+      <p><strong>Services:</strong> ${escapeEmailHtml(serviceText)}<br>
+      <strong>Project location:</strong> ${escapeEmailHtml(request.projectLocation)}<br>
+      <strong>Project type:</strong> ${escapeEmailHtml(projectTypeLabel)}<br>
+      <strong>Target timeline:</strong> ${escapeEmailHtml(timelineLabel)}</p>
       <h2>Project description</h2>
-      <p>${escapeHtml(request.description).replaceAll("\n", "<br>")}</p>
+      <p>${escapeEmailHtml(request.description).replaceAll("\n", "<br>")}</p>
     `.trim(),
   };
 }
@@ -78,13 +70,13 @@ export function createQuoteConfirmationEmail(context: QuoteEmailContext) {
     ].join("\n"),
     html: `
       <h1>We received your project request</h1>
-      <p>Hello ${escapeHtml(request.name)},</p>
+      <p>Hello ${escapeEmailHtml(request.name)},</p>
       <p>Thank you for contacting CTS Pacific. Your project request has been received.</p>
-      <p><strong>Reference:</strong> ${escapeHtml(referenceNumber)}</p>
-      <p><strong>Services:</strong> ${escapeHtml(serviceLabels.join(", "))}<br>
-      <strong>Project location:</strong> ${escapeHtml(request.projectLocation)}<br>
-      <strong>Project type:</strong> ${escapeHtml(projectTypeLabel)}<br>
-      <strong>Target timeline:</strong> ${escapeHtml(timelineLabel)}</p>
+      <p><strong>Reference:</strong> ${escapeEmailHtml(referenceNumber)}</p>
+      <p><strong>Services:</strong> ${escapeEmailHtml(serviceLabels.join(", "))}<br>
+      <strong>Project location:</strong> ${escapeEmailHtml(request.projectLocation)}<br>
+      <strong>Project type:</strong> ${escapeEmailHtml(projectTypeLabel)}<br>
+      <strong>Target timeline:</strong> ${escapeEmailHtml(timelineLabel)}</p>
       <p>Keep this reference for future communication.</p>
       <p><strong>CTS Pacific</strong><br>
       info@corerintechnicalsolutions.com<br>

@@ -40,6 +40,13 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 - Facility Locating: supported locating methods and equipment, utility types, accuracy and reporting expectations, required notifications and permits, mark-out responsibility, exclusions, and whether any regulated locating is included
 - Approved client-supplied photographs or approved representative imagery specifically depicting each expanded service
 
+## Partners and hotel locks
+
+- Approved public wording for the CTS Pacific and VCE Pacific partnership beyond the confirmed hotel-lock relationship
+- Exact division of responsibility for hotel-lock product selection, procurement, installation, configuration, warranty, and continuing support
+- Hotel-lock manufacturers and product lines CTS Pacific is authorized to name beyond VCE Pacific's publicly listed portfolio
+- Final confirmation of any VCE Pacific logo-use or partner-branding requirements
+
 ## Projects and credibility
 
 - Captions, dates, and final web-use approval for the supplied CTS Pacific field photography
@@ -65,7 +72,7 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 
 ## Future commerce
 
-- Product catalog, categories, descriptions, imagery, pricing, SKUs, and inventory rules
+- Actual camera, electronics, and construction-equipment product records: approved names, descriptions, brands/models, SKUs, prices, inventory rules, and product photography
 - Confirmation whether Safety & Construction Equipment is sold, rented, CTS-operated, sourced, or delivered through another model
 - Approved Safety & Construction Equipment categories, including which safety-equipment classes are actually offered
 - Confirmation whether Heavy Equipment is sold, rented, CTS-operated, subcontracted, sourced, or offered as a service

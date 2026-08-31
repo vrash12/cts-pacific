@@ -21,6 +21,7 @@ type ProductCategoryOption = {
   id: string;
   name: string;
   slug: string;
+  isActive: boolean;
 };
 
 type AdminProductFormProps = {
@@ -169,7 +170,7 @@ export function AdminProductForm({
               <option value="">Select a category</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.name}
+                  {category.name}{category.isActive ? "" : " (archived)"}
                 </option>
               ))}
             </select>

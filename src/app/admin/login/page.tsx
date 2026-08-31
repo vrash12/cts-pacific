@@ -58,7 +58,7 @@ export default async function AdminLoginPage() {
           <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Authorized personnel only</p>
           <h2 className="mt-3 text-4xl uppercase text-[var(--color-brand-navy)] sm:text-5xl">Sign in</h2>
           <p className="mt-5 mb-8 text-sm leading-7 text-[var(--color-ink-muted)]">
-            Administration access is verified through Supabase Auth and an active CTS Pacific admin role.
+            Administration access is verified through Supabase Auth and the active CTS Pacific administrator profile.
           </p>
 
           {supabaseUrl && supabaseAnonKey ? (
@@ -69,7 +69,7 @@ export default async function AdminLoginPage() {
           ) : (
             <div className="border-l-4 border-amber-500 bg-amber-50 p-5 text-sm leading-7 text-amber-950">
               <strong className="block font-extrabold uppercase tracking-[0.08em]">Admin authentication is not configured</strong>
-              Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>, then restart the server.
+              Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>, then restart the server.
             </div>
           )}
 

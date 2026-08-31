@@ -5,6 +5,9 @@ test("responsive navigation closes after a destination is selected", async ({
   page,
 }) => {
   await page.goto("/");
+  await expect(
+    page.getByRole("link", { name: "Products", exact: true }),
+  ).toHaveCount(0);
 
   if (isMobile) {
     const menu = page.locator("details.mobile-navigation");

@@ -76,7 +76,8 @@ These are represented only in the authenticated admin workspace as client-detail
 
 Initial future product categories explicitly requested by the client:
 
-- Electronics, including cameras
+- Cameras
+- Electronics
 - Construction Equipment
 
 Future payment methods explicitly requested by the client:
@@ -155,12 +156,18 @@ Implemented public routes:
 
 Implemented dynamic/server routes:
 
+- `POST /api/contact-submissions`
 - `POST /api/quote-requests`
 - `/admin`
 - `/admin/login`
 - `/admin/products`
 - `/admin/products/new`
 - `/admin/products/[id]/edit`
+- `/admin/leads`
+- `/admin/leads/quotes`
+- `/admin/leads/quotes/[id]`
+- `/admin/leads/contacts`
+- `/admin/leads/contacts/[id]`
 
 Routes not currently implemented:
 
@@ -221,7 +228,7 @@ The homepage includes:
 - Micro-trenching feature
 - Why CTS Pacific pillars
 - Commercial, Government, Industrial, and Residential sectors
-- GCA, FOA, ETA Certified FOI, and ETA International supplied artwork
+- GCA membership certificate plus GCA, FOA, ETA Certified FOI, and ETA International supplied artwork
 - Final project quote call to action
 - Subtle microinteractions and restrained motion
 
@@ -261,6 +268,12 @@ Core routes:
 - `/services/access-control`
 - `/services/micro-trenching`
 - `/services/civil-underground`
+
+The Access Control route includes a dedicated VCE Pacific partner module for
+hotel-lock project coordination. The supplied VCE Pacific logo is stored locally,
+the partner website opens as an external resource, and project-specific product,
+installation, warranty, and support responsibilities remain explicitly subject to
+confirmation.
 
 Additional project-specific routes:
 
@@ -321,6 +334,7 @@ Required environment configuration before quote submission works in deployment:
 - `DATABASE_URL`
 - `EMAIL_API_KEY`
 - `EMAIL_FROM`
+- `CONTACT_NOTIFICATION_EMAIL`
 - `QUOTE_NOTIFICATION_EMAIL`
 
 Known remaining quote work:
@@ -334,7 +348,7 @@ Known remaining quote work:
 
 ## 7. Administration status
 
-Status: **Product administration MVP implemented in code; external configuration and additional operational modules remain incomplete**.
+Status: **Private product and category CRUD implemented in code; external configuration and additional operational modules remain incomplete**.
 
 Implemented:
 
@@ -343,17 +357,13 @@ Implemented:
 - Supabase session-refresh proxy for `/admin/:path*`
 - Server-side `requireAdmin()` authorization boundary
 - Active admin profile verification
-- Roles:
-  - `SUPER_ADMIN`
-  - `ADMIN`
-  - `CONTENT_EDITOR`
-  - `ORDER_MANAGER`
+- One administrator account type: `ADMIN`
 - Fail-closed setup screen when Supabase or the database is not configured
 - Access-denied screen for authenticated users without an active admin profile
 - Responsive admin shell and sign-out control
 - Read-only commerce readiness dashboard
 - Catalog counts by product status
-- Electronics and Construction Equipment category summary
+- Cameras, Electronics, and Construction Equipment category summary
 - PayPal and card configuration-readiness summary
 - Public storefront-hidden indicator
 - `noindex, nofollow` metadata for admin pages
@@ -366,10 +376,21 @@ Implemented:
 - Duplicate product slug and SKU error mapping
 - Optimistic edit-conflict detection with a locked product row
 - Server-side catalog checks inside every query and mutation
-- Catalog-management access for `SUPER_ADMIN`, `ADMIN`, and `CONTENT_EDITOR`
-- Read-only catalog access for `ORDER_MANAGER`
+- Full catalog-management access for the authenticated `ADMIN`
 - Transactional audit records for product create, update, archive, and restore actions
+- `/admin/categories` private category list
+- `/admin/categories/new` category creation
+- `/admin/categories/[id]/edit` category editing
+- Recoverable category archive and restore actions; no hard-delete shortcut
+- Active-category enforcement for new and edited products
+- Existing product history remains attached when a category is archived
+- Transactional audit records for category create, update, archive, and restore actions
 - Responsive administration navigation and product form
+- Server-authorized lead-management access for the authenticated `ADMIN`
+- Lead dashboard counts for quote requests and contact inquiries
+- Filterable quote-request and contact-inquiry inboxes
+- Full lead detail views with direct email and phone actions
+- Audited `NEW`, `REVIEWING`, `CONTACTED`, and `CLOSED` status workflows
 
 Not implemented:
 
@@ -379,11 +400,8 @@ Not implemented:
 - The commerce migration has not been confirmed as applied to a real database
 - No product publishing workflow or public product routes
 - No permanent product deletion workflow
-- No category management actions
 - No product-image upload UI or Supabase Storage integration
 - No inventory adjustment workflow
-- No quote-request administration UI
-- No contact-request administration UI
 - No order administration UI
 - No audit-log interface
 
@@ -428,7 +446,7 @@ Implemented constraints include:
 - Unique provider order and capture IDs
 - Unique provider event ID for duplicate-webhook protection
 - RLS enabled on admin and commerce tables
-- Initial Electronics and Construction Equipment category seed
+- Initial Cameras, Electronics, and Construction Equipment category seeds
 
 Implemented payment architecture:
 
@@ -468,6 +486,9 @@ Current migrations:
 - `0000_colorful_iron_patriot.sql` — quote requests and quote-request services
 - `0001_bizarre_loners.sql` — admin profiles, initial commerce categories, products, variants, images, orders, payments, payment events, constraints, and RLS setup
 - `0002_gigantic_wraith.sql` — immutable catalog audit-log storage, indexes, foreign key, and RLS enablement
+- `0003_dizzy_nemesis.sql` — contact-submission storage, indexes, constraints, status and inquiry enums, and RLS enablement
+- `0004_add_cameras_category.sql` — idempotent private Cameras category seed requested by the client
+- `0005_single_admin_role.sql` — converts legacy administrator roles to the single `ADMIN` account type without deleting profiles
 
 Migration commands:
 
@@ -513,6 +534,7 @@ PAYPAL_CARD_PAYMENTS_ENABLED=false
 
 EMAIL_API_KEY=
 EMAIL_FROM=CTS Pacific <quotes@your-verified-domain.com>
+CONTACT_NOTIFICATION_EMAIL=info@corerintechnicalsolutions.com
 QUOTE_NOTIFICATION_EMAIL=info@corerintechnicalsolutions.com
 
 TURNSTILE_SITE_KEY=
@@ -563,22 +585,26 @@ pnpm check
 
 GitHub Actions currently runs install, lint, typecheck, unit/integration tests, and build on pushes to `main` and pull requests.
 
-Most recent validation after the private product-administration MVP, visual-motif cleanup, completed fourteen-service catalog, curated navigation, and supporting-image integration:
+Most recent validation after the private product-category CRUD increment:
 
 - ESLint passed
 - Strict TypeScript passed
-- 15 test files passed
-- 50 tests passed
+- 22 test files passed
+- 67 tests passed
 - Production build passed
 - 23 static pages generated
-- 32 Playwright checks passed across desktop Chromium and mobile Chromium
+- 38 Playwright checks passed across desktop Chromium and mobile Chromium
 - About-page field image verified at desktop and mobile breakpoints
 - Project-intake replacement verified at desktop and mobile breakpoints
 - Curated six-service desktop dropdown and concise mobile navigation verified in the local browser
+- Public navigation verified without a Products link on desktop and mobile while ecommerce is disabled
 - Complete fourteen-service index and quote options verified in the local browser
 - New Telecommunications Project Support, IT Support, and Facility Locating pages verified with project-specific scope notices
 - Responsive handling for long service headings verified on mobile
 - All service records verified with locally hosted supporting imagery and no public credit or source-link interface
+- VCE Pacific partner content, supplied logo, external link, and responsive presentation verified on the Access Control route
+- Contact-form validation verified with hydrated client behavior at the same local origin used by the Next.js development server
+- Node.js admin lead authorization, status validation, quote/contact inbox routes, and production compilation verified
 - No browser console warnings or errors remained after final verification
 
 Run the entire suite again after future changes; do not rely indefinitely on this historical result.
@@ -608,7 +634,7 @@ Tasks:
 2. Set local/preview environment values.
 3. Apply all reviewed Drizzle migrations.
 4. Create a Supabase Auth user for the initial administrator.
-5. Insert a matching active `admin_profiles` row with `SUPER_ADMIN`.
+5. Insert one matching active `admin_profiles` row with `ADMIN`.
 6. Configure Resend and verify the sending domain.
 7. Test quote persistence and both notification emails.
 8. Verify unauthorized, inactive, and authorized admin access.
@@ -623,7 +649,7 @@ Acceptance criteria:
 
 ### Phase 2 — Product administration MVP
 
-Status: **Implemented in code. Requires the environment configuration in Phase 1 and the `0002_gigantic_wraith.sql` migration before operational use.**
+Status: **Implemented in code. Requires the environment configuration in Phase 1 and migrations through `0005_single_admin_role.sql` before operational use.**
 
 Goal: allow authorized staff to manage draft products without exposing a storefront.
 
@@ -632,16 +658,20 @@ Implemented:
 - `/admin/products`
 - `/admin/products/new`
 - `/admin/products/[id]/edit`
+- `/admin/categories`
+- `/admin/categories/new`
+- `/admin/categories/[id]/edit`
 - Server-side create/update/archive commands
+- Server-side category create/update/archive/restore commands
 - Product table with status, category, SKU, price, and inventory summary
 - Zod-validated form for name, slug, description, category, variant, SKU, integer price, currency, inventory policy, and quantity
-- Server-side role checks inside every query and mutation
+- Server-side administrator checks inside every query and mutation
 - Audit records for material mutations
+- Cameras, Electronics, and Construction Equipment begin as empty category records; no fake products are seeded
 
 Authorization:
 
-- `SUPER_ADMIN`, `ADMIN`, and `CONTENT_EDITOR` may manage products
-- `ORDER_MANAGER` may view the catalog but must not edit it unless requirements change
+- The authenticated `ADMIN` may manage products, categories, quotes, and contact inquiries
 
 Acceptance criteria:
 
@@ -650,6 +680,7 @@ Acceptance criteria:
 - Unauthorized users cannot read or mutate catalog data.
 - Creating or editing a product does not make it public.
 - Server code controls status, timestamps, and authoritative numeric values.
+- Archived categories are removed from new product assignment while existing product history remains intact.
 
 ### Phase 3 — Product image storage
 
@@ -759,7 +790,6 @@ Add or strengthen:
 - PayPal create/capture/webhook tests
 - Duplicate-webhook tests
 - Playwright admin authentication tests
-- Playwright hidden-commerce tests
 - Playwright cart and checkout tests before launch
 - CSP, HSTS, and reviewed production security headers
 - Monitoring and error reporting
