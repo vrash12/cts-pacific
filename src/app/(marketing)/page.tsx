@@ -20,12 +20,16 @@ import { siteConfig } from "@/config/site";
 
 const organizationStructuredData = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness"],
+  "@type": "Organization",
+  "@id": new URL("/#organization", siteConfig.url).toString(),
   name: siteConfig.legalName,
   alternateName: siteConfig.dba,
   foundingDate: "2026-01",
   url: siteConfig.url,
+  logo: new URL("/images/logo.png", siteConfig.url).toString(),
+  image: new URL("/og.png", siteConfig.url).toString(),
   email: siteConfig.email,
+  telephone: siteConfig.phones[0],
   areaServed: ["Guam", "Pacific Region"],
   contactPoint: siteConfig.phones.map((phone) => ({
     "@type": "ContactPoint",

@@ -9,12 +9,12 @@ import { ProjectCta } from "@/components/marketing/project-cta";
 import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "About Corerin Technical Solutions",
+  title: "About Our Guam Telecommunications Company",
   description:
     "Learn how Corerin Technical Solutions, LLC dba CTS Pacific coordinates telecommunications, security, and underground infrastructure work across Guam and the Pacific.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Corerin Technical Solutions | CTS Pacific",
+    title: "About CTS Pacific | Guam Telecommunications Company",
     description:
       "Turnkey telecommunications and infrastructure capability for Guam and the Pacific Region.",
     url: "/about",

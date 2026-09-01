@@ -13,6 +13,8 @@ This file tracks business information and production assets that have not been s
 
 - Physical and mailing address, if the company wants either published
 - Exact service-area wording and any Pacific islands or jurisdictions to name individually
+- Google Search Console ownership verification token after the production property is created
+- Bing Webmaster Tools ownership verification token after the production property is created
 - Approved expanded company history beyond the confirmed January 2026 start date
 - Approved biography and headshot for Organization President Saren F. Formento
 - Names, biographies, and headshots for the Technician, Fiber Technician, and Construction Technician positions

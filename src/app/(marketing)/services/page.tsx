@@ -8,12 +8,12 @@ import { siteConfig } from "@/config/site";
 import { services } from "@/modules/services/service-catalog";
 
 export const metadata: Metadata = {
-  title: "Telecommunications & Infrastructure Services",
+  title: "Telecommunications & Infrastructure Services Guam",
   description:
     "Explore CTS Pacific telecommunications, security, civil infrastructure, technical support, IT infrastructure, and facility locating services.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Telecommunications & Infrastructure Services | CTS Pacific",
+    title: "Telecommunications & Infrastructure Services Guam | CTS Pacific",
     description:
       "Turnkey telecommunications, security, and underground infrastructure capabilities across Guam and the Pacific.",
     url: "/services",

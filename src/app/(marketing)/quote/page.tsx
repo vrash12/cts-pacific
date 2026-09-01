@@ -6,12 +6,12 @@ import { BreadcrumbJsonLd } from "@/components/marketing/breadcrumb-json-ld";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Request a Project Quote",
+  title: "Request a Telecommunications Project Quote Guam",
   description:
     "Submit a telecommunications, security, fiber, data cabling, micro trenching, or underground infrastructure project request to CTS Pacific.",
   alternates: { canonical: "/quote" },
   openGraph: {
-    title: "Request a Project Quote | CTS Pacific",
+    title: "Request a Telecommunications Project Quote Guam | CTS Pacific",
     description:
       "Share your project location, services, timeline, and technical scope with CTS Pacific.",
     url: "/quote",

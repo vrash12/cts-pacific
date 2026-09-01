@@ -153,6 +153,8 @@ Implemented public routes:
 - `/certifications`
 - `/contact`
 - `/quote`
+- `/robots.txt`
+- `/sitemap.xml`
 
 Implemented dynamic/server routes:
 
@@ -204,7 +206,18 @@ The Projects section and route were removed from the visible site following the 
 - Navigation panels, directional arrows, form-step feedback, selectable quote options, and interactive cards use restrained microinteractions
 - Hover-only effects are limited to fine pointers, keyboard focus receives equivalent card feedback, and reduced-motion preferences collapse animation and transition timing
 
-### 5.2 Navigation interaction
+### 5.2 Search discovery and metadata
+
+- Guam-focused page titles and descriptions use the Next.js Metadata API
+- Canonical URLs derive from the validated `NEXT_PUBLIC_SITE_URL`
+- `/robots.txt` allows the public site while disallowing `/admin` and `/api`
+- `/sitemap.xml` contains every public company page and all fourteen service pages while excluding private and API routes
+- Organization, Service, BreadcrumbList, and ItemList structured data are rendered from verified site and service records
+- Open Graph, Twitter card, publisher, creator, crawler-preview, and branded icon metadata are configured globally
+- Optional Google Search Console and Bing Webmaster Tools verification tokens are supported through validated environment values
+- The production deployment must set `NEXT_PUBLIC_SITE_URL=https://ctspacific.com` and submit the generated sitemap to both webmaster platforms
+
+### 5.3 Navigation interaction
 
 - Curated Services dropdown with the six core infrastructure links and one clear “All services” path; the complete fourteen-service catalog is intentionally kept on `/services`
 - Dropdown closes immediately when “All services” or any service option is selected
@@ -215,7 +228,7 @@ The Projects section and route were removed from the visible site following the 
 - Section routes remain active on their detail pages, including Services across every `/services/*` route
 - Products are absent from desktop and mobile navigation while commerce is disabled
 
-### 5.3 Homepage
+### 5.4 Homepage
 
 The homepage includes:
 
@@ -238,7 +251,7 @@ The homepage includes:
 - Final project quote call to action
 - Subtle microinteractions and restrained motion
 
-### 5.4 Company pages
+### 5.5 Company pages
 
 - About page with confirmed January 2026 start
 - Organization President Saren F. Formento
@@ -250,7 +263,7 @@ The homepage includes:
 
 Do not turn pending team roles into invented people or biographies.
 
-### 5.5 Service pages
+### 5.6 Service pages
 
 Each of the fourteen service routes uses a detailed editorial service layout with:
 
@@ -292,7 +305,7 @@ Additional project-specific routes:
 - `/services/it-support`
 - `/services/facility-locating`
 
-### 5.6 Images
+### 5.7 Images
 
 - Client-supplied field photography is stored locally in `public/images`
 - Client-supplied customer logos are in `public/images/customer`
@@ -522,6 +535,8 @@ Public values:
 
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+NEXT_PUBLIC_BING_SITE_VERIFICATION=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 NEXT_PUBLIC_ECOMMERCE_ENABLED=false
@@ -596,11 +611,12 @@ Most recent validation after the active-navigation and GCA certificate-layout in
 
 - ESLint passed
 - Strict TypeScript passed
-- 24 test files passed
-- 76 tests passed
+- 25 test files passed
+- 78 tests passed
 - Production build passed
-- 23 static pages generated
-- 48 Playwright checks passed across desktop Chromium and mobile Chromium
+- 25 static pages generated, including `/robots.txt` and `/sitemap.xml`
+- 54 Playwright checks passed across desktop Chromium and mobile Chromium
+- Homepage metadata, Guam-focused service titles, canonical URLs, robots directives, and the public sitemap verified in both desktop and mobile projects
 - Homepage service slideshow verified with current local imagery, precise programmatic alignment, direct selectors, previous/next controls, pause/play, and mobile presentation
 - Autoplay verified with hover, keyboard-focus, hidden-document, offscreen, and reduced-motion safeguards
 - Desktop and 390px mobile visual inspection passed with no browser console warnings or errors

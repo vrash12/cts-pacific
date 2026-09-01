@@ -49,7 +49,7 @@ export const primaryNavigation = [
 export const siteConfig = {
   legalName: "Corerin Technical Solutions, LLC",
   dba: "CTS Pacific",
-  title: "CTS Pacific | Telecommunications & Infrastructure Solutions",
+  title: "Telecommunications Contractor Guam | CTS Pacific",
   description:
     "Turnkey telecommunications, network infrastructure, security, and underground civil solutions across Guam and the Pacific.",
   url: publicEnvironment.NEXT_PUBLIC_SITE_URL,

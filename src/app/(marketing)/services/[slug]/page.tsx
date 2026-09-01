@@ -22,13 +22,14 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   const canonical = `/services/${service.slug}`;
+  const seoTitle = `${service.title} Guam`;
 
   return {
-    title: service.title,
+    title: seoTitle,
     description: service.description,
     alternates: { canonical },
     openGraph: {
-      title: `${service.title} | CTS Pacific`,
+      title: `${seoTitle} | CTS Pacific`,
       description: service.description,
       url: canonical,
       images: [
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title: `${service.title} | CTS Pacific`,
+      title: `${seoTitle} | CTS Pacific`,
       description: service.description,
       images: [service.heroImage],
     },
@@ -61,10 +62,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
       "@context": "https://schema.org",
       "@type": "Service",
       name: service.title,
+      serviceType: service.navigationTitle,
       description: service.description,
       url: canonicalUrl,
       areaServed: ["Guam", "Pacific Region"],
       provider: {
+        "@id": new URL("/#organization", siteConfig.url).toString(),
         "@type": "Organization",
         name: siteConfig.legalName,
         alternateName: siteConfig.dba,

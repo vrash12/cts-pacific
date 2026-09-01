@@ -10,12 +10,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { membershipsAndCredentials } from "@/config/homepage";
 
 export const metadata: Metadata = {
-  title: "Memberships, Certifications & Standards",
+  title: "Telecommunications Certifications & Standards Guam",
   description:
     "Review the GCA, FOA, and ETA materials supplied by CTS Pacific and the company's identified ANSI/TIA/EIA telecommunications standards compliance.",
   alternates: { canonical: "/certifications" },
   openGraph: {
-    title: "Memberships, Certifications & Standards | CTS Pacific",
+    title: "Telecommunications Certifications & Standards Guam | CTS Pacific",
     description:
       "Professional affiliations, technical credentialing materials, and standards-conscious infrastructure execution.",
     url: "/certifications",

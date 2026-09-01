@@ -10,12 +10,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Contact CTS Pacific",
+  title: "Contact a Guam Telecommunications Contractor",
   description:
     "Contact CTS Pacific about telecommunications, network infrastructure, security systems, and underground civil projects across Guam and the Pacific.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact CTS Pacific",
+    title: "Contact CTS Pacific | Guam Telecommunications Contractor",
     description:
       "Start a conversation about telecommunications and infrastructure work in Guam and the Pacific Region.",
     url: "/contact",

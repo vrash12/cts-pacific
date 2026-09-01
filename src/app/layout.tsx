@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 
+import { publicEnvironment } from "@/config/env/public";
 import { siteConfig } from "@/config/site";
 
 import "./globals.css";
@@ -17,6 +18,19 @@ const manrope = Manrope({
   display: "swap",
 });
 
+const siteVerification: Metadata["verification"] = {
+  ...(publicEnvironment.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: publicEnvironment.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : {}),
+  ...(publicEnvironment.NEXT_PUBLIC_BING_SITE_VERIFICATION
+    ? {
+        other: {
+          "msvalidate.01": [publicEnvironment.NEXT_PUBLIC_BING_SITE_VERIFICATION],
+        },
+      }
+    : {}),
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -25,7 +39,26 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.dba,
+  publisher: siteConfig.legalName,
+  creator: siteConfig.legalName,
   alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: "/images/logo.png", type: "image/png" }],
+    shortcut: ["/images/logo.png"],
+    apple: [{ url: "/images/logo.png", type: "image/png" }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: siteVerification,
   openGraph: {
     type: "website",
     locale: "en_US",

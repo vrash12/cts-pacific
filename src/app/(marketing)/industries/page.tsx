@@ -9,14 +9,14 @@ import { ProjectCta } from "@/components/marketing/project-cta";
 import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Industries & Project Environments",
+  title: "Infrastructure Services by Industry in Guam",
   description:
-    "Explore CTS Pacific telecommunications, security, and underground infrastructure capability for commercial, government, industrial, and residential projects.",
+    "Explore CTS Pacific telecommunications, security, and underground infrastructure capability for commercial, government, industrial, and residential projects in Guam.",
   alternates: { canonical: "/industries" },
   openGraph: {
-    title: "Industries & Project Environments | CTS Pacific",
+    title: "Infrastructure Services by Industry in Guam | CTS Pacific",
     description:
-      "Infrastructure capability for commercial, government, industrial, and residential project environments.",
+      "Infrastructure capability for commercial, government, industrial, and residential project environments in Guam.",
     url: "/industries",
   },
 };
