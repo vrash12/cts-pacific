@@ -10,7 +10,7 @@ import { services } from "@/modules/services/service-catalog";
 export const metadata: Metadata = {
   title: "Telecommunications & Infrastructure Services Guam",
   description:
-    "Explore CTS Pacific telecommunications, security, civil infrastructure, technical support, IT infrastructure, and facility locating services.",
+    "Explore CTS Pacific telecommunications, security, civil infrastructure, technical support, facility locating, and construction equipment rental services.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Telecommunications & Infrastructure Services Guam | CTS Pacific",
@@ -35,6 +35,7 @@ const servicesStructuredData = {
 const serviceGroups = [
   {
     id: "core-infrastructure",
+    serviceGroupIds: ["core-infrastructure"],
     eyebrow: "Core infrastructure",
     title: "Six connected disciplines",
     description:
@@ -42,10 +43,11 @@ const serviceGroups = [
   },
   {
     id: "technical-support",
+    serviceGroupIds: ["technical-support", "equipment-rental"],
     eyebrow: "Technical support & systems",
-    title: "Support beyond installation",
+    title: "Support beyond installation and field equipment",
     description:
-      "Additional project-specific services for issue isolation, ongoing infrastructure needs, communications, IT infrastructure, facility planning, and connected systems.",
+      "Additional project-specific services for issue isolation, ongoing infrastructure needs, communications, IT infrastructure, facility planning, connected systems, and construction equipment rental.",
   },
 ] as const;
 
@@ -97,7 +99,11 @@ export default function ServicesPage() {
               </div>
               <div className="services-index-grid">
                 {services
-                  .filter((service) => service.group === group.id)
+                  .filter((service) =>
+                    group.serviceGroupIds.some(
+                      (serviceGroupId) => serviceGroupId === service.group,
+                    ),
+                  )
                   .map((service) => (
                     <article key={service.slug}>
                       <FieldImage

@@ -1,19 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { AdminLeadNavLink } from "@/components/admin/admin-lead-nav-link";
 import { AdminSignOutButton } from "@/components/admin/admin-sign-out-button";
 import { publicEnvironment } from "@/config/env/public";
+import { getAdminNewLeadCount } from "@/modules/leads/queries";
 import { canManageLeads } from "@/server/auth/roles";
 import type { AdminActor } from "@/server/auth/require-admin";
 
 type AdminShellProps = {
   actor: AdminActor;
   children: React.ReactNode;
+  newLeadCount?: number;
 };
 
-export function AdminShell({ actor, children }: AdminShellProps) {
+export async function AdminShell({ actor, children, newLeadCount }: AdminShellProps) {
   const supabaseUrl = publicEnvironment.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = publicEnvironment.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const mayManageLeads = canManageLeads(actor.role);
+  let resolvedNewLeadCount = newLeadCount ?? 0;
+
+  if (mayManageLeads && newLeadCount === undefined) {
+    try {
+      resolvedNewLeadCount = await getAdminNewLeadCount(actor);
+    } catch {
+      resolvedNewLeadCount = 0;
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#f3f6f8] text-[var(--color-ink)]">
@@ -81,13 +94,8 @@ export function AdminShell({ actor, children }: AdminShellProps) {
             >
               Categories
             </Link>
-            {canManageLeads(actor.role) ? (
-              <Link
-                className="inline-flex min-h-10 shrink-0 items-center px-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
-                href="/admin/leads"
-              >
-                Leads
-              </Link>
+            {mayManageLeads ? (
+              <AdminLeadNavLink newLeadCount={resolvedNewLeadCount} />
             ) : null}
           </div>
         </nav>

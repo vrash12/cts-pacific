@@ -58,6 +58,23 @@ export async function getAdminLeadOverview(actor: AdminActor) {
   };
 }
 
+export async function getAdminNewLeadCount(actor: AdminActor) {
+  assertLeadManager(actor);
+  const database = getDatabase();
+  const [quoteRows, contactRows] = await Promise.all([
+    database
+      .select({ count: count() })
+      .from(quoteRequests)
+      .where(eq(quoteRequests.status, "NEW")),
+    database
+      .select({ count: count() })
+      .from(contactSubmissions)
+      .where(eq(contactSubmissions.status, "NEW")),
+  ]);
+
+  return (quoteRows[0]?.count ?? 0) + (contactRows[0]?.count ?? 0);
+}
+
 export async function getAdminQuoteRequests(
   actor: AdminActor,
   status?: LeadStatus,

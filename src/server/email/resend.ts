@@ -1,6 +1,7 @@
 import "server-only";
 
 import { readServerEnvironment } from "@/config/env/server";
+import { addEmailSignature } from "@/server/email/template-utils";
 
 type EmailMessage = {
   to: string | readonly string[];
@@ -18,6 +19,7 @@ export async function sendEmail(message: EmailMessage) {
     throw new Error("EMAIL_NOT_CONFIGURED");
   }
 
+  const signedMessage = addEmailSignature(message);
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -27,11 +29,11 @@ export async function sendEmail(message: EmailMessage) {
     },
     body: JSON.stringify({
       from: EMAIL_FROM,
-      to: message.to,
-      subject: message.subject,
-      html: message.html,
-      text: message.text,
-      reply_to: message.replyTo,
+      to: signedMessage.to,
+      subject: signedMessage.subject,
+      html: signedMessage.html,
+      text: signedMessage.text,
+      reply_to: signedMessage.replyTo,
     }),
     cache: "no-store",
   });

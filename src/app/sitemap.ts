@@ -23,7 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
     url: new URL(`/services/${service.slug}`, siteConfig.url).toString(),
     changeFrequency: "monthly",
-    priority: service.group === "core-infrastructure" ? 0.85 : 0.75,
+    priority:
+      service.group === "core-infrastructure"
+        ? 0.85
+        : service.group === "equipment-rental"
+          ? 0.8
+          : 0.75,
   }));
 
   return [...publicPages, ...servicePages];

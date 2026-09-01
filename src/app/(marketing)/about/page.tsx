@@ -52,21 +52,9 @@ const deliveryStages = [
 ] as const;
 
 const organizationRoles = [
-  {
-    role: "Technician",
-    name: "Profile pending",
-    status: "Name and profile to be supplied",
-  },
-  {
-    role: "Fiber Technician",
-    name: "Profile pending",
-    status: "Name and profile to be supplied",
-  },
-  {
-    role: "Construction Technician",
-    name: "Profile pending",
-    status: "Name and profile to be supplied",
-  },
+  "Technician",
+  "Fiber Technician",
+  "Construction Technician",
 ] as const;
 
 export default function AboutPage() {
@@ -123,9 +111,8 @@ export default function AboutPage() {
               <h2 id="organization-heading">Leadership connected to field execution.</h2>
             </div>
             <p>
-              CTS Pacific&apos;s organization is structured around leadership,
-              telecommunications installation, fiber capability, and construction field
-              execution.
+              CTS Pacific connects executive leadership with coordinated
+              telecommunications, fiber, security, and construction field execution.
             </p>
           </div>
 
@@ -158,14 +145,12 @@ export default function AboutPage() {
               <span>Executive leadership</span>
             </article>
             <div className="organization-chart__roles">
-              {organizationRoles.map((member, index) => (
-                <article className="organization-card" key={member.role}>
+              {organizationRoles.map((role, index) => (
+                <article className="organization-card" key={role}>
                   <span className="organization-card__number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p>{member.role}</p>
-                  <h3>{member.name}</h3>
-                  <span>{member.status}</span>
+                  <h3>{role}</h3>
                 </article>
               ))}
             </div>

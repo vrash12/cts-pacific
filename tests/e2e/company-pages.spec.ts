@@ -90,6 +90,32 @@ test("contact exposes the validated general inquiry workflow", async ({ page }) 
   await expect(page.getByText("Select an inquiry type.")).toBeVisible();
 });
 
+test("about keeps the three field roles without pending profile placeholders", async ({
+  page,
+}) => {
+  await page.goto("/about");
+
+  await expect(page.getByText("Saren F. Formento")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Technician", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Fiber Technician" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Construction Technician" })).toBeVisible();
+  await expect(page.getByText(/profile pending/i)).toHaveCount(0);
+  await expect(page.getByText(/name and profile to be supplied/i)).toHaveCount(0);
+  await expect(page.locator(".organization-chart article")).toHaveCount(4);
+});
+
+test("industry cards use deliberate spacing instead of collapsed dividers", async ({
+  page,
+}) => {
+  await page.goto("/industries");
+
+  const gap = await page.locator(".industry-profile-grid").evaluate((grid) =>
+    Number.parseFloat(getComputedStyle(grid).columnGap),
+  );
+
+  expect(gap).toBeGreaterThanOrEqual(16);
+});
+
 test("access control presents the VCE Pacific hotel-lock partnership", async ({
   page,
 }) => {

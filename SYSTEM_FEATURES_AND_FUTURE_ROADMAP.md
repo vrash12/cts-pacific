@@ -69,10 +69,12 @@ The additional categories are implemented with conservative, project-specific wo
 
 Additional equipment labels supplied by the client:
 
-- Safety & Construction Equipment
+- Safety Equipment
 - Heavy Equipment
 
-These are represented only in the authenticated admin workspace as client-detail-required planning items. They are not public services, product claims, inventory records, rental offers, or equipment-ownership claims. The client must confirm the commercial model and approved categories before catalog records are created.
+These remain represented only in the authenticated admin workspace as client-detail-required planning items. They are not public product claims, inventory records, rental offers, or equipment-ownership claims.
+
+The client has separately confirmed that CTS Pacific provides construction equipment rental. A static public service page and quote option now represent that confirmed commercial model without naming equipment, claiming ownership, publishing availability, or presenting rental rates or terms.
 
 Initial future product categories explicitly requested by the client:
 
@@ -149,6 +151,7 @@ Implemented public routes:
 - `/services/telecommunication-specialist`
 - `/services/it-support`
 - `/services/facility-locating`
+- `/services/construction-equipment-rental`
 - `/industries`
 - `/certifications`
 - `/contact`
@@ -211,7 +214,7 @@ The Projects section and route were removed from the visible site following the 
 - Guam-focused page titles and descriptions use the Next.js Metadata API
 - Canonical URLs derive from the validated `NEXT_PUBLIC_SITE_URL`
 - `/robots.txt` allows the public site while disallowing `/admin` and `/api`
-- `/sitemap.xml` contains every public company page and all fourteen service pages while excluding private and API routes
+- `/sitemap.xml` contains every public company page and all fifteen service pages while excluding private and API routes
 - Organization, Service, BreadcrumbList, and ItemList structured data are rendered from verified site and service records
 - Open Graph, Twitter card, publisher, creator, crawler-preview, and branded icon metadata are configured globally
 - Optional Google Search Console and Bing Webmaster Tools verification tokens are supported through validated environment values
@@ -219,7 +222,7 @@ The Projects section and route were removed from the visible site following the 
 
 ### 5.3 Navigation interaction
 
-- Curated Services dropdown with the six core infrastructure links and one clear “All services” path; the complete fourteen-service catalog is intentionally kept on `/services`
+- Curated Services dropdown with the six core infrastructure links and one clear “All services” path; the complete fifteen-service catalog is intentionally kept on `/services`
 - Dropdown closes immediately when “All services” or any service option is selected
 - Escape closes the dropdown and restores focus to the summary control
 - Mobile navigation closes on link activation, route changes, and Escape instead of persisting after navigation
@@ -265,7 +268,7 @@ Do not turn pending team roles into invented people or biographies.
 
 ### 5.6 Service pages
 
-Each of the fourteen service routes uses a detailed editorial service layout with:
+Each of the fifteen service routes uses a detailed editorial service layout with:
 
 - Service hero
 - Technical overview
@@ -304,6 +307,7 @@ Additional project-specific routes:
 - `/services/telecommunication-specialist`
 - `/services/it-support`
 - `/services/facility-locating`
+- `/services/construction-equipment-rental`
 
 ### 5.7 Images
 
@@ -408,6 +412,8 @@ Implemented:
 - Responsive administration navigation and product form
 - Server-authorized lead-management access for the authenticated `ADMIN`
 - Lead dashboard counts for quote requests and contact inquiries
+- Combined new-lead notification badge beside the admin Leads navigation item
+- Branded CTS Pacific signature and confidentiality footer enforced for every system-generated email
 - Filterable quote-request and contact-inquiry inboxes
 - Full lead detail views with direct email and phone actions
 - Audited `NEW`, `REVIEWING`, `CONTACTED`, and `CLOSED` status workflows
@@ -628,7 +634,7 @@ Most recent validation after the active-navigation and GCA certificate-layout in
 - Project-intake replacement verified at desktop and mobile breakpoints
 - Curated six-service desktop dropdown and concise mobile navigation verified in the local browser
 - Public navigation verified without a Products link on desktop and mobile while ecommerce is disabled
-- Complete fourteen-service index and quote options verified in the local browser
+- Complete fifteen-service index and quote options implemented; the construction-equipment-rental route is verified on desktop and mobile
 - New Telecommunications Project Support, IT Support, and Facility Locating pages verified with project-specific scope notices
 - Responsive handling for long service headings verified on mobile
 - All service records verified with locally hosted supporting imagery and no public credit or source-link interface

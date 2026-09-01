@@ -35,7 +35,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               <p className="service-hero__number">Service {service.number}</p>
               <h1
                 className={
-                  service.title.length >= 30 ? "service-hero__title--compact" : undefined
+                  service.title.length >= 28 ? "service-hero__title--compact" : undefined
                 }
               >
                 {service.title}

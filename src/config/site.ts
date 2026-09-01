@@ -31,6 +31,11 @@ export const serviceLinks = [
     href: "/services/facility-locating",
     group: "Technical support & systems",
   },
+  {
+    label: "Construction Equipment Rental",
+    href: "/services/construction-equipment-rental",
+    group: "Equipment rental",
+  },
 ] as const;
 
 export const navigationServiceLinks = serviceLinks.filter(

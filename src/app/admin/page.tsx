@@ -149,7 +149,10 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <AdminShell actor={access.actor}>
+    <AdminShell
+      actor={access.actor}
+      newLeadCount={(leadOverview?.quotes.new ?? 0) + (leadOverview?.contacts.new ?? 0)}
+    >
       <section className="grid gap-7 border-b border-[var(--color-border)] pb-10 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <p className="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--color-brand-teal)]">

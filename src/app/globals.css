@@ -2114,6 +2114,14 @@ a {
   line-height: 1.7;
 }
 
+.service-process:has(+ .related-services) {
+  padding-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.service-process + .related-services {
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+
 .related-services article a {
   display: inline-flex;
   width: fit-content;
@@ -4449,6 +4457,15 @@ summary > svg {
   background: var(--color-border);
 }
 
+.organization-chart__roles .organization-card {
+  min-height: 12rem;
+  align-content: center;
+}
+
+.organization-chart__roles .organization-card h3 {
+  max-width: 15ch;
+}
+
 .organization-chart__roles::before {
   position: absolute;
   right: 16.666%;
@@ -4655,15 +4672,14 @@ summary > svg {
 .industry-profile-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
+  gap: clamp(1rem, 2vw, 1.5rem);
   margin-top: clamp(3.5rem, 6vw, 5rem);
-  border: 1px solid var(--color-border);
-  background: var(--color-border);
 }
 
 .industry-profile-grid article {
   display: grid;
   grid-template-rows: 23rem 1fr;
+  border: 1px solid var(--color-border);
   background: white;
 }
 

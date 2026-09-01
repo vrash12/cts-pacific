@@ -23,12 +23,14 @@ describe("service catalog", () => {
       "telecommunication-specialist",
       "it-support",
       "facility-locating",
+      "construction-equipment-rental",
     ]);
   });
 
   it("keeps the original disciplines primary and groups added services separately", () => {
     expect(services.filter((service) => service.group === "core-infrastructure")).toHaveLength(6);
     expect(services.filter((service) => service.group === "technical-support")).toHaveLength(8);
+    expect(services.filter((service) => service.group === "equipment-rental")).toHaveLength(1);
   });
 
   it("provides complete technical-page content for every service", () => {
@@ -49,7 +51,7 @@ describe("service catalog", () => {
 
   it("marks every added service with a project-specific scope note", () => {
     const addedServices = services.filter(
-      (service) => service.group === "technical-support",
+      (service) => service.group !== "core-infrastructure",
     );
 
     expect(

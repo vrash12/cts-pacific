@@ -1,5 +1,5 @@
 import type { QuoteRequestInput } from "@/schemas/quote-request";
-import { escapeEmailHtml } from "@/server/email/template-utils";
+import { addEmailSignature, escapeEmailHtml } from "@/server/email/template-utils";
 
 type QuoteEmailContext = {
   referenceNumber: string;
@@ -14,7 +14,7 @@ export function createInternalQuoteEmail(context: QuoteEmailContext) {
   const company = request.company || "Not provided";
   const serviceText = serviceLabels.join(", ");
 
-  return {
+  return addEmailSignature({
     subject: `New project request ${referenceNumber} — ${request.name}`,
     text: [
       `New CTS Pacific project request: ${referenceNumber}`,
@@ -44,13 +44,13 @@ export function createInternalQuoteEmail(context: QuoteEmailContext) {
       <h2>Project description</h2>
       <p>${escapeEmailHtml(request.description).replaceAll("\n", "<br>")}</p>
     `.trim(),
-  };
+  });
 }
 
 export function createQuoteConfirmationEmail(context: QuoteEmailContext) {
   const { referenceNumber, request, serviceLabels, projectTypeLabel, timelineLabel } = context;
 
-  return {
+  return addEmailSignature({
     subject: `CTS Pacific received your project request — ${referenceNumber}`,
     text: [
       `Hello ${request.name},`,
@@ -63,10 +63,6 @@ export function createQuoteConfirmationEmail(context: QuoteEmailContext) {
       `Target timeline: ${timelineLabel}`,
       "",
       "Keep this reference for future communication.",
-      "",
-      "CTS Pacific",
-      "info@corerintechnicalsolutions.com",
-      "(671) 480-6979 | (671) 777-6436",
     ].join("\n"),
     html: `
       <h1>We received your project request</h1>
@@ -78,9 +74,6 @@ export function createQuoteConfirmationEmail(context: QuoteEmailContext) {
       <strong>Project type:</strong> ${escapeEmailHtml(projectTypeLabel)}<br>
       <strong>Target timeline:</strong> ${escapeEmailHtml(timelineLabel)}</p>
       <p>Keep this reference for future communication.</p>
-      <p><strong>CTS Pacific</strong><br>
-      info@corerintechnicalsolutions.com<br>
-      (671) 480-6979 &middot; (671) 777-6436</p>
     `.trim(),
-  };
+  });
 }

@@ -18,6 +18,10 @@ export const quoteServiceOptions = [
   },
   { value: "it-support", label: "IT Support" },
   { value: "facility-locating", label: "Facility Locating" },
+  {
+    value: "construction-equipment-rental",
+    label: "Construction Equipment Rental",
+  },
   { value: "multiple-services", label: "Multiple Services" },
   { value: "not-sure", label: "Not Sure" },
 ] as const;

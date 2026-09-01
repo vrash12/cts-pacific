@@ -37,7 +37,10 @@ export default async function AdminLeadsPage() {
   ] as const;
 
   return (
-    <AdminShell actor={access.actor}>
+    <AdminShell
+      actor={access.actor}
+      newLeadCount={overview.quotes.new + overview.contacts.new}
+    >
       <section className="border-b border-[var(--color-border)] pb-10">
         <p className="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--color-brand-teal)]">
           <Inbox aria-hidden="true" size={16} />

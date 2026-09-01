@@ -44,4 +44,18 @@ describe("quote email templates", () => {
     expect(internal.html).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
     expect(internal.html).toContain("Jordan &amp; Co.");
   });
+
+  it("adds the branded CTS Pacific signature to every quote email", () => {
+    const messages = [
+      createInternalQuoteEmail(context),
+      createQuoteConfirmationEmail(context),
+    ];
+
+    for (const message of messages) {
+      expect(message.html).toContain('data-cts-email-signature="true"');
+      expect(message.html).toContain("/images/logo.png");
+      expect(message.text).toContain("Corerin Technical Solutions, LLC");
+      expect(message.text).toContain("CONFIDENTIALITY NOTICE:");
+    }
+  });
 });

@@ -18,7 +18,7 @@ import {
 
 describe("site configuration", () => {
   it("contains the approved core and additional service routes", () => {
-    expect(serviceLinks).toHaveLength(14);
+    expect(serviceLinks).toHaveLength(15);
     expect(serviceLinks.map((service) => service.href)).toEqual([
       "/services/fiber-optics",
       "/services/data-cabling",
@@ -34,11 +34,13 @@ describe("site configuration", () => {
       "/services/telecommunication-specialist",
       "/services/it-support",
       "/services/facility-locating",
+      "/services/construction-equipment-rental",
     ]);
     expect(serviceLinks.filter((service) => service.group === "Core infrastructure")).toHaveLength(6);
     expect(
       serviceLinks.filter((service) => service.group === "Technical support & systems"),
     ).toHaveLength(8);
+    expect(serviceLinks.filter((service) => service.group === "Equipment rental")).toHaveLength(1);
   });
 
   it("keeps commerce out of primary navigation while it is disabled", () => {
@@ -52,7 +54,7 @@ describe("site configuration", () => {
         (service) => service.group === "Core infrastructure",
       ),
     ).toBe(true);
-    expect(serviceLinks).toHaveLength(14);
+    expect(serviceLinks).toHaveLength(15);
   });
 
   it("links the completed company information routes from primary navigation", () => {

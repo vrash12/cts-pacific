@@ -8,14 +8,14 @@ export type PrivateSalesPlanningItem = {
 
 export const privateSalesPlanningItems: readonly PrivateSalesPlanningItem[] = [
   {
-    name: "Safety & Construction Equipment",
+    name: "Safety Equipment",
     status: "CLIENT_DETAILS_REQUIRED",
     visibility: "ADMIN_ONLY",
     catalogFoundation:
-      "A private Construction Equipment category exists. No safety-equipment category or product record has been approved.",
+      "No safety-equipment category or product record has been approved. Construction equipment rental is represented separately as a public request-based service.",
     decisionsRequired: [
-      "Confirm whether items are sold, rented, operated, sourced, or provided through another model.",
-      "Provide the approved safety- and construction-equipment categories.",
+      "Confirm whether safety items are sold, rented, sourced, or provided through another model.",
+      "Provide the approved safety-equipment categories.",
       "Provide approved products, brands, descriptions, images, SKUs, prices, and inventory rules.",
       "Confirm delivery, pickup, rental, operator, warranty, return, and compliance responsibilities where applicable.",
     ],

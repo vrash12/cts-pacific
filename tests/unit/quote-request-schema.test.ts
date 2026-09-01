@@ -35,6 +35,7 @@ describe("quoteRequestSchema", () => {
         "telecommunication-specialist",
         "it-support",
         "facility-locating",
+        "construction-equipment-rental",
       ],
     });
 

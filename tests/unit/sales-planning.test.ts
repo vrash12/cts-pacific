@@ -7,7 +7,7 @@ import { quoteServiceOptions } from "@/schemas/quote-request";
 describe("private sales and equipment planning", () => {
   it("tracks both unverified equipment scopes as admin-only planning", () => {
     expect(privateSalesPlanningItems.map((item) => item.name)).toEqual([
-      "Safety & Construction Equipment",
+      "Safety Equipment",
       "Heavy Equipment",
     ]);
 
@@ -18,13 +18,15 @@ describe("private sales and equipment planning", () => {
     }
   });
 
-  it("does not expose equipment planning as a service or quote choice", () => {
+  it("exposes confirmed construction equipment rental but keeps unverified equipment planning private", () => {
     const publicServiceLabels = serviceLinks.map((item) => item.label);
     const quoteLabels = quoteServiceOptions.map((item) => item.label);
 
-    expect(publicServiceLabels).not.toContain("Safety & Construction Equipment");
+    expect(publicServiceLabels).toContain("Construction Equipment Rental");
+    expect(quoteLabels).toContain("Construction Equipment Rental");
+    expect(publicServiceLabels).not.toContain("Safety Equipment");
     expect(publicServiceLabels).not.toContain("Heavy Equipment");
-    expect(quoteLabels).not.toContain("Safety & Construction Equipment");
+    expect(quoteLabels).not.toContain("Safety Equipment");
     expect(quoteLabels).not.toContain("Heavy Equipment");
   });
 });

@@ -8,6 +8,7 @@ This file tracks business information and production assets that have not been s
 - Approved stacked, light, and dark logo variants
 - Exact brand colors and typography guidance
 - Confirmation that the supplied PNG logo is current and approved for production use
+- Optional named email signatory, job title, office address, and approved social links if the generic company signature should be personalized
 
 ## Company information
 
@@ -83,8 +84,9 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 ## Future commerce
 
 - Actual camera, electronics, and construction-equipment product records: approved names, descriptions, brands/models, SKUs, prices, inventory rules, and product photography
-- Confirmation whether Safety & Construction Equipment is sold, rented, CTS-operated, sourced, or delivered through another model
-- Approved Safety & Construction Equipment categories, including which safety-equipment classes are actually offered
+- Construction equipment rental is confirmed. Provide the approved equipment classes and records, model details where publishable, current availability process, rental periods, rates, deposits, operator requirements, delivery or pickup, mobilization, insurance, damage, cancellation, inspection, and return terms
+- Confirmation whether Safety Equipment is sold, rented, sourced, or delivered through another model
+- Approved Safety Equipment categories, including which safety-equipment classes are actually offered
 - Confirmation whether Heavy Equipment is sold, rented, CTS-operated, subcontracted, sourced, or offered as a service
 - Approved Heavy Equipment classes and confirmation of equipment ownership, operator, transport, mobilization, scheduling, permit, and insurance responsibilities
 - Any rental duration, deposit, damage, inspection, pickup/return, operator, cancellation, and availability terms, if rentals are approved

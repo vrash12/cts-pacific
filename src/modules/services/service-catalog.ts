@@ -12,9 +12,13 @@ export type ServiceSlug =
   | "server-infrastructure"
   | "telecommunication-specialist"
   | "it-support"
-  | "facility-locating";
+  | "facility-locating"
+  | "construction-equipment-rental";
 
-export type ServiceGroup = "core-infrastructure" | "technical-support";
+export type ServiceGroup =
+  | "core-infrastructure"
+  | "technical-support"
+  | "equipment-rental";
 
 export type ServiceProcessStep = {
   title: string;
@@ -917,6 +921,74 @@ export const services: readonly ServiceDefinition[] = [
     referenceObjectPosition: "54% 52%",
     scopeNote:
       "The client must confirm supported locating methods and equipment, utility types, accuracy and reporting expectations, notification and permit responsibilities, mark-out ownership, exclusions, and whether regulated locating is included.",
+  },
+  {
+    slug: "construction-equipment-rental",
+    group: "equipment-rental",
+    number: "15",
+    navigationTitle: "Construction Equipment Rental",
+    title: "Construction Equipment Rental",
+    eyebrow: "Equipment aligned to the project",
+    description:
+      "Construction equipment rental coordinated for project requirements in Guam, with availability and rental arrangements confirmed for each request.",
+    overview: [
+      "CTS Pacific provides construction equipment rental for project requirements in Guam. Each request begins with the planned work, site conditions, schedule, and equipment need.",
+      "Available equipment, rental duration, delivery or pickup, operator requirements, mobilization, deposits, insurance, and commercial terms are confirmed before a reservation is accepted. No specific equipment or availability is assumed online.",
+    ],
+    capabilities: [
+      "Project-requirement intake",
+      "Equipment-need coordination",
+      "Site-condition review",
+      "Schedule and duration review",
+      "Availability confirmation",
+      "Delivery and pickup coordination",
+      "Rental-scope documentation",
+    ],
+    applications: [
+      "Construction project support",
+      "Civil and underground work",
+      "Telecommunications pathway work",
+      "Commercial project sites",
+      "Industrial project environments",
+      "Planned equipment requirements",
+    ],
+    process: [
+      {
+        title: "Define the requirement",
+        description:
+          "Share the project, work area, schedule, duration, and equipment need.",
+      },
+      {
+        title: "Confirm the available fit",
+        description:
+          "Review the requested equipment category, site conditions, timing, and current availability.",
+      },
+      {
+        title: "Agree the rental scope",
+        description:
+          "Confirm the equipment, duration, logistics, responsibilities, and commercial terms in writing.",
+      },
+      {
+        title: "Coordinate handoff and return",
+        description:
+          "Organize the approved delivery or pickup and the documented return requirements.",
+      },
+    ],
+    related: ["civil-underground", "micro-trenching"],
+    heroImage: "/images/services 12.jpeg",
+    heroImageAlt:
+      "Client-supplied field image showing project vehicles and elevated-access equipment at a work site.",
+    heroObjectPosition: "54% 55%",
+    detailImage: "/images/services 13.jpeg",
+    detailImageAlt:
+      "Client-supplied field image showing work vehicles and equipment positioned within a controlled project area.",
+    detailObjectPosition: "58% 54%",
+    referenceImage: "/images/services 10.jpeg",
+    referenceImageAlt:
+      "Client-supplied field image of elevated-access equipment, safety cones, and staged project materials.",
+    referenceObjectPosition: "56% 48%",
+    scopeNote:
+      "Specific equipment classes, models, availability, rental periods, rates, deposits, operator requirements, delivery or pickup, mobilization, insurance, damage, cancellation, and return terms require explicit confirmation for each request.",
   },
 ] as const;
 

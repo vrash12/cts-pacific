@@ -44,9 +44,6 @@ export default async function AdminLoginPage() {
           <h1 className="text-[clamp(2.8rem,6vw,5.5rem)] leading-[0.9] uppercase tracking-[-0.055em]">
             Commerce administration.
           </h1>
-          <p className="mt-7 max-w-lg text-base leading-7 text-white/68">
-            Prepare products and payment configuration privately before any storefront is enabled.
-          </p>
         </div>
 
         <p className="mt-12 text-xs text-white/50">Corerin Technical Solutions, LLC dba CTS Pacific</p>
