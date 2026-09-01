@@ -3,16 +3,12 @@ import {
   Camera,
   CheckCircle2,
   Construction,
-  CreditCard,
   EyeOff,
   FileText,
-  HardHat,
   Mail,
   PackagePlus,
   ShieldCheck,
-  Truck,
   TriangleAlert,
-  WalletCards,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,11 +19,8 @@ import { publicEnvironment } from "@/config/env/public";
 import { featureFlags } from "@/config/features";
 import { getAdminLeadOverview } from "@/modules/leads/queries";
 import { getAdminCatalogOverview } from "@/modules/products/queries";
-import { privateSalesPlanningItems } from "@/modules/products/sales-planning";
-import { supportedPaymentMethods } from "@/modules/payments/payment-methods";
 import { canManageCatalog, canManageLeads } from "@/server/auth/roles";
 import { requireAdmin } from "@/server/auth/require-admin";
-import { getPaymentReadiness } from "@/server/payments/readiness";
 
 export const dynamic = "force-dynamic";
 
@@ -142,9 +135,8 @@ export default async function AdminPage() {
 
   const mayManageCatalog = canManageCatalog(access.actor.role);
   const mayManageLeads = canManageLeads(access.actor.role);
-  const [catalog, paymentReadiness, leadOverview] = await Promise.all([
+  const [catalog, leadOverview] = await Promise.all([
     getAdminCatalogOverview(access.actor),
-    Promise.resolve(getPaymentReadiness()),
     mayManageLeads ? getAdminLeadOverview(access.actor) : Promise.resolve(null),
   ]);
 
@@ -278,116 +270,6 @@ export default async function AdminPage() {
         </div>
       </section>
 
-      <section aria-labelledby="sales-planning-title" className="border-t border-[var(--color-border)] py-10">
-        <div className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.8fr] lg:items-end">
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Private planning</p>
-            <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="sales-planning-title">Equipment scope decisions</h2>
-          </div>
-          <p className="text-sm leading-7 text-[var(--color-ink-muted)]">
-            These client-supplied labels are not approved inventory or public offerings. Complete the listed decisions before creating categories or product records.
-          </p>
-        </div>
-
-        <div className="grid gap-5 lg:grid-cols-2">
-          {privateSalesPlanningItems.map((item, index) => {
-            const Icon = index === 0 ? HardHat : Truck;
-
-            return (
-              <article className="border border-[var(--color-border)] bg-white p-7" key={item.name}>
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <Icon aria-hidden="true" className="text-[var(--color-brand-blue)]" size={29} strokeWidth={1.6} />
-                  <StatusPill ready={false}>Client details required</StatusPill>
-                </div>
-                <h3 className="mt-8 text-3xl uppercase text-[var(--color-brand-navy)]">{item.name}</h3>
-                <p className="mt-4 text-sm leading-7 text-[var(--color-ink-muted)]">{item.catalogFoundation}</p>
-                <ul className="mt-6 border-t border-[var(--color-border)] text-sm">
-                  {item.decisionsRequired.map((decision) => (
-                    <li className="flex gap-3 border-b border-[var(--color-border)] py-4 leading-6 text-[var(--color-ink-muted)]" key={decision}>
-                      <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--color-brand-teal)]" />
-                      {decision}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.1em] text-amber-800">Admin planning only · Not public</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section aria-labelledby="payments-title" className="border-t border-[var(--color-border)] py-10">
-        <div className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.8fr] lg:items-end">
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-brand-teal)]">Future checkout</p>
-            <h2 className="mt-2 text-3xl uppercase text-[var(--color-brand-navy)]" id="payments-title">Payment methods</h2>
-          </div>
-          <p className="text-sm leading-7 text-[var(--color-ink-muted)]">
-            Payment controls remain private and inactive. No browser-supplied price or raw card number will be trusted or stored.
-          </p>
-        </div>
-
-        <div className="grid gap-5 lg:grid-cols-2">
-          {supportedPaymentMethods.map((method) => {
-            const isPayPal = method.value === "PAYPAL";
-            const ready = isPayPal
-              ? paymentReadiness.paypal.configured
-              : paymentReadiness.card.configured;
-            const Icon = isPayPal ? WalletCards : CreditCard;
-
-            return (
-              <article className="border border-[var(--color-border)] bg-white p-7" key={method.value}>
-                <div className="flex items-start justify-between gap-4">
-                  <Icon aria-hidden="true" className="text-[var(--color-brand-blue)]" size={28} strokeWidth={1.7} />
-                  <StatusPill ready={ready}>{ready ? "Configured" : "Setup required"}</StatusPill>
-                </div>
-                <h3 className="mt-9 text-3xl uppercase text-[var(--color-brand-navy)]">{method.label}</h3>
-                <p className="mt-4 text-sm leading-7 text-[var(--color-ink-muted)]">
-                  {isPayPal
-                    ? "Prepared for the PayPal Orders API after credentials, webhook verification, checkout, and server-side order totals are complete."
-                    : "Planned through PayPal-hosted card fields, subject to PayPal merchant eligibility. CTS Pacific will never handle raw card details."}
-                </p>
-                <dl className="mt-7 grid gap-3 border-t border-[var(--color-border)] pt-5 text-xs">
-                  <div className="flex justify-between gap-4">
-                    <dt className="font-bold uppercase tracking-[0.08em] text-[var(--color-ink-muted)]">Environment</dt>
-                    <dd className="font-extrabold uppercase text-[var(--color-brand-navy)]">{paymentReadiness.environment}</dd>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <dt className="font-bold uppercase tracking-[0.08em] text-[var(--color-ink-muted)]">Public button</dt>
-                    <dd className="font-extrabold uppercase text-amber-800">Hidden</dd>
-                  </div>
-                </dl>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="grid gap-6 border-t border-[var(--color-border)] pt-10 lg:grid-cols-[0.75fr_1.25fr]">
-        <div className="bg-[var(--color-brand-navy)] p-7 text-white">
-          <ShieldCheck aria-hidden="true" className="mb-9 text-[#78d2d4]" size={30} strokeWidth={1.6} />
-          <h2 className="text-3xl uppercase">Security boundary</h2>
-          <p className="mt-5 text-sm leading-7 text-white/68">
-            Administrator access is authenticated, verified on the server, and isolated from the public marketing layout.
-          </p>
-        </div>
-        <div className="border border-[var(--color-border)] bg-white p-7">
-          <h2 className="text-3xl uppercase text-[var(--color-brand-navy)]">Before launch</h2>
-          <ul className="mt-6 grid gap-0 border-t border-[var(--color-border)] text-sm">
-            {[
-              "Receive approved products, descriptions, SKUs, prices, images, and inventory rules.",
-              "Confirm whether card payments use PayPal Advanced Card Payments or a separate provider.",
-              "Approve tax, shipping, delivery, return, refund, cancellation, and warranty policies.",
-              "Complete checkout routes, server-authoritative totals, webhook verification, and payment tests.",
-            ].map((item) => (
-              <li className="flex gap-3 border-b border-[var(--color-border)] py-4 leading-6 text-[var(--color-ink-muted)]" key={item}>
-                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--color-brand-teal)]" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </AdminShell>
   );
 }
