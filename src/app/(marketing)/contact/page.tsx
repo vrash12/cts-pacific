@@ -82,7 +82,12 @@ export default function ContactPage() {
             <article>
               <Mail aria-hidden="true" size={24} strokeWidth={1.7} />
               <p>Email</p>
-              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+              <a
+                className="contact-method-grid__email"
+                href={`mailto:${siteConfig.email}`}
+              >
+                {siteConfig.email}
+              </a>
             </article>
             <article>
               <MapPin aria-hidden="true" size={24} strokeWidth={1.7} />

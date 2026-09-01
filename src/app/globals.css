@@ -4859,6 +4859,12 @@ summary > svg {
   overflow-wrap: anywhere;
 }
 
+.contact-method-grid article > a.contact-method-grid__email {
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
 .contact-method-grid a:hover,
 .contact-method-grid a:focus-visible {
   color: var(--color-brand-blue);
@@ -5149,6 +5155,11 @@ summary > svg {
   .contact-method-grid,
   .contact-routing__options {
     grid-template-columns: 1fr;
+  }
+
+  .contact-method-grid article > a.contact-method-grid__email {
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .industry-profile-grid article {

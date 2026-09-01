@@ -90,6 +90,20 @@ test("contact exposes the validated general inquiry workflow", async ({ page }) 
   await expect(page.getByText("Select an inquiry type.")).toBeVisible();
 });
 
+test("contact email remains on one line at desktop width", async ({ page }) => {
+  await page.setViewportSize({ width: 1530, height: 900 });
+  await page.goto("/contact");
+
+  const email = page.locator(".contact-method-grid__email");
+  await expect(email).toBeVisible();
+  expect(
+    await email.evaluate((element) => {
+      const styles = getComputedStyle(element);
+      return element.getBoundingClientRect().height <= Number.parseFloat(styles.lineHeight) * 1.1;
+    }),
+  ).toBe(true);
+});
+
 test("about keeps the three field roles without pending profile placeholders", async ({
   page,
 }) => {
