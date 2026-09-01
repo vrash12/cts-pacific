@@ -53,7 +53,8 @@ describe("quote email templates", () => {
 
     for (const message of messages) {
       expect(message.html).toContain('data-cts-email-signature="true"');
-      expect(message.html).toContain("/images/logo.png");
+      expect(message.html).toContain("https://ctspacific.com/images/logo.png");
+      expect(message.html).not.toContain("localhost");
       expect(message.text).toContain("Corerin Technical Solutions, LLC");
       expect(message.text).toContain("CONFIDENTIALITY NOTICE:");
     }

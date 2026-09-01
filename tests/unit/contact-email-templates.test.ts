@@ -5,7 +5,10 @@ import {
   createContactConfirmationEmail,
   createInternalContactEmail,
 } from "@/server/email/contact-templates";
-import { addEmailSignature } from "@/server/email/template-utils";
+import {
+  addEmailSignature,
+  resolveEmailSiteUrl,
+} from "@/server/email/template-utils";
 
 const context = {
   referenceNumber: "CTC-20260830-CB53EA7B",
@@ -50,10 +53,20 @@ describe("contact email templates", () => {
 
     for (const message of messages) {
       expect(message.html).toContain('data-cts-email-signature="true"');
-      expect(message.html).toContain("/images/logo.png");
+      expect(message.html).toContain("https://ctspacific.com/images/logo.png");
+      expect(message.html).not.toContain("localhost");
       expect(message.text).toContain("Corerin Technical Solutions, LLC");
       expect(message.text).toContain("CONFIDENTIALITY NOTICE:");
     }
+  });
+
+  it("uses the public domain for signatures created during local testing", () => {
+    expect(resolveEmailSiteUrl("http://localhost:3000")).toBe(
+      "https://ctspacific.com",
+    );
+    expect(resolveEmailSiteUrl("https://preview.example.com/")).toBe(
+      "https://preview.example.com",
+    );
   });
 
   it("does not duplicate the signature when the transport enforces it again", () => {

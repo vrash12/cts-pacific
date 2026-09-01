@@ -14,6 +14,21 @@ type EmailContent = {
   text: string;
 };
 
+const productionEmailSiteUrl = "https://ctspacific.com";
+
+export function resolveEmailSiteUrl(siteUrl: string) {
+  const hostname = new URL(siteUrl).hostname.toLowerCase();
+  const isLocalHostname =
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname === "::1" ||
+    hostname.endsWith(".localhost");
+
+  return isLocalHostname ? productionEmailSiteUrl : siteUrl.replace(/\/$/, "");
+}
+
+const emailSiteUrl = resolveEmailSiteUrl(siteConfig.url);
+
 const emailSignatureText = [
   "In service,",
   "",
@@ -23,7 +38,7 @@ const emailSignatureText = [
   siteConfig.coverage,
   siteConfig.phones.join(" | "),
   siteConfig.email,
-  siteConfig.url,
+  emailSiteUrl,
   "",
   "CONFIDENTIALITY NOTICE: This email and any attachments may contain confidential information intended only for the named recipient. If you received it in error, please notify the sender and delete it without copying, sharing, or using its contents.",
 ].join("\n");
@@ -34,8 +49,8 @@ const emailSignatureHtml = `
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:100%;max-width:620px;">
       <tr>
         <td style="width:184px;padding:0 20px 0 0;vertical-align:middle;">
-          <a href="${escapeEmailHtml(siteConfig.url)}" style="text-decoration:none;">
-            <img src="${escapeEmailHtml(siteConfig.url)}/images/logo.png" width="164" alt="CTS Pacific" style="display:block;width:164px;max-width:100%;height:auto;border:0;">
+          <a href="${escapeEmailHtml(emailSiteUrl)}" style="text-decoration:none;">
+            <img src="${escapeEmailHtml(emailSiteUrl)}/images/logo.png" width="164" alt="CTS Pacific" style="display:block;width:164px;max-width:100%;height:auto;border:0;">
           </a>
         </td>
         <td style="padding:2px 0 2px 20px;vertical-align:middle;border-left:2px solid #168fd0;">
@@ -46,7 +61,7 @@ const emailSignatureHtml = `
             <span style="color:#8c9aa6;"> &middot; </span>
             <a href="tel:+16717776436" style="color:#0b2942;text-decoration:none;">${escapeEmailHtml(siteConfig.phones[1])}</a><br>
             <a href="mailto:${escapeEmailHtml(siteConfig.email)}" style="color:#087f82;text-decoration:underline;">${escapeEmailHtml(siteConfig.email)}</a><br>
-            <a href="${escapeEmailHtml(siteConfig.url)}" style="color:#087f82;text-decoration:underline;">${escapeEmailHtml(siteConfig.url.replace(/^https?:\/\//, ""))}</a>
+            <a href="${escapeEmailHtml(emailSiteUrl)}" style="color:#087f82;text-decoration:underline;">${escapeEmailHtml(emailSiteUrl.replace(/^https?:\/\//, ""))}</a>
           </p>
         </td>
       </tr>
