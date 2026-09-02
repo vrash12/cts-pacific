@@ -14,6 +14,13 @@ const securityHeaders = [
   },
 ];
 
+const documentCacheHeaders = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=0, s-maxage=0, must-revalidate",
+  },
+];
+
 const nextConfig: NextConfig = {
   agentRules: false,
   images: {
@@ -26,6 +33,14 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        // Hashed Next.js assets stay immutable, while documents must be
+        // revalidated so a CDN cannot serve HTML that references deleted
+        // chunks from an earlier deployment.
+        source:
+          "/:path((?!api|_next/static|_next/image|images|favicon.ico|robots.txt|sitemap.xml).*)",
+        headers: documentCacheHeaders,
       },
     ];
   },
