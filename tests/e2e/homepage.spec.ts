@@ -29,7 +29,6 @@ test("service slideshow controls select and align the requested service", async 
     name: /one team\. complete infrastructure capability/i,
   });
   await expect(carousel).toBeVisible();
-  await carousel.getByRole("button", { name: "Pause slideshow" }).click();
   await carousel.getByRole("button", { name: "Show next service" }).click();
 
   await expect(
@@ -57,7 +56,6 @@ test("service slideshow remains usable at a mobile viewport", async ({ page }) =
   const carousel = page.getByRole("region", {
     name: /one team\. complete infrastructure capability/i,
   });
-  await carousel.getByRole("button", { name: "Pause slideshow" }).click();
   await carousel
     .getByRole("button", { name: /show cctv systems, slide 3 of 6/i })
     .click();

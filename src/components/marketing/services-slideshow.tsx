@@ -1,19 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import {
-  type FocusEvent,
-  type UIEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { type UIEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { FieldImage } from "@/components/marketing/field-image";
 
-const AUTOPLAY_INTERVAL_MS = 7_000;
 const SCROLL_SETTLE_DELAY_MS = 120;
 
 function getSlideScrollLeft(track: HTMLElement, slide: HTMLElement) {
@@ -40,16 +32,9 @@ type ServicesSlideshowProps = {
 };
 
 export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProps) {
-  const carouselRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollSettleTimeoutRef = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isUserPaused, setIsUserPaused] = useState(false);
-  const [isPointerOver, setIsPointerOver] = useState(false);
-  const [hasFocusWithin, setHasFocusWithin] = useState(false);
-  const [allowFocusedAutoplay, setAllowFocusedAutoplay] = useState(false);
-  const [isDocumentHidden, setIsDocumentHidden] = useState(false);
-  const [isInViewport, setIsInViewport] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [announcement, setAnnouncement] = useState("");
 
@@ -95,60 +80,6 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
     return () => mediaQuery.removeEventListener?.("change", updateMotionPreference);
   }, []);
 
-  useEffect(() => {
-    const updateVisibility = () => setIsDocumentHidden(document.visibilityState === "hidden");
-    updateVisibility();
-    document.addEventListener("visibilitychange", updateVisibility);
-
-    return () => document.removeEventListener("visibilitychange", updateVisibility);
-  }, []);
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel || typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInViewport(Boolean(entry?.isIntersecting && entry.intersectionRatio >= 0.35)),
-      { threshold: [0, 0.35] },
-    );
-
-    observer.observe(carousel);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const isTemporarilyPaused =
-      isPointerOver ||
-      (hasFocusWithin && !allowFocusedAutoplay) ||
-      isDocumentHidden ||
-      !isInViewport;
-    if (
-      services.length < 2 ||
-      isUserPaused ||
-      isTemporarilyPaused ||
-      prefersReducedMotion
-    ) {
-      return;
-    }
-
-    const autoplayTimeout = window.setTimeout(() => {
-      scrollToSlide(activeIndex + 1, false);
-    }, AUTOPLAY_INTERVAL_MS);
-
-    return () => window.clearTimeout(autoplayTimeout);
-  }, [
-    activeIndex,
-    allowFocusedAutoplay,
-    hasFocusWithin,
-    isDocumentHidden,
-    isInViewport,
-    isPointerOver,
-    isUserPaused,
-    prefersReducedMotion,
-    scrollToSlide,
-    services.length,
-  ]);
-
   useEffect(
     () => () => {
       if (scrollSettleTimeoutRef.current !== null) {
@@ -184,49 +115,17 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
     }, SCROLL_SETTLE_DELAY_MS);
   };
 
-  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      setHasFocusWithin(false);
-      setAllowFocusedAutoplay(false);
-    }
-  };
-
-  const handleFocus = (event: FocusEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      setHasFocusWithin(true);
-      setAllowFocusedAutoplay(false);
-    }
-  };
-
-  const toggleAutoplay = () => {
-    if (isUserPaused) {
-      setIsUserPaused(false);
-      setAllowFocusedAutoplay(true);
-      return;
-    }
-
-    setIsUserPaused(true);
-    setAllowFocusedAutoplay(false);
-  };
-
   if (services.length === 0) return null;
 
   const activeService = services[activeIndex] ?? services[0];
   if (!activeService) return null;
-
-  const autoplayDisabledByPreference = prefersReducedMotion;
 
   return (
     <div
       aria-labelledby={headingId}
       aria-roledescription="carousel"
       className="services-slideshow"
-      ref={carouselRef}
       role="region"
-      onBlurCapture={handleBlur}
-      onFocusCapture={handleFocus}
-      onPointerEnter={() => setIsPointerOver(true)}
-      onPointerLeave={() => setIsPointerOver(false)}
     >
       <div className="services-slideshow__controls">
         <p className="services-slideshow__status" aria-hidden="true">
@@ -237,36 +136,6 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
         </p>
 
         <div className="services-slideshow__actions">
-          <button
-            aria-label={
-              autoplayDisabledByPreference
-                ? "Autoplay disabled by reduced-motion preference"
-                : isUserPaused
-                  ? "Play slideshow"
-                  : "Pause slideshow"
-            }
-            className="services-slideshow__control services-slideshow__control--toggle"
-            disabled={autoplayDisabledByPreference}
-            type="button"
-            onClick={toggleAutoplay}
-          >
-            {autoplayDisabledByPreference ? (
-              <>
-                <Pause aria-hidden="true" size={16} />
-                Motion off
-              </>
-            ) : isUserPaused ? (
-              <>
-                <Play aria-hidden="true" size={16} />
-                Play
-              </>
-            ) : (
-              <>
-                <Pause aria-hidden="true" size={16} />
-                Pause
-              </>
-            )}
-          </button>
           <button
             aria-label="Show previous service"
             className="services-slideshow__control"
