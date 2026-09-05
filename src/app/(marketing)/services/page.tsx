@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { directoryImage } from "@/config/field-photography";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -108,9 +109,10 @@ export default function ServicesPage() {
                     <article key={service.slug}>
                       <FieldImage
                         alt={service.referenceImageAlt}
+                        loading="eager"
                         objectPosition={service.referenceObjectPosition}
                         sizes="(max-width: 736px) 100vw, (max-width: 1024px) 50vw, 34vw"
-                        src={service.referenceImage}
+                        {...directoryImage(service.referenceImage)}
                       />
                       <div className="services-index-card__body">
                         <p>{service.number} / Service</p>

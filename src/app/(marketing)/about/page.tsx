@@ -6,6 +6,8 @@ import { BreadcrumbJsonLd } from "@/components/marketing/breadcrumb-json-ld";
 import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectCta } from "@/components/marketing/project-cta";
+import { PhotoGallery } from "@/components/marketing/photo-gallery";
+import { companyPhotography } from "@/config/field-photography";
 import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -102,6 +104,15 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <PhotoGallery
+        description="Company moments from an exhibition booth and a Guam Contractors Association membership presentation."
+        eyebrow="People and professional connections"
+        id="company-moments"
+        photos={companyPhotography}
+        title="Beyond the field. Part of the industry."
+        variant="company"
+      />
 
       <section className="organization-section" aria-labelledby="organization-heading">
         <div className="container">

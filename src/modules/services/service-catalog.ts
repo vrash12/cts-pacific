@@ -1,3 +1,5 @@
+import { fieldPhotography, serviceImages } from "@/config/field-photography";
+
 export type ServiceSlug =
   | "fiber-optics"
   | "data-cabling"
@@ -52,6 +54,7 @@ export type ServiceDefinition = {
   heroImage: string;
   heroImageAlt: string;
   heroObjectPosition: string;
+  heroImageLayout?: "landscape";
   detailImage: string;
   detailImageAlt: string;
   detailObjectPosition: string;
@@ -112,15 +115,8 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["data-cabling", "civil-underground"],
-    heroImage: "/images/field-work/fiber-enclosure-open.jpeg",
-    heroImageAlt: "Open fiber enclosure showing organized fiber loops during CTS Pacific field work.",
-    heroObjectPosition: "50% 50%",
-    detailImage: "/images/field-work/fiber-enclosure-conduit-wide.jpeg",
-    detailImageAlt: "Fiber enclosure and protective conduit at an interior installation site.",
-    detailObjectPosition: "52% 54%",
-    referenceImage: "/images/editorial/fiber-optic-reference.jpeg",
-    referenceImageAlt: "Dense rows of aqua fiber-optic patch cords connected to rack-mounted adapter panels.",
-    referenceObjectPosition: "50% 50%",
+    ...serviceImages(fieldPhotography.angledClosure, fieldPhotography.openClosure, fieldPhotography.compactTray),
+    heroImageLayout: "landscape",
   },
   {
     slug: "data-cabling",
@@ -172,15 +168,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["fiber-optics", "cctv"],
-    heroImage: "/images/field-work/network-equipment-integration.jpeg",
-    heroImageAlt: "Network routing, switching, communications, and connected equipment at an installation site.",
-    heroObjectPosition: "48% 50%",
-    detailImage: "/images/services 7.jpeg",
-    detailImageAlt: "Cabling staged across an active CTS Pacific field site.",
-    detailObjectPosition: "48% 58%",
-    referenceImage: "/images/editorial/data-cabling-reference.jpeg",
-    referenceImageAlt: "Organized network patch cords connected to rack-mounted communications equipment.",
-    referenceObjectPosition: "62% 50%",
+    ...serviceImages(fieldPhotography.rackPathways, fieldPhotography.switchCabinet, fieldPhotography.networkRoom),
   },
   {
     slug: "cctv",
@@ -423,15 +411,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["micro-trenching", "fiber-optics"],
-    heroImage: "/images/services 5.jpeg",
-    heroImageAlt: "Excavated underground pathway beside a CTS Pacific service vehicle.",
-    heroObjectPosition: "50% 58%",
-    detailImage: "/images/services 2.jpeg",
-    detailImageAlt: "Underground pathway excavation beside an industrial building.",
-    detailObjectPosition: "50% 56%",
-    referenceImage: "/images/editorial/civil-underground-reference.jpeg",
-    referenceImageAlt: "Construction crew inspecting an open underground utility excavation.",
-    referenceObjectPosition: "50% 58%",
+    ...serviceImages(fieldPhotography.conduitTrench, fieldPhotography.handhole, fieldPhotography.cableCoils),
   },
   {
     slug: "troubleshooting",
@@ -665,15 +645,8 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["data-cabling", "civil-underground"],
-    heroImage: "/images/services 4.jpeg",
-    heroImageAlt: "Client-supplied field image showing utility, conduit, and connected infrastructure interfaces.",
-    heroObjectPosition: "50% 48%",
-    detailImage: "/images/services 8.jpeg",
-    detailImageAlt: "Client-supplied field image of exterior conduit routed along a utility pole.",
-    detailObjectPosition: "50% 48%",
-    referenceImage: "/images/editorial/electrical-support-reference.jpeg",
-    referenceImageAlt: "Technician working inside an electrical control panel.",
-    referenceObjectPosition: "50% 50%",
+    ...serviceImages(fieldPhotography.doorwayConduit, fieldPhotography.junctionBoxes, fieldPhotography.doorwayConduit),
+    heroImageLayout: "landscape",
     scopeNote:
       "The client must confirm electrical licenses, voltage classes, permitting responsibility, and whether regulated work is self-performed or delivered through an approved electrical trade partner.",
   },
@@ -726,15 +699,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["data-cabling", "pbx-systems"],
-    heroImage: "/images/field-work/network-equipment-integration.jpeg",
-    heroImageAlt: "Client-supplied image of network and communications equipment integration.",
-    heroObjectPosition: "45% 50%",
-    detailImage: "/images/field-work/fiber-enclosure-conduit-wide.jpeg",
-    detailImageAlt: "Client-supplied field image of a connected fiber pathway and enclosure.",
-    detailObjectPosition: "52% 54%",
-    referenceImage: "/images/editorial/server-infrastructure-reference.jpeg",
-    referenceImageAlt: "Physical server equipment installed in enclosed racks.",
-    referenceObjectPosition: "62% 50%",
+    ...serviceImages(fieldPhotography.rackPathways, fieldPhotography.wallCabinet, fieldPhotography.switchCabinet),
     scopeNote:
       "Supported server hardware, operating systems, virtualization, backup, cybersecurity, cloud, warranty, and managed-service responsibilities require explicit client confirmation.",
   },
@@ -787,15 +752,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["fiber-optics", "data-cabling"],
-    heroImage: "/images/services 21.jpeg",
-    heroImageAlt: "CTS Pacific field personnel coordinating telecommunications infrastructure work.",
-    heroObjectPosition: "50% 48%",
-    detailImage: "/images/field-work/network-equipment-integration.jpeg",
-    detailImageAlt: "Client-supplied image of network and communications equipment at a project site.",
-    detailObjectPosition: "48% 50%",
-    referenceImage: "/images/editorial/telecommunications-specialist-reference.jpeg",
-    referenceImageAlt: "Telecommunications specialist configuring network equipment and cabling.",
-    referenceObjectPosition: "55% 50%",
+    ...serviceImages(fieldPhotography.opticalTransport, fieldPhotography.coveredClosure, fieldPhotography.opticalTransport),
     scopeNote:
       "The client must confirm whether this offering includes consulting, staffing, direct installation, or another delivery model, together with the supported disciplines, credentials, contract boundaries, and technical responsibilities.",
   },
@@ -848,15 +805,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["troubleshooting", "server-infrastructure"],
-    heroImage: "/images/field-work/network-equipment-integration.jpeg",
-    heroImageAlt: "Client-supplied image of connected network, communications, and endpoint equipment.",
-    heroObjectPosition: "50% 50%",
-    detailImage: "/images/field-work/fiber-enclosure-conduit-wide.jpeg",
-    detailImageAlt: "Client-supplied field image of a connected fiber pathway and enclosure.",
-    detailObjectPosition: "50% 52%",
-    referenceImage: "/images/editorial/it-support-reference.jpeg",
-    referenceImageAlt: "IT technician working among network-rack cabling.",
-    referenceObjectPosition: "50% 45%",
+    ...serviceImages(fieldPhotography.router, fieldPhotography.wallCabinet, fieldPhotography.router),
     scopeNote:
       "Supported devices, operating systems, applications, remote or on-site delivery, service windows, cybersecurity boundaries, response commitments, warranties, and managed-support terms require explicit client confirmation.",
   },
@@ -975,18 +924,8 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["civil-underground", "micro-trenching"],
-    heroImage: "/images/services 12.jpeg",
-    heroImageAlt:
-      "Client-supplied field image showing project vehicles and elevated-access equipment at a work site.",
-    heroObjectPosition: "54% 55%",
-    detailImage: "/images/services 13.jpeg",
-    detailImageAlt:
-      "Client-supplied field image showing work vehicles and equipment positioned within a controlled project area.",
-    detailObjectPosition: "58% 54%",
-    referenceImage: "/images/services 10.jpeg",
-    referenceImageAlt:
-      "Client-supplied field image of elevated-access equipment, safety cones, and staged project materials.",
-    referenceObjectPosition: "56% 48%",
+    ...serviceImages(fieldPhotography.dayTrencher, fieldPhotography.nightTrencher, fieldPhotography.dayTrencher),
+    heroImageLayout: "landscape",
     scopeNote:
       "Specific equipment classes, models, availability, rental periods, rates, deposits, operator requirements, delivery or pickup, mobilization, insurance, damage, cancellation, and return terms require explicit confirmation for each request.",
   },

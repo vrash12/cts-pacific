@@ -95,6 +95,12 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 - Confirmation that card payments will use PayPal Advanced Card Payments, plus confirmation of merchant eligibility; otherwise the selected PCI-compliant card provider and credentials
 - Merchant statement descriptor and customer-service contact details
 
+## September 2026 photography follow-up
+
+- Obtain a clean original of the IT&E exhibition photograph if available; the supplied screenshot is currently framed without the app header while retaining the watermark.
+- Supply renewed Guam retail and technical support business-license copies before the January 31, 2027 expiration shown on the supplied documents.
+- Confirm project names, locations, dates, and publication-ready case-study details for the new field photographs before adding those claims. Current captions describe visible equipment only.
+
 ## Future chatbot
 
 - Approved knowledge articles and service answers

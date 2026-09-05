@@ -1,3 +1,5 @@
+import { fieldPhotography } from "@/config/field-photography";
+
 export const credibilityItems = [
   "FOA Certified",
   "ETA International",
@@ -40,9 +42,8 @@ export const homepageServices = [
     href: "/services/fiber-optics",
     description:
       "Single-mode and multi-mode deployment, fusion splicing, OTDR testing, termination, and backbone integration.",
-    imageSrc: "/images/field-work/fiber-enclosure-open.jpeg",
-    imageAlt:
-      "Open fiber enclosure showing organized fiber loops during CTS Pacific field work.",
+    imageSrc: fieldPhotography.angledClosure.src,
+    imageAlt: fieldPhotography.angledClosure.alt,
     objectPosition: "50% 50%",
   },
   {
@@ -51,10 +52,9 @@ export const homepageServices = [
     href: "/services/data-cabling",
     description:
       "Cat6 and Cat6A structured cabling, patch panels, network racks, cable routing, labeling, and channel certification.",
-    imageSrc: "/images/field-work/network-equipment-integration.jpeg",
-    imageAlt:
-      "Network routing, switching, communications, and connected equipment at an installation site.",
-    objectPosition: "48% 50%",
+    imageSrc: fieldPhotography.rackPathways.src,
+    imageAlt: fieldPhotography.rackPathways.alt,
+    objectPosition: "50% 38%",
   },
   {
     number: "03",
@@ -95,9 +95,8 @@ export const homepageServices = [
     href: "/services/civil-underground",
     description:
       "Underground conduit, trenching, utility vaults, handholes, telecom duct banks, and site preparation.",
-    imageSrc: "/images/services 5.jpeg",
-    imageAlt:
-      "Excavated underground pathway beside a CTS Pacific service vehicle.",
+    imageSrc: fieldPhotography.conduitTrench.src,
+    imageAlt: fieldPhotography.conduitTrench.alt,
     objectPosition: "50% 58%",
   },
 ] as const;

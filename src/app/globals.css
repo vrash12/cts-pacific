@@ -257,7 +257,7 @@ a {
   border-bottom: 1px solid rgb(255 255 255 / 10%);
   padding-block: 0.7rem;
   color: rgb(255 255 255 / 78%);
-  transition: color var(--transition-fast), padding-left var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), padding-left var(--transition-fast);
 }
 
 .navigation-menu__panel .navigation-menu__all {
@@ -300,9 +300,23 @@ a {
 
 .navigation-menu__panel a:hover,
 .navigation-menu__panel a:focus-visible {
-  padding-left: 0.25rem;
   color: white;
   outline: none;
+}
+
+.navigation-menu__groups a:hover,
+.navigation-menu__groups a:focus-visible {
+  padding-left: 0.25rem;
+}
+
+.navigation-menu__all:hover,
+.navigation-menu__all:focus-visible {
+  background: rgb(255 255 255 / 8%);
+}
+
+.navigation-menu__panel .navigation-menu__all:focus-visible {
+  outline: 2px solid #65c8cf;
+  outline-offset: -3px;
 }
 
 .mobile-navigation {
@@ -585,6 +599,170 @@ a {
   max-width: min(100%, 12rem);
   height: 4.5rem;
   object-fit: contain;
+}
+
+/* Client-supplied field photography */
+
+.photo-gallery {
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+}
+
+/* Keep wide client photos intact inside the existing editorial hero treatment. */
+.service-hero__visual.service-hero__visual--landscape {
+  align-self: center;
+  min-height: 0;
+}
+
+.service-hero__visual.service-hero__visual--landscape .field-image {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+}
+
+.photo-gallery__heading {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: end;
+  gap: 2rem 4rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.photo-gallery__heading > div {
+  min-width: 0;
+}
+
+.photo-gallery__heading h2 {
+  max-width: 18ch;
+  margin: 1.25rem 0 0;
+  color: var(--color-brand-navy);
+  font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+  line-height: 1.04;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.photo-gallery__heading > p {
+  max-width: 31rem;
+  margin: 0;
+  color: var(--color-ink-muted);
+  line-height: 1.8;
+}
+
+.photo-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem 1.5rem;
+}
+
+.photo-gallery__item {
+  min-width: 0;
+  margin: 0;
+}
+
+.photo-gallery__link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--color-surface-subtle);
+}
+
+.photo-gallery__link .field-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.photo-gallery__link:focus-visible {
+  outline: 3px solid var(--color-brand-blue);
+  outline-offset: 5px;
+}
+
+.photo-gallery__open {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  background: var(--color-brand-navy);
+  color: white;
+}
+
+.photo-gallery__link:hover .photo-gallery__open,
+.photo-gallery__link:focus-visible .photo-gallery__open {
+  background: var(--color-brand-blue);
+}
+
+.photo-gallery__item figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  padding-top: 1rem;
+  color: var(--color-brand-navy);
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.photo-gallery__number {
+  flex-shrink: 0;
+  color: var(--color-brand-teal);
+  font-size: 0.6875rem;
+  font-weight: 800;
+}
+
+.photo-gallery--company {
+  background: var(--color-surface);
+}
+
+.photo-gallery--company .photo-gallery__grid {
+  grid-template-columns: 0.82fr 1.18fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+}
+
+/* Frame out only the social-app header; retain the photo and IT&E watermark. */
+.photo-gallery--company .photo-gallery__item:first-child .field-image {
+  aspect-ratio: 1166 / 1460;
+}
+
+.photo-gallery--company .photo-gallery__item:last-child .field-image {
+  aspect-ratio: 1600 / 1224;
+}
+
+.photo-gallery--documents .photo-gallery__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.photo-gallery--documents .photo-gallery__link {
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.photo-gallery--documents .field-image__asset {
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .photo-gallery__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photo-gallery__heading {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 736px) {
+  .photo-gallery__heading,
+  .photo-gallery__grid,
+  .photo-gallery--company .photo-gallery__grid,
+  .photo-gallery--documents .photo-gallery__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* Services */

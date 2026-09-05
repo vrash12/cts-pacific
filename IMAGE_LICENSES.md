@@ -2,6 +2,12 @@
 
 Internal provenance register. Do not render this document, creator credits, or its outbound source links in the public website.
 
+## Client-supplied photography — September 2026
+
+The 25 assets under `public/images/cts/` were supplied by the user for website inclusion from the `cts images` Downloads folder. See [CLIENT_PHOTOGRAPHY.md](CLIENT_PHOTOGRAPHY.md) for the complete placement guide, source notes, and the router privacy edit. These are separate from the editorial reference images below. The exhibition photo retains its original IT&E watermark. No new project-result, personnel-identity, equipment-availability, or licensing claims are inferred from the photographs.
+
+## Editorial reference imagery
+
 The photographs listed below are representative technical imagery. They must not be described as CTS Pacific project photography. Files are stored locally so the production site does not hotlink third-party assets.
 
 Last retrieved: 2026-08-31

@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { StrictMode } from "react";
+import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ServicesSlideshow } from "@/components/marketing/services-slideshow";
@@ -37,6 +38,19 @@ afterEach(() => {
 });
 
 describe("ServicesSlideshow", () => {
+  it("disables server-rendered controls until they can handle clicks", () => {
+    const html = renderToString(
+      <ServicesSlideshow headingId="services-heading" services={homepageServices} />,
+    );
+    const document = new DOMParser().parseFromString(html, "text/html");
+    const buttons = Array.from(document.querySelectorAll("button"));
+    expect(buttons).toHaveLength(8);
+    expect(buttons.every((button) => button.disabled)).toBe(true);
+
+    renderSlideshow();
+    expect(screen.getByRole("button", { name: "Show next service" })).toBeEnabled();
+  });
+
   it("exposes carousel semantics and supports direct, next, and previous controls", async () => {
     installMatchMedia(false);
     const user = userEvent.setup();

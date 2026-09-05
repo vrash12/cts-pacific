@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { type UIEvent, useCallback, useEffect, useRef, useState } from "react";
+import { type UIEvent, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import { FieldImage } from "@/components/marketing/field-image";
 
 const SCROLL_SETTLE_DELAY_MS = 120;
+const subscribeToHydration = () => () => {};
 
 function getSlideScrollLeft(track: HTMLElement, slide: HTMLElement) {
   return (
@@ -32,6 +33,8 @@ type ServicesSlideshowProps = {
 };
 
 export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProps) {
+  // Prevent clicks on server-rendered controls before React can handle them.
+  const hydrated = useSyncExternalStore(subscribeToHydration, () => true, () => false);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollSettleTimeoutRef = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -139,6 +142,7 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
           <button
             aria-label="Show previous service"
             className="services-slideshow__control"
+            disabled={!hydrated}
             type="button"
             onClick={() => scrollToSlide(activeIndex - 1)}
           >
@@ -147,6 +151,7 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
           <button
             aria-label="Show next service"
             className="services-slideshow__control"
+            disabled={!hydrated}
             type="button"
             onClick={() => scrollToSlide(activeIndex + 1)}
           >
@@ -201,6 +206,7 @@ export function ServicesSlideshow({ headingId, services }: ServicesSlideshowProp
             aria-current={index === activeIndex ? "true" : undefined}
             className="services-slideshow__pagination-button"
             data-active={index === activeIndex ? "true" : "false"}
+            disabled={!hydrated}
             key={service.href}
             type="button"
             onClick={() => scrollToSlide(index)}

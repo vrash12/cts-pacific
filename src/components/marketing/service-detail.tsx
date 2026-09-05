@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectCta } from "@/components/marketing/project-cta";
+import { PhotoGallery } from "@/components/marketing/photo-gallery";
+import { fiberWorkGallery } from "@/config/field-photography";
 import { buttonVariants } from "@/components/ui/button";
 import {
   getRelatedServices,
@@ -53,7 +55,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               </div>
             </div>
 
-            <div className="service-hero__visual">
+            <div className={`service-hero__visual${service.heroImageLayout === "landscape" ? " service-hero__visual--landscape" : ""}`}>
               <FieldImage
                 preload
                 alt={service.heroImageAlt}
@@ -182,6 +184,16 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
           </div>
         </div>
       </section>
+
+      {service.slug === "fiber-optics" && (
+        <PhotoGallery
+          description="A closer look at the equipment, fiber management, and pathway connections in CTS Pacific’s supplied field photography. Select a photo to view it in full."
+          eyebrow="Field details"
+          id="fiber-work"
+          photos={fiberWorkGallery}
+          title="The detail behind the connection."
+        />
+      )}
 
       <section className="service-process">
         <div className="container">
