@@ -7,6 +7,7 @@ import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { buttonVariants } from "@/components/ui/button";
+import { fieldPhotography } from "@/config/field-photography";
 
 export const metadata: Metadata = {
   title: "Infrastructure Services by Industry in Guam",
@@ -80,10 +81,10 @@ export default function IndustriesPage() {
         currentPage="Industries"
         description="CTS Pacific supports telecommunications, physical security, and underground infrastructure across four primary project types, with scope configured around each facility and operating environment."
         eyebrow="Project environments"
-        imageAlt="CTS Pacific technician performing elevated infrastructure work from a bucket truck."
+        imageAlt={fieldPhotography.networkRoom.alt}
         imageLabel="Commercial / Government / Industrial / Residential"
-        imageSrc="/images/services 13.jpeg"
-        objectPosition="50% 46%"
+        imageSrc={fieldPhotography.networkRoom.src}
+        objectPosition="50% 60%"
         title="Infrastructure for critical operating environments."
       >
         <Link className={buttonVariants({ size: "large" })} href="/quote">

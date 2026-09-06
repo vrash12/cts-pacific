@@ -1,5 +1,9 @@
 # CTS client photography — September 2026
 
+## Industries hero
+
+The Industries hero uses `fieldPhotography.networkRoom`, the client-supplied communications-room photo, instead of repeating the homepage bucket-truck photo. The framing centers the rack and patch-panel installation; existing responsive delivery and hero preloading are retained. No industry-specific project identity is inferred.
+
 ## Pacific Region photo
 
 The client-supplied `Downloads/WhatsApp Image 2026-09-06 at 16.08.22.jpeg` appears directly below the Guam coastal photo in the About page's regional section. The website source is `public/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg`, a byte-identical, metadata-free 1280 × 1232 JPEG. Both photos retain their native proportions and captions below the frame on desktop and mobile. The new photo uses the existing responsive delivery pipeline and lazy loading. It represents Pacific regional context; the visible Saipan Surf Club marking does not imply a customer relationship or a CTS project.
