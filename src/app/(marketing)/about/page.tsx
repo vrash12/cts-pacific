@@ -197,19 +197,33 @@ export default function AboutPage() {
 
       <section className="service-applications about-field-section">
         <div className="container service-applications__grid">
-          <figure className="about-region-visual">
-            <FieldImage
-              alt={septemberPhotography.coastline.alt}
-              objectPosition="50% 50%"
-              sizes="(max-width: 1024px) 100vw, 52vw"
-              src={septemberPhotography.coastline.src}
-              unoptimized
-            />
-            <figcaption>
-              <span>Guam &amp; Pacific Region</span>
-              {septemberPhotography.coastline.caption}
-            </figcaption>
-          </figure>
+          <div className="about-region-gallery">
+            <figure className="about-region-visual">
+              <FieldImage
+                alt={septemberPhotography.coastline.alt}
+                objectPosition="50% 50%"
+                sizes="(max-width: 1024px) 100vw, 52vw"
+                src={septemberPhotography.coastline.src}
+                unoptimized
+              />
+              <figcaption>
+                <span>Guam</span>
+                {septemberPhotography.coastline.caption}
+              </figcaption>
+            </figure>
+            <figure className="about-region-visual about-region-visual--pacific">
+              <FieldImage
+                alt="Palm trees and a sailboat with a colorful sail on a sandy Pacific beach beside calm blue water."
+                sizes="(max-width: 1024px) 100vw, 52vw"
+                src="/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg"
+                preserveFrame
+              />
+              <figcaption>
+                <span>Pacific Region</span>
+                Pacific island shores
+              </figcaption>
+            </figure>
+          </div>
           <div className="service-applications__content">
             <p className="eyebrow">Regional focus</p>
             <h2>Built around Guam and Pacific project environments.</h2>

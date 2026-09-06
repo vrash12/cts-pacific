@@ -4847,6 +4847,12 @@ summary > svg {
   margin-top: 2.25rem;
 }
 
+.about-region-gallery {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
 .about-region-visual {
   position: relative;
   align-self: center;
@@ -4862,6 +4868,10 @@ summary > svg {
   height: auto;
   aspect-ratio: 1290 / 952;
   border: 0;
+}
+
+.about-region-visual--pacific .field-image {
+  aspect-ratio: 1280 / 1232;
 }
 
 .about-region-visual figcaption {

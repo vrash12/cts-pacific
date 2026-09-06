@@ -391,6 +391,19 @@
       1280
     ]
   },
+  "/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg": {
+    "base": "/images/delivery/cts-pacific-region-beach-and-sailboat-7896359efab4b10d",
+    "original": "/images/delivery/cts-pacific-region-beach-and-sailboat-7896359efab4b10d-original.jpeg",
+    "width": 1280,
+    "height": 1232,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960
+    ]
+  },
   "/images/cts/september-2026/cts-pacific-camera-above-storage-shelving.webp": {
     "base": "/images/delivery/cts-pacific-camera-above-storage-shelving-56ebfd67d5691ec7",
     "original": "/images/delivery/cts-pacific-camera-above-storage-shelving-56ebfd67d5691ec7-original.webp",

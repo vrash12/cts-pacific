@@ -1,5 +1,11 @@
 # CTS client photography — September 2026
 
+## Pacific Region photo
+
+The client-supplied `Downloads/WhatsApp Image 2026-09-06 at 16.08.22.jpeg` appears directly below the Guam coastal photo in the About page's regional section. The website source is `public/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg`, a byte-identical, metadata-free 1280 × 1232 JPEG. Both photos retain their native proportions and captions below the frame on desktop and mobile. The new photo uses the existing responsive delivery pipeline and lazy loading. It represents Pacific regional context; the visible Saipan Surf Club marking does not imply a customer relationship or a CTS project.
+
+Validation: the About page lint check, strict TypeScript, four existing image-delivery tests, and the production build passed. Browser review at 1440px and 390px confirmed Guam first, the Pacific photo below it, full framing, and successful image loading; mobile has no horizontal overflow.
+
 ## Micro Trenching card replacement
 
 At the user's explicit request, the Micro Trenching card in `/services` now uses the supplied `Downloads/WhatsApp Image 2026-09-06 at 15.10.07.jpeg`. The companion `15.09.36.jpeg` is a placement screenshot, not a website asset. The 1600 × 1200 photo shows Vermeer equipment with a cutting-wheel attachment. Publication copies are under `public/images/cts/micro-trenching/` and its matching `thumbnails/micro-trenching/` directory, with responsive delivery files generated automatically. This replaces the pavement-saw stock reference on that card; no equipment specifications or availability claims are inferred.

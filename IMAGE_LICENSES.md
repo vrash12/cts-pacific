@@ -4,6 +4,8 @@ Internal provenance register. Do not render this document, creator credits, or i
 
 ## Client-supplied photography — September 2026
 
+The user supplied `Downloads/WhatsApp Image 2026-09-06 at 16.08.22.jpeg` for the About page, directly below the Guam coastal photograph. Its unchanged website copy is `public/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg`. The Pacific Region caption describes regional context, with no affiliation or project claim inferred from the visible Saipan Surf Club marking.
+
 The user supplied `Downloads/WhatsApp Image 2026-09-06 at 15.10.07.jpeg` for the Micro Trenching service-directory card. The photo shows Vermeer equipment and a cutting-wheel attachment; its website copy is `public/images/cts/micro-trenching/cts-pacific-vermeer-cutting-wheel.jpeg`. The companion screenshot identifies placement only. This user-directed replacement supersedes the earlier choice of stock pavement-saw imagery for that card.
 
 The additional 31 photographs from `C:\Users\MAURICIO\Downloads\new images` were supplied by the user on September 6 for website inclusion. Optimized website copies are under `public/images/cts/september-2026/`, with exact source mappings in `src/config/september-photography.json`. See `CLIENT_PHOTOGRAPHY.md` for service categorization. Source collages and monitoring views remain intact; no new third-party images were acquired. Visible manufacturer names, equipment, sites, and historical monitor timestamps do not establish authorized-dealer status, saleable inventory, named customers, or CTS Pacific project dates.
