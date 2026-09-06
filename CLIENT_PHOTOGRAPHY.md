@@ -1,5 +1,9 @@
 # CTS client photography — September 2026
 
+## Hosted image delivery
+
+Marketing images now use prepared responsive files with content-hashed URLs and long-lived browser/CDN caching. This avoids runtime resizing on first visits. The header logo requests an appropriate display size, and hero content appears without an entrance delay. Original-source treatment and image categorization below remain unchanged. Run `pnpm images:prepare` after replacing assets; it also runs automatically during development startup, tests, and production builds. See `docs/architecture/IMAGE_DELIVERY.md` for the pipeline and cache-update behavior.
+
 ## September 6 additional batch
 
 All 31 images supplied in `C:\Users\MAURICIO\Downloads\new images` are represented in the site. Their exact source filenames, descriptive output names, captions, and alt text are mapped in `src/config/september-photography.json`. Service groups and placement are configured in `src/config/service-photography.ts`.

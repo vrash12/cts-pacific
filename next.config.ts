@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
   agentRules: false,
   images: {
     qualities: [75, 88],
+    deviceSizes: [640, 768, 960, 1280, 1600, 1920],
+    imageSizes: [256, 384],
   },
   poweredByHeader: false,
   reactStrictMode: true,
@@ -33,6 +35,14 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        // Only content-hashed image URLs are immutable. Replacing a source
+        // generates a new URL at build time, so revised photos appear immediately.
+        source: "/images/delivery/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
       },
       {
         // Hashed Next.js assets stay immutable, while documents must be

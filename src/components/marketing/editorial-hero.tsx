@@ -52,7 +52,7 @@ export function EditorialHero({
               preload
               alt={imageAlt}
               objectPosition={objectPosition}
-              sizes="(max-width: 1024px) 100vw, 48vw"
+              sizes="(max-width: 1024px) calc(100vw - 40px), (max-width: 1440px) 42vw, 560px"
               src={imageSrc}
               unoptimized={imageUnoptimized}
             />

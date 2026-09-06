@@ -4,6 +4,7 @@ node_modules/
 # Next.js
 .next/
 out/
+public/images/delivery/
 
 # Test output
 coverage/
@@ -32,4 +33,3 @@ drizzle/meta/
 .vscode/
 .DS_Store
 Thumbs.db
-

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage as Image } from "@/components/ui/site-image";
 import Link from "next/link";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
 
@@ -84,7 +84,7 @@ export default function HomePage() {
               preload
               alt={homepageMedia.hero.alt}
               objectPosition={homepageMedia.hero.objectPosition}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 1024px) calc(100vw - 40px), (max-width: 1280px) 45vw, 512px"
               src={homepageMedia.hero.src}
             />
             <div className="hero__visual-label">

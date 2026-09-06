@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage as Image } from "@/components/ui/site-image";
 import Link from "next/link";
 
 import { ActiveNavigationLink } from "@/components/layout/active-navigation-link";
@@ -14,7 +14,8 @@ function Brand() {
         alt="CTS Pacific — Corerin Technical Solutions, LLC"
         className="brand__logo"
         height={777}
-        priority
+        preload
+        sizes="(max-width: 736px) 144px, 168px"
         src="/images/logo.png"
         width={2024}
       />

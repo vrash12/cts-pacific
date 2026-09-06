@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage as Image } from "@/components/ui/site-image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -61,7 +61,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                 preload
                 alt={service.heroImageAlt}
                 objectPosition={service.heroObjectPosition}
-                sizes="(max-width: 1024px) 100vw, 48vw"
+                sizes="(max-width: 1024px) calc(100vw - 40px), (max-width: 1440px) 42vw, 560px"
                 src={service.heroImage}
               />
               <p>Guam &amp; Pacific Region</p>
