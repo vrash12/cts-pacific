@@ -4,6 +4,8 @@ Internal provenance register. Do not render this document, creator credits, or i
 
 ## Client-supplied photography — September 2026
 
+The additional 31 photographs from `C:\Users\MAURICIO\Downloads\new images` were supplied by the user on September 6 for website inclusion. Optimized website copies are under `public/images/cts/september-2026/`, with exact source mappings in `src/config/september-photography.json`. See `CLIENT_PHOTOGRAPHY.md` for service categorization. Source collages and monitoring views remain intact; no new third-party images were acquired. Visible manufacturer names, equipment, sites, and historical monitor timestamps do not establish authorized-dealer status, saleable inventory, named customers, or CTS Pacific project dates.
+
 The 25 assets under `public/images/cts/` were supplied by the user for website inclusion from the `cts images` Downloads folder. See [CLIENT_PHOTOGRAPHY.md](CLIENT_PHOTOGRAPHY.md) for the complete placement guide, source notes, and the router privacy edit. These are separate from the editorial reference images below. The exhibition photo retains its original IT&E watermark. No new project-result, personnel-identity, equipment-availability, or licensing claims are inferred from the photographs.
 
 ## Editorial reference imagery

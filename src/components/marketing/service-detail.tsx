@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { PhotoGallery } from "@/components/marketing/photo-gallery";
-import { fiberWorkGallery } from "@/config/field-photography";
+import { servicePhotography } from "@/config/service-photography";
 import { buttonVariants } from "@/components/ui/button";
 import {
   getRelatedServices,
@@ -18,6 +18,7 @@ type ServiceDetailProps = {
 
 export function ServiceDetail({ service }: ServiceDetailProps) {
   const relatedServices = getRelatedServices(service);
+  const gallery = servicePhotography[service.slug];
 
   return (
     <>
@@ -185,13 +186,13 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
       </section>
 
-      {service.slug === "fiber-optics" && (
+      {gallery && (
         <PhotoGallery
-          description="A closer look at the equipment, fiber management, and pathway connections in CTS Pacific’s supplied field photography. Select a photo to view it in full."
+          description={gallery.description}
           eyebrow="Field details"
-          id="fiber-work"
-          photos={fiberWorkGallery}
-          title="The detail behind the connection."
+          id={`${service.slug}-work`}
+          groups={gallery.groups}
+          title={gallery.title}
         />
       )}
 

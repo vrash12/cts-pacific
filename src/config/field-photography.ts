@@ -3,6 +3,7 @@ export type FieldPhoto = {
   alt: string;
   caption: string;
   objectPosition?: string;
+  preserveFrame?: boolean;
 };
 
 // These finite directory thumbnails are pre-sized, avoiding a second WebP

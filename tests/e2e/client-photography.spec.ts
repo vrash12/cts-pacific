@@ -21,7 +21,12 @@ test("service directory loads every thumbnail including the final row", async ({
 });
 
 const galleries = [
-  { route: "/services/fiber-optics", name: "The detail behind the connection.", count: 6 },
+  { route: "/services/fiber-optics", name: "The detail behind the connection.", count: 10 },
+  { route: "/services/cctv", name: "From camera to monitoring.", count: 17 },
+  { route: "/services/data-cabling", name: "Connections, organized.", count: 5 },
+  { route: "/services/troubleshooting", name: "A closer look inside the system.", count: 3 },
+  { route: "/services/electrical", name: "The pathways behind the systems.", count: 3 },
+  { route: "/services/it-support", name: "Where devices meet infrastructure.", count: 5 },
   { route: "/about", name: "Beyond the field. Part of the industry.", count: 2 },
   { route: "/certifications", name: "Documented business scope.", count: 2 },
 ] as const;
@@ -38,15 +43,33 @@ for (const { route, name, count } of galleries) {
         element instanceof HTMLImageElement && element.complete && element.naturalWidth > 0,
       ), { timeout: 15_000 }).toBe(true);
     }
-    for (const link of await gallery.getByRole("link").all()) {
-      await expect(link).toHaveAttribute("href", /^\/images\/cts\/.*\.webp$/);
-      await expect(link).toHaveAttribute("target", "_blank");
-      await expect(link).toHaveAccessibleName(/opens in a new tab/i);
+    const triggers = gallery.getByRole("button", { name: /^View full (photo|document):/ });
+    await expect(triggers).toHaveCount(count);
+    for (const trigger of await triggers.all()) {
+      await expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
     }
+    await triggers.first().click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Close image viewer" })).toBeVisible();
+    await page.getByRole("button", { name: "Close image viewer" }).press("Escape");
+    await expect(page.getByRole("dialog")).not.toBeVisible();
+    await expect(triggers.first()).toBeFocused();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await gallery.screenshot({ path: testInfo.outputPath("gallery.png"), style: screenshotStyle });
   });
 }
+
+test("supplied collages remain uncropped in their service groups", async ({ page }) => {
+  for (const route of ["fiber-optics", "cctv"]) {
+    await page.goto(`/services/${route}`);
+    const collage = page.getByRole("img", { name: /client-supplied collage/i });
+    await expect(collage).toHaveCSS("object-fit", "contain");
+    await page.getByRole("button").filter({ has: collage }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page.getByRole("dialog").getByRole("img")).toHaveCSS("object-fit", "contain");
+    await page.keyboard.press("Escape");
+  }
+});
 
 for (const slug of ["fiber-optics", "data-cabling", "civil-underground", "electrical", "server-infrastructure", "telecommunication-specialist", "it-support", "construction-equipment-rental"]) {
   test(`${slug} loads its new service photography`, async ({ page }, testInfo) => {

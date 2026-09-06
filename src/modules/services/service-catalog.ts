@@ -1,4 +1,5 @@
 import { fieldPhotography, serviceImages } from "@/config/field-photography";
+import { septemberPhotography } from "@/config/service-photography";
 
 export type ServiceSlug =
   | "fiber-optics"
@@ -219,15 +220,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["data-cabling", "access-control"],
-    heroImage: "/images/field-work/cctv-exterior-installation.jpeg",
-    heroImageAlt: "Exterior pan-tilt-zoom surveillance camera installed on a commercial building.",
-    heroObjectPosition: "58% 40%",
-    detailImage: "/images/field-work/cctv-installation-with-truck.jpeg",
-    detailImageAlt: "Exterior surveillance camera installation area with a CTS Pacific bucket truck.",
-    detailObjectPosition: "54% 48%",
-    referenceImage: "/images/editorial/cctv-reference.jpeg",
-    referenceImageAlt: "Dome surveillance camera mounted at the corner of a modern commercial building.",
-    referenceObjectPosition: "50% 46%",
+    ...serviceImages(septemberPhotography.cornerCamera, septemberPhotography.residentialCamera, septemberPhotography.turretCamera),
   },
   {
     slug: "access-control",
@@ -462,15 +455,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["maintenance", "server-infrastructure"],
-    heroImage: "/images/field-work/network-equipment-integration.jpeg",
-    heroImageAlt: "Network and communications equipment at a CTS Pacific installation site.",
-    heroObjectPosition: "48% 48%",
-    detailImage: "/images/services 9.jpeg",
-    detailImageAlt: "Client-supplied field image of an exterior connected communications device.",
-    detailObjectPosition: "50% 48%",
-    referenceImage: "/images/editorial/network-troubleshooting-reference.jpeg",
-    referenceImageAlt: "Field engineer reviewing network equipment with a laptop.",
-    referenceObjectPosition: "50% 50%",
+    ...serviceImages(septemberPhotography.recorderChassis, septemberPhotography.recorderBoard, septemberPhotography.recorderChassis),
     scopeNote:
       "Supported platforms, response availability, diagnostic limits, and corrective-work coverage are confirmed for each request.",
   },
@@ -752,7 +737,7 @@ export const services: readonly ServiceDefinition[] = [
       },
     ],
     related: ["fiber-optics", "data-cabling"],
-    ...serviceImages(fieldPhotography.opticalTransport, fieldPhotography.coveredClosure, fieldPhotography.opticalTransport),
+    ...serviceImages(fieldPhotography.opticalTransport, fieldPhotography.coveredClosure, septemberPhotography.opticalSwitch),
     scopeNote:
       "The client must confirm whether this offering includes consulting, staffing, direct installation, or another delivery model, together with the supported disciplines, credentials, contract boundaries, and technical responsibilities.",
   },

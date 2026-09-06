@@ -11,6 +11,7 @@ type FieldImageProps = {
   preload?: boolean;
   loading?: "eager" | "lazy";
   unoptimized?: boolean;
+  preserveFrame?: boolean;
 };
 
 export function FieldImage({
@@ -22,6 +23,7 @@ export function FieldImage({
   preload = false,
   loading = "lazy",
   unoptimized = false,
+  preserveFrame = false,
 }: FieldImageProps) {
   return (
     <div className={cn("field-image", className)}>
@@ -35,7 +37,7 @@ export function FieldImage({
         quality={preload ? 88 : 75}
         sizes={sizes}
         src={src}
-        style={objectPosition ? { objectPosition } : undefined}
+        style={{ objectPosition, ...(preserveFrame ? { objectFit: "contain" } : {}) }}
       />
     </div>
   );

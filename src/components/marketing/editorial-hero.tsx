@@ -12,6 +12,8 @@ type EditorialHeroProps = {
   imageAlt: string;
   imageLabel: string;
   objectPosition?: string;
+  imageLayout?: "portrait" | "landscape";
+  imageUnoptimized?: boolean;
   children?: ReactNode;
 };
 
@@ -24,10 +26,12 @@ export function EditorialHero({
   imageAlt,
   imageLabel,
   objectPosition,
+  imageLayout = "portrait",
+  imageUnoptimized = false,
   children,
 }: EditorialHeroProps) {
   return (
-    <section className="service-hero editorial-hero">
+    <section className={`service-hero editorial-hero${imageLayout === "landscape" ? " editorial-hero--landscape" : ""}`}>
       <div className="container">
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
@@ -43,13 +47,14 @@ export function EditorialHero({
             {children ? <div className="service-hero__actions">{children}</div> : null}
           </div>
 
-          <div className="service-hero__visual">
+          <div className={`service-hero__visual${imageLayout === "landscape" ? " service-hero__visual--landscape" : ""}`}>
             <FieldImage
               preload
               alt={imageAlt}
               objectPosition={objectPosition}
               sizes="(max-width: 1024px) 100vw, 48vw"
               src={imageSrc}
+              unoptimized={imageUnoptimized}
             />
             <p>{imageLabel}</p>
           </div>

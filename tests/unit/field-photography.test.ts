@@ -10,6 +10,7 @@ import {
   fieldPhotography,
 } from "@/config/field-photography";
 import { services } from "@/modules/services/service-catalog";
+import { septemberPhotography, servicePhotography } from "@/config/service-photography";
 
 describe("client field photography", () => {
   const photos = Object.values(fieldPhotography);
@@ -51,5 +52,25 @@ describe("client field photography", () => {
         expect(thumbnail.src).toContain("/thumbnails/");
       }
     }
+  });
+
+  it("places all 31 September images in relevant galleries or the regional image", () => {
+    const supplied = Object.values(septemberPhotography);
+    expect(supplied).toHaveLength(31);
+    const galleryPhotos = Object.values(servicePhotography).flatMap((gallery) =>
+      gallery.groups.flatMap((group) => group.photos),
+    );
+    const used = new Set([
+      ...galleryPhotos.map((photo) => photo.src),
+      septemberPhotography.coastline.src,
+    ]);
+    for (const photo of supplied) {
+      expect(used.has(photo.src), photo.caption).toBe(true);
+      expect(existsSync(path.join(process.cwd(), "public", photo.src))).toBe(true);
+      expect(existsSync(path.join(process.cwd(), "public", directoryImage(photo.src).src))).toBe(true);
+      expect(photo.alt.length).toBeGreaterThan(30);
+    }
+    expect(septemberPhotography.fiberCollage.preserveFrame).toBe(true);
+    expect(septemberPhotography.cctvCollage.preserveFrame).toBe(true);
   });
 });

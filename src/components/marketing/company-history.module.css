@@ -1,0 +1,276 @@
+.history {
+  padding-block: var(--section-space);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  scroll-margin-top: 9rem;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: end;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.heading h2 {
+  margin-top: 1.4rem;
+  color: var(--color-brand-navy);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.heading > p {
+  max-width: 35ch;
+  color: var(--color-ink-muted);
+  font-size: 1.075rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  align-items: start;
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.summary {
+  position: sticky;
+  top: 9rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--color-brand-navy);
+  color: white;
+}
+
+.label,
+.metricLabel,
+.chapterMeta,
+.dates dt {
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.label {
+  color: #80d3d3;
+}
+
+.metric {
+  display: flex;
+  align-items: start;
+  margin-top: 2.5rem;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: clamp(6rem, 10vw, 9rem);
+  font-weight: 650;
+  letter-spacing: -0.075em;
+  line-height: 1;
+}
+
+.metric span {
+  margin-top: 0.15em;
+  color: #80d3d3;
+  font-size: 0.45em;
+  font-weight: 400;
+}
+
+.metricLabel {
+  margin-top: 0.75rem;
+  letter-spacing: 0.065em;
+}
+
+.summaryCopy {
+  margin-top: 1.5rem;
+  color: #c8d8e4;
+  font-size: 0.9375rem;
+}
+
+.dates {
+  display: grid;
+  gap: 1.1rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #365168;
+}
+
+.dates dt {
+  color: #b8ccd9;
+}
+
+.dates dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.link {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #365168;
+  padding-top: 0.75rem;
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.link svg {
+  flex: 0 0 auto;
+}
+
+.link:hover {
+  color: #80d3d3;
+}
+
+.link:focus-visible {
+  outline: 2px solid #80d3d3;
+  outline-offset: 5px;
+}
+
+.chapters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chapter {
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.chapter:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.chapterMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  color: var(--color-ink-muted);
+}
+
+.chapterNumber {
+  color: var(--color-brand-teal);
+}
+
+.chapter h3 {
+  max-width: 24ch;
+  margin: 1rem 0;
+  color: var(--color-brand-navy);
+  font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+  line-height: 1.12;
+}
+
+.chapter > p {
+  color: var(--color-ink-muted);
+}
+
+.chapter > p + p {
+  margin-top: 1rem;
+}
+
+.disciplines {
+  display: grid;
+  gap: 1.2rem;
+  margin: 1.75rem 0 0;
+  border-left: 2px solid var(--color-brand-teal);
+  padding: 0 0 0 1.25rem;
+  list-style: none;
+}
+
+.disciplines li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+}
+
+.disciplines li > span {
+  padding-top: 0.2rem;
+  color: var(--color-brand-teal);
+  font-size: 0.6875rem;
+  font-weight: 750;
+}
+
+.disciplines h4 {
+  margin: 0 0 0.25rem;
+  color: var(--color-brand-navy);
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.disciplines p {
+  color: var(--color-ink-muted);
+  font-size: 0.875rem;
+}
+
+.founding {
+  border-top: 3px solid var(--color-brand-teal);
+  padding-bottom: 0;
+}
+
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+    gap: 2rem;
+  }
+
+  .summary {
+    position: static;
+  }
+}
+
+@media (max-width: 46rem) {
+  .heading,
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heading {
+    gap: 1.5rem;
+  }
+
+  .heading h2 {
+    font-size: clamp(2rem, 8.8vw, 3rem);
+  }
+
+  .heading > p {
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .summary {
+    padding: 1.5rem;
+  }
+
+  .metric {
+    margin-top: 1.5rem;
+    font-size: 6rem;
+  }
+
+  .dates {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  }
+
+  .chapter {
+    padding-block: 2rem;
+  }
+
+  .chapterMeta {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-height: 50rem) {
+  .summary {
+    position: static;
+  }
+}

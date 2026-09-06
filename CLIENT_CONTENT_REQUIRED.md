@@ -16,8 +16,8 @@ This file tracks business information and production assets that have not been s
 - Exact service-area wording and any Pacific islands or jurisdictions to name individually
 - Google Search Console ownership verification token after the production property is created
 - Bing Webmaster Tools ownership verification token after the production property is created
-- Approved expanded company history beyond the confirmed January 2026 start date
-- Approved biography and headshot for Organization President Saren F. Formento
+- Any additional history beyond the founder narrative supplied in September 2026 (now published on About: career began in 2011, five years of field experience, seven years at an ISP, and CTS Pacific established in January 2026)
+- Optional named biography and headshot for Organization President Saren F. Formento; the supplied career narrative is currently attributed to the founder without adding a personal-name attribution
 - Names, biographies, and headshots for the Technician, Fiber Technician, and Construction Technician positions
 - Licenses, registrations, or contractor classifications the company wants published
 - Confirmation of the preferred legal-name formatting in all footer and form notices
@@ -28,6 +28,7 @@ This file tracks business information and production assets that have not been s
 - Exact ETA International credential names, holders or company status, and current validity details
 - Confirmation of the intended ANSI/TIA/EIA standards-compliance wording
 - Final confirmation of any third-party mark-use requirements for the supplied GCA, FOA, and ETA artwork
+- Exact CCNA and CompTIA credential names, holders, dates, and current validity only if current credential listings or marks are requested; About references them solely as part of the client-supplied early-career history
 
 ## Expanded service scope
 
@@ -97,6 +98,8 @@ The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical,
 
 ## September 2026 photography follow-up
 
+- The 31 images in the September 6 `new images` batch are now categorized on the site. Provide any desired approved project identities, dates, and captions; the current labels describe visible systems only, including source monitoring views with historical timestamps.
+- Confirm projector/presentation-equipment platform and support scope if broader AV claims are desired. Current photos sit within the existing project-specific IT Support category and do not create a new AV service.
 - Obtain a clean original of the IT&E exhibition photograph if available; the supplied screenshot is currently framed without the app header while retaining the watermark.
 - Supply renewed Guam retail and technical support business-license copies before the January 31, 2027 expiration shown on the supplied documents.
 - Confirm project names, locations, dates, and publication-ready case-study details for the new field photographs before adding those claims. Current captions describe visible equipment only.

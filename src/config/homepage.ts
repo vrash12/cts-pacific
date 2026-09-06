@@ -1,4 +1,5 @@
 import { fieldPhotography } from "@/config/field-photography";
+import { septemberPhotography } from "@/config/service-photography";
 
 export const credibilityItems = [
   "FOA Certified",
@@ -62,10 +63,9 @@ export const homepageServices = [
     href: "/services/cctv",
     description:
       "IP camera deployment, NVR and VMS integration, night vision, remote viewing, and commercial surveillance systems.",
-    imageSrc: "/images/field-work/cctv-exterior-installation.jpeg",
-    imageAlt:
-      "Exterior pan-tilt-zoom surveillance camera installed on a commercial building.",
-    objectPosition: "58% 40%",
+    imageSrc: septemberPhotography.cornerCamera.src,
+    imageAlt: septemberPhotography.cornerCamera.alt,
+    objectPosition: "50% 10%",
   },
   {
     number: "04",

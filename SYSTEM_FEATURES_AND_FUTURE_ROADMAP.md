@@ -257,6 +257,9 @@ The homepage includes:
 ### 5.5 Company pages
 
 - About page with confirmed January 2026 start
+- About history expanded in September 2026 from the client-supplied founder narrative: a 2011 technical foundation, five years of field experience, seven years of ISP team leadership, and CTS Pacific's January 2026 start. A separate “14+ years of founder experience” panel distinguishes personal experience from company age. CCNA and CompTIA appear only in historical career context; no current credential status, employer name, or inferred intermediate dates are added.
+- History uses a server-rendered four-chapter editorial layout and four technical highlights, with responsive styles isolated in `src/components/marketing/company-history.module.css`. The original short history block is replaced, and the organization chart and photography galleries remain intact.
+- September 6 history validation: `pnpm check` passed (lint, strict TypeScript, 28 test files / 88 tests, production build); all six existing About-specific Playwright checks passed across desktop and mobile. Browser review covered desktop, tablet, and mobile, with history containment verified down to 320px and no browser warnings or errors.
 - Organization President Saren F. Formento
 - Clearly marked pending technician profiles
 - Industries page
@@ -311,6 +314,10 @@ Additional project-specific routes:
 
 ### 5.7 Images
 
+- September 6 additional photography: all 31 supplied images from `Downloads/new images` are optimized and mapped through `src/config/september-photography.json` and `src/config/service-photography.ts`. Grouped galleries cover CCTV, Fiber Optics, Data Cabling, Troubleshooting, Electrical, and IT Support; the beach photo is used for About's regional context. Existing company and license galleries remain intact. Two collages and monitoring/rack-detail views use contained previews and the full-image viewer. See `CLIENT_PHOTOGRAPHY.md` for complete placement and rebuild instructions.
+- CCTV and Troubleshooting service images and selected directory images now use the additional supplied photographs. The homepage CCTV slide is synchronized with its detail-page hero. No new service, product, project identity, or historical project-date claims are added from photographs.
+- Gallery viewer controls now wait for hydration, preventing early clicks from being lost on mobile. The photography increment passed `pnpm check` (91 tests and production build); after fixing the single timing failure from the full browser run, all 18 gallery/collage regression checks passed. Desktop, tablet, and mobile visual review completed; the detailed validation record is in `CLIENT_PHOTOGRAPHY.md`.
+- About photo quality correction: the fleet and coastline images now use their native landscape proportions and original JPEGs, bypassing extra image compression and decorative scaling. The regional caption sits below the photo. The coastal copy is byte-identical to the supplied source, with its format tracked in the manifest and preparation script. These layout changes are scoped to About; other editorial heroes keep their existing treatment.
 - Client-supplied field photography is stored locally in `public/images`
 - Client-supplied customer logos are in `public/images/customer`
 - Client-supplied membership and credential artwork is used in the site

@@ -3,11 +3,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { BreadcrumbJsonLd } from "@/components/marketing/breadcrumb-json-ld";
+import { CompanyHistory } from "@/components/marketing/company-history";
 import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { FieldImage } from "@/components/marketing/field-image";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { PhotoGallery } from "@/components/marketing/photo-gallery";
 import { companyPhotography } from "@/config/field-photography";
+import { septemberPhotography } from "@/config/service-photography";
 import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -71,6 +73,8 @@ export default function AboutPage() {
         imageAlt="CTS Pacific service vehicles and field equipment staged at an infrastructure work area."
         imageLabel="Field execution / Guam"
         imageSrc="/images/services 12.jpeg"
+        imageLayout="landscape"
+        imageUnoptimized
         objectPosition="52% 50%"
         title="Infrastructure built as one connected system."
       >
@@ -105,6 +109,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <CompanyHistory />
+
       <PhotoGallery
         description="Company moments from an exhibition booth and a Guam Contractors Association membership presentation."
         eyebrow="People and professional connections"
@@ -125,28 +131,6 @@ export default function AboutPage() {
               CTS Pacific connects executive leadership with coordinated
               telecommunications, fiber, security, and construction field execution.
             </p>
-          </div>
-
-          <div className="organization-history">
-            <div className="organization-history__date">
-              <span>January</span>
-              <strong>2026</strong>
-            </div>
-            <div>
-              <p className="eyebrow">Company history</p>
-              <h3>CTS Pacific begins operations.</h3>
-              <p>
-                Corerin Technical Solutions, LLC began operating as CTS Pacific in
-                January 2026, with a focus on coordinated telecommunications, network
-                infrastructure, physical security, and underground civil capability for
-                Guam and the Pacific Region.
-              </p>
-              <p>
-                Its service model brings together infrastructure pathways, fiber optics,
-                structured cabling, CCTV, access control, testing, and commissioning so
-                each discipline can be planned as part of one connected project scope.
-              </p>
-            </div>
           </div>
 
           <div className="organization-chart" aria-label="CTS Pacific organization">
@@ -215,14 +199,15 @@ export default function AboutPage() {
         <div className="container service-applications__grid">
           <figure className="about-region-visual">
             <FieldImage
-              alt="Technician working from an elevated bucket near telecommunications cabling."
-              objectPosition="48% 42%"
+              alt={septemberPhotography.coastline.alt}
+              objectPosition="50% 50%"
               sizes="(max-width: 1024px) 100vw, 52vw"
-              src="/images/services 20.jpeg"
+              src={septemberPhotography.coastline.src}
+              unoptimized
             />
             <figcaption>
-              <span>Client-supplied field photography</span>
-              Elevated infrastructure work
+              <span>Guam &amp; Pacific Region</span>
+              {septemberPhotography.coastline.caption}
             </figcaption>
           </figure>
           <div className="service-applications__content">
