@@ -6,6 +6,8 @@ Public marketing pages serve prepared image files directly. Visitors no longer w
 
 Run `pnpm images:prepare` after adding or replacing a local image. `pnpm dev`, `pnpm test`, and `pnpm build` run it automatically. No additional package or external image service is required; the preparation script uses the Sharp runtime supplied with Next.js.
 
+Lifecycle scripts invoke the preparation script directly with `node`. Hostinger can install with pnpm while its build-script environment lacks a `pnpm` executable on PATH; a nested `pnpm images:prepare` prevented the September 6 image deployments from building. Calling Node directly removes that dependency. Hostinger's `NEXT_PUBLIC_SITE_URL` must be `https://ctspacific.com` before rebuilding so canonical URLs, robots.txt, and sitemap.xml use the public domain.
+
 `scripts/prepare-image-delivery.mjs` reads the existing raster images in `public/images`, excluding its own output. It writes:
 
 - Content-hashed original copies and smaller WebP variants to `public/images/delivery/` (ignored by Git, generated before deployment).
