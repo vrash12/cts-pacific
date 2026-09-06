@@ -350,9 +350,9 @@ export const services: readonly ServiceDefinition[] = [
     detailImage: "/images/services 2.jpeg",
     detailImageAlt: "Narrow underground pathway beside an industrial facility.",
     detailObjectPosition: "50% 58%",
-    referenceImage: "/images/editorial/micro-trenching-reference.jpeg",
-    referenceImageAlt: "Road worker operating a compact pavement saw beside a traffic cone.",
-    referenceObjectPosition: "48% 50%",
+    referenceImage: "/images/cts/micro-trenching/cts-pacific-vermeer-cutting-wheel.jpeg",
+    referenceImageAlt: "Client-supplied Vermeer equipment with a large cutting-wheel attachment on a paved surface.",
+    referenceObjectPosition: "50% 55%",
   },
   {
     slug: "civil-underground",

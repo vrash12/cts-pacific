@@ -377,6 +377,20 @@
       960
     ]
   },
+  "/images/cts/micro-trenching/cts-pacific-vermeer-cutting-wheel.jpeg": {
+    "base": "/images/delivery/cts-pacific-vermeer-cutting-wheel-157779c0209c59dd",
+    "original": "/images/delivery/cts-pacific-vermeer-cutting-wheel-157779c0209c59dd-original.jpeg",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960,
+      1280
+    ]
+  },
   "/images/cts/september-2026/cts-pacific-camera-above-storage-shelving.webp": {
     "base": "/images/delivery/cts-pacific-camera-above-storage-shelving-56ebfd67d5691ec7",
     "original": "/images/delivery/cts-pacific-camera-above-storage-shelving-56ebfd67d5691ec7-original.webp",
@@ -860,6 +874,18 @@
   "/images/cts/thumbnails/cts-pacific-vermeer-rtx550-trencher-side-view.webp": {
     "base": "/images/delivery/cts-pacific-vermeer-rtx550-trencher-side-view-42ef7740a3378c66",
     "original": "/images/delivery/cts-pacific-vermeer-rtx550-trencher-side-view-42ef7740a3378c66-original.webp",
+    "width": 960,
+    "height": 720,
+    "widths": [
+      256,
+      384,
+      640,
+      768
+    ]
+  },
+  "/images/cts/thumbnails/micro-trenching/cts-pacific-vermeer-cutting-wheel.jpeg": {
+    "base": "/images/delivery/cts-pacific-vermeer-cutting-wheel-169a901d2670fd53",
+    "original": "/images/delivery/cts-pacific-vermeer-cutting-wheel-169a901d2670fd53-original.jpeg",
     "width": 960,
     "height": 720,
     "widths": [
