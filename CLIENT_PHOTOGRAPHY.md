@@ -1,5 +1,18 @@
 # CTS client photography — September 2026
 
+## Safety and professional training documents
+
+The client supplied two UC San Diego Extension, Occupational Safety and Health Department training certificates for publication. They appear on `/certifications#safety-training`, after technical credentials and before business licenses, with a link from Saren's About leadership card. Each card includes the recipient exactly as printed, completion date, an uncropped responsive preview, and a link to the original-size document.
+
+| Supplied file | Training / recipient / completion | Website copy |
+| --- | --- | --- |
+| `Downloads/SHG Warehousing FORMENTO, SAREN (1)_page-0001.jpg` | Warehousing Safety & Health / Saren F. Formento / May 19, 2026 | `public/images/credentials/training/saren-formento-warehousing-safety-health-2026.jpg` |
+| `Downloads/FORMENTO, SAREN_page-0001.jpg` | Temporary Traffic Control / Saren Formento / August 17, 2026 | `public/images/credentials/training/saren-formento-temporary-traffic-control-2026.jpg` |
+
+Both 1650 × 1275 originals are copied unchanged; their responsive previews use the standard image-delivery pipeline. These are individual training completions. No company-wide certification, expiration date, training duration, or additional service is inferred. The highlighted date on the supplied traffic-control certificate is preserved.
+
+Validation: changed-file lint, strict TypeScript within the production build, four existing image-delivery checks, and the production build passed. Desktop and 390px mobile review confirmed contained images, both course names and dates, and no horizontal overflow. The About link lands on the section beneath the fixed header. Both full-size document URLs return the original bytes successfully.
+
 ## Industries hero
 
 The Industries hero uses `fieldPhotography.networkRoom`, the client-supplied communications-room photo, instead of repeating the homepage bucket-truck photo. The framing centers the rack and patch-panel installation; existing responsive delivery and hero preloading are retained. No industry-specific project identity is inferred.

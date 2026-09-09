@@ -4,6 +4,8 @@ Internal provenance register. Do not render this document, creator credits, or i
 
 ## Client-supplied photography — September 2026
 
+The user supplied and requested publication of `Downloads/SHG Warehousing FORMENTO, SAREN (1)_page-0001.jpg` and `Downloads/FORMENTO, SAREN_page-0001.jpg`, documenting Saren Formento's UC San Diego Extension training. Unchanged copies are stored in `public/images/credentials/training/`. The complete certificates retain their issuer artwork and signatures; the issuer's seal is not repurposed as a company credential or endorsement. Exact placement and metadata are in `CLIENT_PHOTOGRAPHY.md`.
+
 The user supplied `Downloads/WhatsApp Image 2026-09-06 at 16.08.22.jpeg` for the About page, directly below the Guam coastal photograph. Its unchanged website copy is `public/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg`. The Pacific Region caption describes regional context, with no affiliation or project claim inferred from the visible Saipan Surf Club marking.
 
 The user supplied `Downloads/WhatsApp Image 2026-09-06 at 15.10.07.jpeg` for the Micro Trenching service-directory card. The photo shows Vermeer equipment and a cutting-wheel attachment; its website copy is `public/images/cts/micro-trenching/cts-pacific-vermeer-cutting-wheel.jpeg`. The companion screenshot identifies placement only. This user-directed replacement supersedes the earlier choice of stock pavement-saw imagery for that card.

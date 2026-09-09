@@ -7,6 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/marketing/breadcrumb-json-ld";
 import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { PhotoGallery } from "@/components/marketing/photo-gallery";
+import { SafetyTraining } from "@/components/marketing/safety-training";
 import { businessLicensePhotography } from "@/config/field-photography";
 import { buttonVariants } from "@/components/ui/button";
 import { membershipsAndCredentials } from "@/config/homepage";
@@ -147,6 +148,8 @@ export default function CertificationsPage() {
           </div>
         </div>
       </section>
+
+      <SafetyTraining />
 
       <PhotoGallery
         description="Guam business-license documents supplied by Corerin Technical Solutions, LLC, covering the stated retail and technical support activities. These are business licenses, separate from technical certifications. Select a document to read the full copy."

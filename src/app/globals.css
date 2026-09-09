@@ -1412,6 +1412,90 @@ a {
   }
 }
 
+.safety-training {
+  scroll-margin-top: 8rem;
+  padding-block: var(--section-space);
+  border-block: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+}
+
+.safety-training__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.training-certificate {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  background: white;
+}
+
+.training-certificate__preview {
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.training-certificate__preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.training-certificate__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.training-certificate__content h3 {
+  color: var(--color-brand-navy);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.2;
+}
+
+.training-certificate__content dl {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  padding-block: 1rem;
+  border-block: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.training-certificate__content dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.training-certificate__content dt {
+  color: var(--color-ink-muted);
+}
+
+.training-certificate__content dd {
+  color: var(--color-brand-navy);
+  font-weight: 650;
+}
+
+.training-certificate__content > a {
+  margin-top: auto;
+}
+
+@media (max-width: 46rem) {
+  .safety-training__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Proof pillars */
 
 .proof-section {
@@ -4704,6 +4788,23 @@ summary > svg {
 
 .organization-card--president > span {
   color: rgb(255 255 255 / 67%) !important;
+}
+
+.organization-card__training {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 0.65rem;
+  min-height: 2.75rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.organization-card__training svg {
+  flex-shrink: 0;
 }
 
 .organization-chart__roles {

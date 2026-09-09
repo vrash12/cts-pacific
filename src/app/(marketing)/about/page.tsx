@@ -138,6 +138,10 @@ export default function AboutPage() {
               <p>Organization President</p>
               <h3>Saren F. Formento</h3>
               <span>Executive leadership</span>
+              <Link className="organization-card__training" href="/certifications#safety-training">
+                Safety &amp; professional training
+                <ArrowRight aria-hidden="true" size={16} />
+              </Link>
             </article>
             <div className="organization-chart__roles">
               {organizationRoles.map((role, index) => (

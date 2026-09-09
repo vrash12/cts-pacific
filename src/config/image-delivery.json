@@ -45,6 +45,36 @@
       960
     ]
   },
+  "/images/credentials/training/saren-formento-temporary-traffic-control-2026.jpg": {
+    "base": "/images/delivery/saren-formento-temporary-traffic-control-2026-020da637b300762d",
+    "original": "/images/delivery/saren-formento-temporary-traffic-control-2026-020da637b300762d-original.jpg",
+    "width": 1650,
+    "height": 1275,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960,
+      1280,
+      1600
+    ]
+  },
+  "/images/credentials/training/saren-formento-warehousing-safety-health-2026.jpg": {
+    "base": "/images/delivery/saren-formento-warehousing-safety-health-2026-69ffe1099f3701b3",
+    "original": "/images/delivery/saren-formento-warehousing-safety-health-2026-69ffe1099f3701b3-original.jpg",
+    "width": 1650,
+    "height": 1275,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960,
+      1280,
+      1600
+    ]
+  },
   "/images/cts/cts-pacific-broadband-router.webp": {
     "base": "/images/delivery/cts-pacific-broadband-router-a1d0659201ba344d",
     "original": "/images/delivery/cts-pacific-broadband-router-a1d0659201ba344d-original.webp",
