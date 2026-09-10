@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import { type KeyboardEvent, useEffect, useRef } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ServicesNavigationMenu } from "@/components/layout/services-navigation-menu";
 import { isPathActive } from "@/lib/navigation";
 
 type MobileNavigationItem = {
   label: string;
   href: string;
+  children?: readonly { label: string; href: string; group?: string }[];
 };
 
 type MobileNavigationProps = {
@@ -24,6 +26,9 @@ export function MobileNavigation({ items }: MobileNavigationProps) {
   function closeMenu() {
     if (menuRef.current) {
       menuRef.current.open = false;
+      menuRef.current.querySelectorAll("details[open]").forEach((menu) => {
+        menu.removeAttribute("open");
+      });
     }
   }
 
@@ -44,6 +49,9 @@ export function MobileNavigation({ items }: MobileNavigationProps) {
     <details
       className="mobile-navigation"
       onKeyDown={handleKeyDown}
+      onToggle={(event) => {
+        if (event.target === event.currentTarget && !event.currentTarget.open) closeMenu();
+      }}
       ref={menuRef}
     >
       <summary aria-label="Toggle navigation menu">
@@ -52,6 +60,20 @@ export function MobileNavigation({ items }: MobileNavigationProps) {
       </summary>
       <nav className="mobile-navigation__panel" aria-label="Mobile navigation">
         {items.map((item) => {
+          if (item.children?.length) {
+            return (
+              <ServicesNavigationMenu
+                href={item.href}
+                key={item.href}
+                label={item.label}
+                onNavigate={closeMenu}
+                variant="mobile"
+              >
+                {item.children}
+              </ServicesNavigationMenu>
+            );
+          }
+
           const isActive = isPathActive(pathname, item.href);
 
           return (

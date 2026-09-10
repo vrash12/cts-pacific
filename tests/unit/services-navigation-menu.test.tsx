@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -14,6 +14,83 @@ const services = [
 ] as const;
 
 describe("ServicesNavigationMenu", () => {
+  it("opens on mouse hover, stays open across its links, and closes after leaving", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details")!;
+    const summary = details.querySelector("summary")!;
+
+    await user.hover(summary);
+    expect(details.open).toBe(true);
+    await user.hover(screen.getByRole("link", { name: "Fiber Optics" }));
+    expect(details.open).toBe(true);
+    await user.unhover(details);
+    await waitFor(() => expect(details.open).toBe(false));
+  });
+
+  it("keeps the hover-opened menu available when the trigger is clicked", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details")!;
+    const summary = details.querySelector("summary")!;
+
+    await user.hover(summary);
+    await user.click(summary);
+    expect(details.open).toBe(true);
+    await user.click(document.body);
+    expect(details.open).toBe(false);
+  });
+
+  it("supports touch taps without opening on touch contact", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ServicesNavigationMenu href="/services" label="Services">
+        {services}
+      </ServicesNavigationMenu>,
+    );
+    const details = container.querySelector("details")!;
+    const summary = details.querySelector("summary")!;
+
+    await user.pointer({ keys: "[TouchA>]", target: summary });
+    expect(details.open).toBe(false);
+    await user.pointer({ keys: "[/TouchA]", target: summary });
+    expect(details.open).toBe(true);
+    await user.pointer({ keys: "[TouchA]", target: summary });
+    expect(details.open).toBe(false);
+  });
+
+  it("keeps keyboard navigation inside the open menu until focus leaves", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <>
+        <ServicesNavigationMenu href="/services" label="Services">
+          {services}
+        </ServicesNavigationMenu>
+        <button>Next item</button>
+      </>,
+    );
+    const details = container.querySelector("details")!;
+    // jsdom does not implement the summary's native Enter-key activation.
+    details.open = true;
+    details.querySelector("summary")!.focus();
+    await user.tab();
+    expect(screen.getByRole("link", { name: "All services" })).toHaveFocus();
+    expect(details.open).toBe(true);
+    await user.tab();
+    await user.tab();
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Next item" })).toHaveFocus();
+    expect(details.open).toBe(false);
+  });
+
   it("marks Services as current on a service detail page", () => {
     render(
       <ServicesNavigationMenu href="/services" label="Services">

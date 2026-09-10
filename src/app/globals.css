@@ -260,6 +260,16 @@ a {
   transition: color var(--transition-fast), background-color var(--transition-fast), padding-left var(--transition-fast);
 }
 
+/* Keep the pointer inside the menu while crossing the gap below its trigger. */
+.navigation-menu--desktop > .navigation-menu__panel::before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: calc(0.5rem + 3px);
+  content: "";
+}
+
 .navigation-menu__panel .navigation-menu__all {
   padding: 0.9rem 1.25rem;
   color: white;
@@ -3988,6 +3998,9 @@ a {
     background: var(--color-brand-navy);
     box-shadow: 0 20px 50px rgb(11 41 66 / 24%);
     padding: 1rem 1.25rem 1.25rem;
+    max-height: calc(100dvh - 9rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .mobile-navigation__panel > a:not(:last-child) {
@@ -4006,6 +4019,71 @@ a {
 
   .mobile-navigation__panel > a:last-child {
     margin-top: 1rem;
+  }
+
+  .navigation-menu--mobile > summary {
+    justify-content: space-between;
+    min-height: 2.75rem;
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+    padding-block: 0.7rem;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .navigation-menu--mobile > summary[aria-current="page"] {
+    border-left: 3px solid #65c8cf;
+    background: rgb(255 255 255 / 6%);
+    color: #8edee2;
+    padding-left: 0.75rem;
+  }
+
+  .navigation-menu--mobile > summary:is(:hover, :focus-visible) {
+    color: #8edee2;
+  }
+
+  .navigation-menu--mobile > summary:focus-visible {
+    outline: 2px solid #65c8cf;
+    outline-offset: -2px;
+  }
+
+  .navigation-menu--mobile > summary::after {
+    display: none;
+  }
+
+  .navigation-menu--mobile > .navigation-menu__panel {
+    position: static;
+    width: 100%;
+    transform: none;
+    border-top: 0;
+    border-left: 2px solid #65c8cf;
+    background: rgb(255 255 255 / 4%);
+    box-shadow: none;
+    animation: none;
+  }
+
+  .navigation-menu--mobile .navigation-menu__groups {
+    grid-template-columns: 1fr;
+  }
+
+  .navigation-menu--mobile .navigation-menu__groups section {
+    padding: 0.5rem 0.875rem;
+  }
+
+  .navigation-menu--mobile .navigation-menu__groups section + section {
+    border-left: 0;
+  }
+
+  .navigation-menu--mobile .navigation-menu__panel a {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    font-size: 0.8125rem;
+  }
+
+  .navigation-menu--mobile .navigation-menu__panel .navigation-menu__all {
+    padding-inline: 0.875rem;
+    font-size: 0.6875rem;
   }
 
   .hero {
@@ -4579,7 +4657,7 @@ summary > svg {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .navigation-menu[open] > .navigation-menu__panel {
+  .navigation-menu--desktop[open] > .navigation-menu__panel {
     animation: precision-dropdown-enter 190ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 

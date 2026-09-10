@@ -6,7 +6,7 @@ test("All services stays aligned on hover and keyboard focus", async ({ isMobile
   await page.goto("/certifications");
   const menu = page.locator("details.navigation-menu");
   const summary = menu.locator("summary");
-  await summary.click();
+  await summary.hover();
   const panel = menu.locator(".navigation-menu__panel");
   await panel.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
   const link = panel.getByRole("link", { name: "All services", exact: true });
@@ -28,7 +28,9 @@ test("All services stays aligned on hover and keyboard focus", async ({ isMobile
   expect(hovered.background).not.toBe(initial.background);
 
   await page.mouse.move(0, 850);
+  await expect(panel).toBeHidden();
   await summary.focus();
+  await page.keyboard.press("Enter");
   await page.keyboard.press("Tab");
   await expect(link).toBeFocused();
   await link.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
