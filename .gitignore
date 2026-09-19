@@ -28,6 +28,11 @@ drizzle/meta/
 *.tsbuildinfo
 .eslintcache
 
+# Local assistant instructions and handoff prompts
+AGENTS.md
+AI.md
+NEXT_AI_*_PROMPT.md
+
 # Editors and operating systems
 .idea/
 .vscode/
