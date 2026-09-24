@@ -109,6 +109,27 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="service-overview company-license-summary" aria-labelledby="company-license-heading">
+        <div className="container service-overview__grid">
+          <div>
+            <p className="eyebrow">Guam contractor credentials</p>
+            <h2 id="company-license-heading">Documented company and RME licensing.</h2>
+          </div>
+          <div className="service-overview__copy">
+            <p>
+              CTS Pacific’s contractor license CLB26-2114 and Saren F. Formento’s
+              RME license CLB26-2115 list classifications C13, C17 &amp; C61.
+              Both documents were issued June 26, 2026 and show an expiration date
+              of June 30, 2027.
+            </p>
+            <Link className={buttonVariants({ variant: "secondary" })} href="/certifications#contractor-licenses">
+              View contractor licenses
+              <ArrowRight aria-hidden="true" size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <CompanyHistory />
 
       <PhotoGallery

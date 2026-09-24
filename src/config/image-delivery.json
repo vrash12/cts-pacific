@@ -1,4 +1,32 @@
 {
+  "/images/camera-equipment/ai.jpeg": {
+    "base": "/images/delivery/ai-2ee706b40fe1a6d8",
+    "original": "/images/delivery/ai-2ee706b40fe1a6d8-original.jpeg",
+    "width": 300,
+    "height": 300,
+    "widths": [
+      256
+    ]
+  },
+  "/images/camera-equipment/camius.jpeg": {
+    "base": "/images/delivery/camius-0a6aeeb788f8492a",
+    "original": "/images/delivery/camius-0a6aeeb788f8492a-original.jpeg",
+    "width": 300,
+    "height": 100,
+    "widths": [
+      256
+    ]
+  },
+  "/images/camera-equipment/ndaa.jpeg": {
+    "base": "/images/delivery/ndaa-49d1a7ad6c4ba331",
+    "original": "/images/delivery/ndaa-49d1a7ad6c4ba331-original.jpeg",
+    "width": 588,
+    "height": 330,
+    "widths": [
+      256,
+      384
+    ]
+  },
   "/images/credentials/eta-certified-foi.png": {
     "base": "/images/delivery/eta-certified-foi-73be3b2b4c33c554",
     "original": "/images/delivery/eta-certified-foi-73be3b2b4c33c554-original.png",
@@ -43,6 +71,36 @@
       640,
       768,
       960
+    ]
+  },
+  "/images/credentials/licenses/cts-pacific-contractor-license-2027.jpg": {
+    "base": "/images/delivery/cts-pacific-contractor-license-2027-f3f54214202d2b04",
+    "original": "/images/delivery/cts-pacific-contractor-license-2027-f3f54214202d2b04-original.jpg",
+    "width": 1650,
+    "height": 1275,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960,
+      1280,
+      1600
+    ]
+  },
+  "/images/credentials/licenses/saren-formento-rme-license-2027.jpg": {
+    "base": "/images/delivery/saren-formento-rme-license-2027-f6ac5aeb40502499",
+    "original": "/images/delivery/saren-formento-rme-license-2027-f6ac5aeb40502499-original.jpg",
+    "width": 1650,
+    "height": 1275,
+    "widths": [
+      256,
+      384,
+      640,
+      768,
+      960,
+      1280,
+      1600
     ]
   },
   "/images/credentials/training/saren-formento-temporary-traffic-control-2026.jpg": {

@@ -1,5 +1,23 @@
 # CTS client photography — September 2026
 
+## Contractor licenses and camera graphics — September 24
+
+The user requested publication of five assets. Original files are copied unchanged; responsive previews use the existing image-delivery pipeline.
+
+| Supplied file | Website copy | Placement |
+| --- | --- | --- |
+| `Downloads/AgriGOV-CALABARZON-Access/20260924170220/20260924170220_page-0001.jpg` | `public/images/credentials/licenses/cts-pacific-contractor-license-2027.jpg` | `/certifications#contractor-licenses`, company license CLB26-2114, certificate C-0626-0923 |
+| `Downloads/AgriGOV-CALABARZON-Access/20260924170220/20260924170240_page-0001.jpg` | `public/images/credentials/licenses/saren-formento-rme-license-2027.jpg` | Same section, Saren F. Formento RME CLB26-2115, certificate R-0626-0924 |
+| `Downloads/camius.jpeg` | `public/images/camera-equipment/camius.jpeg` | `/services/cctv#camera-equipment`, installed camera brand |
+| `Downloads/WhatsApp Image 2026-09-24 at 16.24.10.jpeg` | `public/images/camera-equipment/ai.jpeg` | Same section, model-specific AI feature selection |
+| `Downloads/ndaa.jpeg` | `public/images/camera-equipment/ndaa.jpeg` | Same section, model-specific NDAA documentation |
+
+Both license scans list C13, C17 & C61, issued June 26, 2026, expiring June 30, 2027. Full uncropped scans open from their previews and buttons; About includes a license summary linking to this section. No classification descriptions or expanded trade scope are inferred. These contractor documents remain separate from existing business licenses, membership, and training documents.
+
+The user identified Camius as the installed camera brand but did not confirm what the AI or NDAA graphics establish. Adjacent text makes features and compliance subject to selected equipment and supporting documentation; neither graphic is included among company certifications. Outstanding details are tracked in `CLIENT_CONTENT_REQUIRED.md`.
+
+Validation: changed-component lint, production build with TypeScript, and the four existing image-delivery checks passed. Browser checks at 1440px, 768px, and 390px confirmed all added images load without horizontal overflow, the About license link reaches its target, and camera graphics are limited to the CCTV service. All five served originals match the supplied files byte for byte. Camius retains a stable 260px logo frame across these viewport sizes.
+
 ## Safety and professional training documents
 
 The client supplied two UC San Diego Extension, Occupational Safety and Health Department training certificates for publication. They appear on `/certifications#safety-training`, after technical credentials and before business licenses, with a link from Saren's About leadership card. Each card includes the recipient exactly as printed, completion date, an uncropped responsive preview, and a link to the original-size document.

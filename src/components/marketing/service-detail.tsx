@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { FieldImage } from "@/components/marketing/field-image";
+import { CameraEquipment } from "@/components/marketing/camera-equipment";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { PhotoGallery } from "@/components/marketing/photo-gallery";
 import { servicePhotography } from "@/config/service-photography";
@@ -89,6 +90,8 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
           </div>
         </div>
       </section>
+
+      {service.slug === "cctv" ? <CameraEquipment /> : null}
 
       {service.partner ? (
         <section

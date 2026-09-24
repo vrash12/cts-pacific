@@ -4,6 +4,8 @@ Internal provenance register. Do not render this document, creator credits, or i
 
 ## Client-supplied photography — September 2026
 
+On September 24, the user supplied and requested publication of two Guam contractor license scans plus Camius, AI, and NDAA graphics. Unchanged copies are stored in `public/images/credentials/licenses/` and `public/images/camera-equipment/`; exact sources and placements are recorded in `CLIENT_PHOTOGRAPHY.md`. Government seals and signatures remain within the complete license scans. Camius identifies the user-confirmed installed camera brand; no authorized-dealer or endorsement relationship is asserted. AI and NDAA graphics are presented with model-specific verification wording, not as company credentials.
+
 The user supplied and requested publication of `Downloads/SHG Warehousing FORMENTO, SAREN (1)_page-0001.jpg` and `Downloads/FORMENTO, SAREN_page-0001.jpg`, documenting Saren Formento's UC San Diego Extension training. Unchanged copies are stored in `public/images/credentials/training/`. The complete certificates retain their issuer artwork and signatures; the issuer's seal is not repurposed as a company credential or endorsement. Exact placement and metadata are in `CLIENT_PHOTOGRAPHY.md`.
 
 The user supplied `Downloads/WhatsApp Image 2026-09-06 at 16.08.22.jpeg` for the About page, directly below the Guam coastal photograph. Its unchanged website copy is `public/images/cts/regional/cts-pacific-region-beach-and-sailboat.jpeg`. The Pacific Region caption describes regional context, with no affiliation or project claim inferred from the visible Saipan Surf Club marking.

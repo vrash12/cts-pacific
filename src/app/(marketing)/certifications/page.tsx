@@ -8,17 +8,18 @@ import { EditorialHero } from "@/components/marketing/editorial-hero";
 import { ProjectCta } from "@/components/marketing/project-cta";
 import { PhotoGallery } from "@/components/marketing/photo-gallery";
 import { SafetyTraining } from "@/components/marketing/safety-training";
+import { ContractorLicenses } from "@/components/marketing/contractor-licenses";
 import { businessLicensePhotography } from "@/config/field-photography";
 import { buttonVariants } from "@/components/ui/button";
 import { membershipsAndCredentials } from "@/config/homepage";
 
 export const metadata: Metadata = {
-  title: "Telecommunications Certifications & Standards Guam",
+  title: "Contractor Licenses, Certifications & Standards Guam",
   description:
-    "Review the GCA, FOA, and ETA materials supplied by CTS Pacific and the company's identified ANSI/TIA/EIA telecommunications standards compliance.",
+    "View CTS Pacific’s Guam contractor and RME licenses, classifications C13, C17 and C61, plus professional affiliations, training, and technical credentials.",
   alternates: { canonical: "/certifications" },
   openGraph: {
-    title: "Telecommunications Certifications & Standards Guam | CTS Pacific",
+    title: "Contractor Licenses, Certifications & Standards Guam | CTS Pacific",
     description:
       "Professional affiliations, technical credentialing materials, and standards-conscious infrastructure execution.",
     url: "/certifications",
@@ -50,8 +51,8 @@ export default function CertificationsPage() {
 
       <EditorialHero
         currentPage="Certifications"
-        description="CTS Pacific supplied professional membership and credentialing artwork for publication. Exact credential-holder details, validity dates, and standards wording remain subject to final client verification."
-        eyebrow="Memberships & credentials"
+        description="Explore CTS Pacific’s Guam contractor and RME licenses, professional affiliations, technical credentials, and safety training."
+        eyebrow="Licenses, memberships & credentials"
         imageAlt="Open fiber enclosure showing organized fiber loops during CTS Pacific field work."
         imageLabel="Technical capability / Field verification"
         imageSrc="/images/field-work/fiber-enclosure-open.jpeg"
@@ -67,6 +68,8 @@ export default function CertificationsPage() {
           <ArrowRight aria-hidden="true" size={17} />
         </Link>
       </EditorialHero>
+
+      <ContractorLicenses />
 
       <section className="certifications-section certification-directory">
         <div className="container">

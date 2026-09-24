@@ -1422,6 +1422,70 @@ a {
   }
 }
 
+.camera-equipment {
+  padding-block: var(--section-space);
+  scroll-margin-top: 8rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+}
+
+.camera-equipment__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.camera-equipment__grid article {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  background: white;
+}
+
+.camera-equipment__mark {
+  display: grid;
+  place-items: center;
+  height: 11rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.camera-equipment__mark img {
+  width: 100%;
+  height: 7.5rem;
+  max-width: 16.25rem;
+  object-fit: contain;
+}
+
+.camera-equipment__content {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.camera-equipment__content h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--color-brand-navy);
+}
+
+.camera-equipment__content > p:last-child {
+  color: var(--color-ink-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.company-license-summary {
+  background: var(--color-surface-muted);
+  border-block: 1px solid var(--color-border);
+}
+
+@media (max-width: 64rem) {
+  .camera-equipment__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .safety-training {
   scroll-margin-top: 8rem;
   padding-block: var(--section-space);

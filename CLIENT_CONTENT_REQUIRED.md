@@ -19,7 +19,7 @@ This file tracks business information and production assets that have not been s
 - Any additional history beyond the founder narrative supplied in September 2026 (now published on About: career began in 2011, five years of field experience, seven years at an ISP, and CTS Pacific established in January 2026)
 - Optional named biography and headshot for Organization President Saren F. Formento; the supplied career narrative is currently attributed to the founder without adding a personal-name attribution
 - Names, biographies, and headshots for the Technician, Fiber Technician, and Construction Technician positions
-- Licenses, registrations, or contractor classifications the company wants published
+- Additional licenses or registrations beyond the supplied Guam company and RME contractor licenses (CLB26-2114 / CLB26-2115, C13, C17 & C61; issued June 26, 2026, expires June 30, 2027), now displayed on Certifications and referenced from About; replacement documents when renewed
 - Confirmation of the preferred legal-name formatting in all footer and form notices
 
 ## Certifications and standards
@@ -31,6 +31,8 @@ This file tracks business information and production assets that have not been s
 - Exact CCNA and CompTIA credential names, holders, dates, and current validity only if current credential listings or marks are requested; About references them solely as part of the client-supplied early-career history
 
 ## Expanded service scope
+
+- CCTV: exact installed Camius camera and recorder models, manufacturer documentation for any NDAA compliance claims, supported AI features, and the intended meaning of the supplied generic AI graphic. The Camius installation brand is confirmed by the user; AI and NDAA graphics appear only in model-specific equipment-selection context on `/services/cctv`, without dealer status, company certification, or blanket product compliance claims.
 
 The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical, Server Infrastructure, Telecommunication Specialist, IT Support, and Facility Locating as service categories. Confirm the following before treating the current project-specific wording as a complete service specification:
 
