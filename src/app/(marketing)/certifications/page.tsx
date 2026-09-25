@@ -71,6 +71,15 @@ export default function CertificationsPage() {
 
       <ContractorLicenses />
 
+      <PhotoGallery
+        description="Guam business-license documents supplied by Corerin Technical Solutions, LLC, covering the stated retail and technical support activities. These business licenses appear directly below the contractor licenses for clarity and remain separate from technical certifications. Select a document to read the full copy."
+        eyebrow="Business documentation"
+        id="business-licenses"
+        photos={businessLicensePhotography}
+        title="Documented business scope."
+        variant="documents"
+      />
+
       <section className="certifications-section certification-directory">
         <div className="container">
           <div className="certifications-section__heading">
@@ -153,15 +162,6 @@ export default function CertificationsPage() {
       </section>
 
       <SafetyTraining />
-
-      <PhotoGallery
-        description="Guam business-license documents supplied by Corerin Technical Solutions, LLC, covering the stated retail and technical support activities. These are business licenses, separate from technical certifications. Select a document to read the full copy."
-        eyebrow="Business documentation"
-        id="business-licenses"
-        photos={businessLicensePhotography}
-        title="Documented business scope."
-        variant="documents"
-      />
 
       <section className="credential-context">
         <div className="container">

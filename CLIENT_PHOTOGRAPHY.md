@@ -12,15 +12,15 @@ The user requested publication of five assets. Original files are copied unchang
 | `Downloads/WhatsApp Image 2026-09-24 at 16.24.10.jpeg` | `public/images/camera-equipment/ai.jpeg` | Same section, model-specific AI feature selection |
 | `Downloads/ndaa.jpeg` | `public/images/camera-equipment/ndaa.jpeg` | Same section, model-specific NDAA documentation |
 
-Both license scans list C13, C17 & C61, issued June 26, 2026, expiring June 30, 2027. Full uncropped scans open from their previews and buttons; About includes a license summary linking to this section. No classification descriptions or expanded trade scope are inferred. These contractor documents remain separate from existing business licenses, membership, and training documents.
+Both license scans list C13, C17 & C61, issued June 26, 2026, expiring June 30, 2027. Full uncropped scans open from their previews and buttons; About includes a license summary linking to this section. On Certifications, the contractor-license section appears directly above the business-license section. No classification descriptions or expanded trade scope are inferred. These contractor documents remain separate from existing business licenses, membership, and training documents.
 
-The user identified Camius as the installed camera brand but did not confirm what the AI or NDAA graphics establish. Adjacent text makes features and compliance subject to selected equipment and supporting documentation; neither graphic is included among company certifications. Outstanding details are tracked in `CLIENT_CONTENT_REQUIRED.md`.
+The user confirmed that the Camius and AI materials belong to the CCTV service. The Camius logo and AI graphic appear only on `/services/cctv`; adjacent text makes model features subject to the selected equipment. The NDAA graphic remains a separate, project-specific documentation reference and is not included among company certifications. Outstanding details are tracked in `CLIENT_CONTENT_REQUIRED.md`.
 
 Validation: changed-component lint, production build with TypeScript, and the four existing image-delivery checks passed. Browser checks at 1440px, 768px, and 390px confirmed all added images load without horizontal overflow, the About license link reaches its target, and camera graphics are limited to the CCTV service. All five served originals match the supplied files byte for byte. Camius retains a stable 260px logo frame across these viewport sizes.
 
 ## Safety and professional training documents
 
-The client supplied two UC San Diego Extension, Occupational Safety and Health Department training certificates for publication. They appear on `/certifications#safety-training`, after technical credentials and before business licenses, with a link from Saren's About leadership card. Each card includes the recipient exactly as printed, completion date, an uncropped responsive preview, and a link to the original-size document.
+The client supplied two UC San Diego Extension, Occupational Safety and Health Department training certificates for publication. They appear on `/certifications#safety-training`, after technical credentials, with a link from Saren's About leadership card. Each card includes the recipient exactly as printed, completion date, an uncropped responsive preview, and a link to the original-size document.
 
 | Supplied file | Training / recipient / completion | Website copy |
 | --- | --- | --- |

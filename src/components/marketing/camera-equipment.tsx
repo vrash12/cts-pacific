@@ -6,13 +6,13 @@ export function CameraEquipment() {
       <div className="container">
         <div className="photo-gallery__heading">
           <div>
-            <p className="eyebrow">Camera systems &amp; equipment selection</p>
-            <h2 id="camera-equipment-heading">Camius camera installation.</h2>
+            <p className="eyebrow">CCTV systems &amp; equipment selection</p>
+            <h2 id="camera-equipment-heading">Camius and AI for CCTV.</h2>
           </div>
           <p>
-            CTS Pacific installs Camius camera systems. Camera and recorder selection
-            is coordinated around coverage, recording, remote viewing, and the
-            requirements of each site.
+            The supplied Camius logo and AI graphic belong to the CCTV service. CTS
+            Pacific coordinates camera and recorder selection around coverage,
+            recording, remote viewing, and the requirements of each site.
           </p>
         </div>
         <div className="camera-equipment__grid">

@@ -32,7 +32,7 @@ This file tracks business information and production assets that have not been s
 
 ## Expanded service scope
 
-- CCTV: exact installed Camius camera and recorder models, manufacturer documentation for any NDAA compliance claims, supported AI features, and the intended meaning of the supplied generic AI graphic. The Camius installation brand is confirmed by the user; AI and NDAA graphics appear only in model-specific equipment-selection context on `/services/cctv`, without dealer status, company certification, or blanket product compliance claims.
+- CCTV: exact installed Camius camera and recorder models, manufacturer documentation for any NDAA compliance claims, supported AI features, and the intended meaning of the supplied generic AI graphic. The user confirmed that the Camius and AI materials belong to CCTV; they appear only on `/services/cctv`, without dealer status, company certification, or blanket product compliance claims. The NDAA graphic remains a separate project-specific reference until model documentation is supplied.
 
 The client has identified Troubleshooting, Maintenance, PBX Systems, Electrical, Server Infrastructure, Telecommunication Specialist, IT Support, and Facility Locating as service categories. Confirm the following before treating the current project-specific wording as a complete service specification:
 
