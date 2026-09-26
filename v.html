@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ColdTrace ESP32 Dashboard</title>
+
+    <!-- MQTT.js -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .connecting {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .connected {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .disconnected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .unit {
+            font-size: 15px;
+            color: #6b7280;
+        }
+
+        .raw {
+            margin-top: 30px;
+            background: #111827;
+            color: #d1fae5;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            min-height: 100px;
+        }
+
+        .last-update {
+            margin-top: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>ColdTrace Monitoring Dashboard</h1>
+
+    <p class="subtitle">
+        ESP32 GPS + Temperature Telemetry
+    </p>
+
+    <div
+        id="mqttStatus"
+        class="status connecting">
+        Connecting to MQTT...
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="label">Device</div>
+
+            <div
+                id="device"
+                class="value">
+                --
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">Temperature</div>
+
+            <div class="value">
+                <span id="temperature">--</span>
+                <span class="unit">°C</span>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">Latitude</div>
+
+            <div
+                id="latitude"
+                class="value">
+                --
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">Longitude</div>
+
+            <div
+                id="longitude"
+                class="value">
+                --
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">Satellites</div>
+
+            <div
+                id="satellites"
+                class="value">
+                --
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">Speed</div>
+
+            <div class="value">
+                <span id="speed">--</span>
+                <span class="unit">km/h</span>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="label">GPS Status</div>
+
+            <div
+                id="gpsStatus"
+                class="value">
+                --
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="last-update">
+        Last update:
+        <span id="lastUpdate">
+            Waiting for ESP32...
+        </span>
+    </div>
+
+
+    <h3 style="margin-top:30px;">
+        Raw MQTT Message
+    </h3>
+
+    <pre
+        id="rawMessage"
+        class="raw">Waiting for telemetry...</pre>
+
+</div>
+
+
+<script>
+
+    // =====================================================
+    // HIVEMQ SETTINGS
+    // =====================================================
+
+    /*
+        IMPORTANT:
+
+        Browser MQTT uses WebSockets.
+
+        ESP32:
+            mqtts://broker:8883
+
+        Browser:
+            wss://broker:8884/mqtt
+    */
+
+    const MQTT_HOST =
+        "9d73804b71954f829dd579d791128b63.s1.eu.hivemq.cloud";
+
+    const MQTT_PORT = 8884;
+
+    const MQTT_USERNAME =
+        "vanrodolf";
+
+    const MQTT_PASSWORD =
+        "Vanrodolf123.";
+
+    const MQTT_TOPIC =
+        "coldtrace/trucks/CT-1004/telemetry";
+
+
+    // =====================================================
+    // CONNECTION URL
+    // =====================================================
+
+    const brokerURL =
+        `wss://${MQTT_HOST}:${MQTT_PORT}/mqtt`;
+
+
+    console.log(
+        "Connecting to:",
+        brokerURL
+    );
+
+
+    // =====================================================
+    // MQTT CLIENT
+    // =====================================================
+
+    const client = mqtt.connect(
+        brokerURL,
+        {
+
+            username:
+                MQTT_USERNAME,
+
+            password:
+                MQTT_PASSWORD,
+
+            clientId:
+                "coldtrace-web-" +
+                Math.random()
+                    .toString(16)
+                    .substring(2, 10),
+
+            clean: true,
+
+            reconnectPeriod:
+                3000,
+
+            connectTimeout:
+                10000
+
+        }
+    );
+
+
+    // =====================================================
+    // CONNECTED
+    // =====================================================
+
+    client.on(
+        "connect",
+        function () {
+
+            console.log(
+                "Connected to HiveMQ"
+            );
+
+
+            const status =
+                document.getElementById(
+                    "mqttStatus"
+                );
+
+
+            status.textContent =
+                "MQTT Connected";
+
+
+            status.className =
+                "status connected";
+
+
+            client.subscribe(
+                MQTT_TOPIC,
+                function (error) {
+
+                    if (error) {
+
+                        console.error(
+                            "Subscription error:",
+                            error
+                        );
+
+                    }
+                    else {
+
+                        console.log(
+                            "Subscribed to:",
+                            MQTT_TOPIC
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    // =====================================================
+    // RECEIVE MESSAGE
+    // =====================================================
+
+    client.on(
+        "message",
+        function (
+            topic,
+            message
+        ) {
+
+            const text =
+                message.toString();
+
+
+            console.log(
+                "MQTT message:",
+                text
+            );
+
+
+            document.getElementById(
+                "rawMessage"
+            ).textContent =
+                text;
+
+
+            try {
+
+                const data =
+                    JSON.parse(text);
+
+
+                // DEVICE
+
+                document.getElementById(
+                    "device"
+                ).textContent =
+                    data.device_code ??
+                    "--";
+
+
+                // TEMPERATURE
+
+                document.getElementById(
+                    "temperature"
+                ).textContent =
+                    data.temperature ??
+                    "--";
+
+
+                // GPS
+
+                if (
+                    data.latitude !== null &&
+                    data.latitude !== undefined
+                ) {
+
+                    document.getElementById(
+                        "latitude"
+                    ).textContent =
+                        Number(
+                            data.latitude
+                        ).toFixed(6);
+
+                }
+                else {
+
+                    document.getElementById(
+                        "latitude"
+                    ).textContent =
+                        "No GPS";
+
+                }
+
+
+                if (
+                    data.longitude !== null &&
+                    data.longitude !== undefined
+                ) {
+
+                    document.getElementById(
+                        "longitude"
+                    ).textContent =
+                        Number(
+                            data.longitude
+                        ).toFixed(6);
+
+                }
+                else {
+
+                    document.getElementById(
+                        "longitude"
+                    ).textContent =
+                        "No GPS";
+
+                }
+
+
+                // SATELLITES
+
+                document.getElementById(
+                    "satellites"
+                ).textContent =
+                    data.satellites ??
+                    0;
+
+
+                // SPEED
+
+                document.getElementById(
+                    "speed"
+                ).textContent =
+                    data.speed_kmph ??
+                    "0.00";
+
+
+                // GPS STATUS
+
+                document.getElementById(
+                    "gpsStatus"
+                ).textContent =
+                    data.gps_valid
+                        ? "GPS Fixed"
+                        : "No Fix";
+
+
+                // TIME
+
+                document.getElementById(
+                    "lastUpdate"
+                ).textContent =
+                    new Date()
+                        .toLocaleString();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Invalid JSON:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // ERRORS
+    // =====================================================
+
+    client.on(
+        "error",
+        function (error) {
+
+            console.error(
+                "MQTT Error:",
+                error
+            );
+
+
+            const status =
+                document.getElementById(
+                    "mqttStatus"
+                );
+
+
+            status.textContent =
+                "MQTT Error";
+
+
+            status.className =
+                "status disconnected";
+
+        }
+    );
+
+
+    // =====================================================
+    // OFFLINE
+    // =====================================================
+
+    client.on(
+        "offline",
+        function () {
+
+            document.getElementById(
+                "mqttStatus"
+            ).textContent =
+                "MQTT Offline";
+
+        }
+    );
+
+
+    // =====================================================
+    // RECONNECT
+    // =====================================================
+
+    client.on(
+        "reconnect",
+        function () {
+
+            const status =
+                document.getElementById(
+                    "mqttStatus"
+                );
+
+
+            status.textContent =
+                "Reconnecting...";
+
+
+            status.className =
+                "status connecting";
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
