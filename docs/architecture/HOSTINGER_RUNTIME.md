@@ -1,5 +1,18 @@
 # Hostinger runtime dependencies
 
+## Production build bundler
+
+The September 26 deployment failed in Turbopack while creating the PostCSS
+worker for `company-history.module.css`: the Node subprocess exited before
+Turbopack could connect. Hostinger kept serving the previous successful build,
+which did not include the CCTV equipment graphics.
+
+The production build command uses `next build --webpack` to avoid this
+host-specific Turbopack failure. Image preparation still runs before compilation.
+Keep this option until Turbopack has been validated on the hosting environment.
+
+## Runtime helpers
+
 The September 12, 2026 production outage returned HTTP 500 for pages and
 `robots.txt`, while static images remained available. Hostinger runtime logs
 reported `Cannot find module '@swc/helpers/_/_interop_require_default'` when

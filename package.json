@@ -11,7 +11,7 @@
   "scripts": {
     "images:prepare": "node scripts/prepare-image-delivery.mjs",
     "dev": "node scripts/prepare-image-delivery.mjs && next dev",
-    "build": "node scripts/prepare-image-delivery.mjs && next build",
+    "build": "node scripts/prepare-image-delivery.mjs && next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
